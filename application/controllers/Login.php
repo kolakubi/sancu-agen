@@ -1,4 +1,4 @@
-<?php 
+<?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
 	class Login extends CI_Controller{
 
@@ -32,22 +32,23 @@
 
 				// ambil data dari model login_model
 				$result = $this->login_model->login($username, $password);
-
+				// jika ada result
 				if($result){
-
-					$level = $result['level'];
-
+					$level = $result['level']; // cek level
 					$this->session->set_userdata($result);
-
-					if($level === '1'){
+					if($level === '1'){ // jika level 1 ke admin
 						redirect('admin');
 					}
+					else if($level === '2'){
+						redirect('agen'); // jika level 2 ke agen
+					}
 					else{
-						redirect('karyawan');
+						return false;
 					}
 				}
+				// jika tdk ada result
 				else{
-					$this->load->view('login');
+					$this->load->view('login'); // kembali ke login
 				}
 			}
 
