@@ -3,7 +3,7 @@
 <a href="<?php echo base_url() ?>admin/tambahagen" class="btn btn-info">Tambah Agen +</a>
 <br><br><br>
 
-<table class="table">
+<table class="table" id="datatable">
   <thead>
     <tr>
       <th>No</th>
@@ -14,9 +14,10 @@
     </tr>
   </thead>
   <tbody>
+    <?php $i = 0; ?>
     <?php foreach ($agen as $agenDetail) : ?>
       <tr>
-        <td><?php echo '1'?></td>
+        <td><?php echo $i+=1;?></td>
         <td><?php echo $agenDetail['kode_agen']?></td>
         <td><?php echo $agenDetail['nama']?></td>
         <td><?php echo $agenDetail['kota']?></td>

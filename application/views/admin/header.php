@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<?php echo base_url(); ?>asset/bootstrap/css/bootstrap.css">
+    <!-- datatables css -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>asset/datatables/datatables.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>asset/datatables/buttons/css/buttons.bootstrap.min.css">
     <title>Dashboard</title>
   </head>
   <body>
