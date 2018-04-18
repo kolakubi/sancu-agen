@@ -3,7 +3,7 @@
 <a href="<?php echo base_url() ?>admin/agentambah" class="btn btn-info">Tambah Agen +</a>
 <br><br><br>
 
-<table class="table table-striped" id="datatable">
+<table class="table table-striped" id="datatableagen">
   <thead>
     <tr>
       <th>No</th>
@@ -29,4 +29,11 @@
       </tr>
     <?php endforeach ?>
   </tbody>
+  <tfoot>
+    <td></td>
+    <td>Kode Agen</td>
+    <td>Nama</td>
+    <td>Lokasi</td>
+    <td></td>
+  </tfoot>
 </table>
