@@ -1,6 +1,6 @@
 <h1 class="text-center">Info Pembelian</h1>
 
-<a href="#" class="btn btn-info">Tambah Pembelian +</a>
+<a href="<?php echo base_url() ?>admin/pembeliantambah" class="btn btn-info">Tambah Pembelian +</a>
 <br><br><br>
 
 <table class="table table-striped" id="datatablepembelian">

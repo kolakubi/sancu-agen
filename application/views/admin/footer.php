@@ -75,7 +75,7 @@
 
       //datatables agen
       prettyTable('datatableagen', 'Info Agen');
-      
+
       //datatables pembelian
       prettyTable('datatablepembelian', 'Info Pembelian');
 

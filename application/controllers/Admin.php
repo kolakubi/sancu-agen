@@ -244,4 +244,85 @@
       $this->load->view('admin/footer');
     }
 
+    public function pembeliantambah(){
+
+      $dataAgen = $this->admin_model->getDataAgen();
+      $data['agen'] = $dataAgen;
+
+      $this->form_validation->set_rules(
+        array(
+          array(
+            'field' => 'kodeagen',
+            'label' => 'Kodeagen',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'tanggal',
+            'label' => 'Tanggal',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'sancu',
+            'label' => 'Sancu',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'boncu',
+            'label' => 'Boncu',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'pretty',
+            'label' => 'Pretty',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'xtreme',
+            'label' => 'Xtreme',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'pembelianjumlahitem',
+            'label' => 'Jumlah Item',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'pembelianjumlah',
+            'label' => 'Jumlah',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'pembeliandibayar',
+            'label' => 'Dibayar',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'pembeliansisatagihan',
+            'label' => 'Sisa Tagihan',
+            'rules' => 'required'
+          )
+        )
+      );
+
+      if(!$this->form_validation->run()){
+        $this->load->view('admin/header');
+        $this->load->view('admin/pembeliantambah', $data);
+        $this->load->view('admin/footer');
+      }
+      else{
+        $kodeagen = $this->input->post('kodeagen');
+        $tanggal = $this->input->post('tanggal');
+        $sancu = $this->input->post('sancu');
+        $boncu = $this->input->post('boncu');
+        $pretty = $this->input->post('pretty');
+        $xtreme = $this->input->post('xtreme');
+        $pembelianjumlahitem = $this->input->post('pembelianjumlahitem');
+        $pembelianjumlah = $this->input->post('pembelianjumlah');
+        $pembeliandibayar = $this->input->post('pembeliandibayar');
+        $pembeliansisatagihan = $this->input->post('pembeliansisatagihan');
+      }
+
+
+    }
+
   }
