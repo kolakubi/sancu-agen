@@ -31,10 +31,14 @@
         $('#'+tableId+' tfoot td').each(function(){
           let title = $(this).text();
           $(this).html('<input type="text" placeholder="cari '+title+'" />' );
+
+          // hapus fitur search di nomor sama action
+          // cari input dengan placehoder 'cari '
+          if($(this).children().attr('placeholder') == 'cari '){
+            //jika ktemu lansung remove
+            $(this).children().remove();
+          }
         });
-        // hapus fitur search di nomor sama action
-        $('#'+tableId+' tfoot td:nth-child(1) input').remove();
-        $('#'+tableId+' tfoot td:nth-last-child(1) input').remove();
 
         // DataTable
         let table = $('#'+tableId).DataTable({
@@ -79,13 +83,10 @@
       //datatables pembelian
       prettyTable('datatablepembelian', 'Info Pembelian');
 
+      //////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////
 
-    });
-  </script>
-
-  <!-- script hapus data -->
-  <script type="text/javascript">
-    $(document).ready(function(){
+      // peingatan saat menghapus data
       $('.btnhapus').on('click', function(event){
         event.preventDefault();
         let link = $(this).attr('href');
@@ -93,7 +94,8 @@
           window.location = link;
         }
       })
-    })
+
+    });
   </script>
 
 </body>

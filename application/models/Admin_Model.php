@@ -77,4 +77,54 @@
         return $result;
       }
     }
+
+    public function getDataPembelianJoin($kodepembelian=null){
+        // ambil data agen join data agen
+      if($kodepembelian){
+        // jika ada kode agen, ambil data menurut kode agen
+        $this->db->select('*');
+        $this->db->from('pembelian');
+        $this->db->join('agen', 'pembelian.kode_agen = agen.kode_agen');
+        $this->db->where('kode_pembelian', $kodepembelian);
+        $result = $this->db->get()->row_array();
+        return $result;
+      }
+      else{
+        // jika tidak ada kode agen, ambil semua data agen
+        $this->db->select('*');
+        $this->db->from('pembelian');
+        $this->db->join('agen', 'pembelian.kode_agen = agen.kode_agen');
+        $result = $this->db->get()->result_array();
+        return $result;
+      }
+    }
+
+    public function insertPembelian($dataPembelian){
+      // insert data pembelian
+      if($this->db->insert('pembelian', $dataPembelian)){
+        return true;
+      }
+      return false;
+    }
+
+    public function updatePembelian($dataPembelian, $kodepembelian){
+      //update database
+      $this->db->set($dataPembelian);
+      $this->db->where('kode_pembelian', $kodepembelian);
+
+      if($this->db->update('pembelian')){
+          return true;
+      }
+      return false;
+    }
+
+    public function deletePembelian($kodepembelian){
+      // hapus data agen dari kodeagen
+      $this->db->where('kode_pembelian', $kodepembelian);
+      if($this->db->delete('pembelian')){
+        return true;
+      }
+      return false;
+    }
+
   }

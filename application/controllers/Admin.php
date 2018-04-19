@@ -236,7 +236,7 @@
 
     public function pembelian(){
       // ambil semua data pembelian
-      $dataPembelian = $this->admin_model->getDataPembelian();
+      $dataPembelian = $this->admin_model->getDataPembelianJoin();
       $data['pembelian'] = $dataPembelian;
 
       $this->load->view('admin/header');
@@ -246,6 +246,8 @@
 
     public function pembeliantambah(){
 
+      // ambil data agen
+      // untuk isi dropdown agen
       $dataAgen = $this->admin_model->getDataAgen();
       $data['agen'] = $dataAgen;
 
@@ -320,9 +322,142 @@
         $pembelianjumlah = $this->input->post('pembelianjumlah');
         $pembeliandibayar = $this->input->post('pembeliandibayar');
         $pembeliansisatagihan = $this->input->post('pembeliansisatagihan');
+
+        $dataPembelian = array(
+          // nama harus sama dengan nama field di tabel
+          'kode_agen' => $kodeagen,
+          'tanggal_pembelian' => $tanggal,
+          'sancu' => $sancu,
+          'boncu' => $boncu,
+          'pretty' => $pretty,
+          'xtreme' => $xtreme,
+          'jumlah_item' => $pembelianjumlahitem,
+          'jumlah_pembelian' => $pembelianjumlah,
+          'jumlah_dibayar' => $pembeliandibayar,
+          'sisa_tagihan' => $pembeliansisatagihan,
+        );
+
+        // insert data ke database
+        $result = $this->admin_model->insertPembelian($dataPembelian);
+        if($result){
+          // jika sukses redirect ke halaman pembelian
+          redirect('admin/pembelian');
+        }
       }
+    }
 
+    public function pembeliandetail($kodepembelian){
+      // ambil data pembelian berdasarkan kode
+      $datapembelian = $this->admin_model->getDataPembelianJoin($kodepembelian);
+      $data['datapembelian'] = $datapembelian;
 
+      $this->load->view('admin/header');
+      $this->load->view('admin/pembeliandetail', $data);
+      $this->load->view('admin/footer');
+    }
+
+    public function pembelianubah($kodepembelian){
+      // ambil data pembelian berdasarkan kode
+      $datapembelian = $this->admin_model->getDataPembelianJoin($kodepembelian);
+      $data['pembelian'] = $datapembelian;
+
+      $this->form_validation->set_rules(
+        array(
+          array(
+            'field' => 'tanggal',
+            'label' => 'Tanggal',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'sancu',
+            'label' => 'Sancu',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'boncu',
+            'label' => 'Boncu',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'pretty',
+            'label' => 'Pretty',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'xtreme',
+            'label' => 'Xtreme',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'pembelianjumlahitem',
+            'label' => 'Jumlah Item',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'pembelianjumlah',
+            'label' => 'Jumlah',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'pembeliandibayar',
+            'label' => 'Dibayar',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'pembeliansisatagihan',
+            'label' => 'Sisa Tagihan',
+            'rules' => 'required'
+          )
+        )
+      );
+
+      if(!$this->form_validation->run()){
+        $this->load->view('admin/header');
+        $this->load->view('admin/pembelianubah', $data);
+        $this->load->view('admin/footer');
+      }
+      else{
+        //$kodepembelian = $this->input->post('kode_pembelian');
+        //$kodeagen = $this->input->post('kodeagen');
+        $tanggal = $this->input->post('tanggal');
+        $sancu = $this->input->post('sancu');
+        $boncu = $this->input->post('boncu');
+        $pretty = $this->input->post('pretty');
+        $xtreme = $this->input->post('xtreme');
+        $pembelianjumlahitem = $this->input->post('pembelianjumlahitem');
+        $pembelianjumlah = $this->input->post('pembelianjumlah');
+        $pembeliandibayar = $this->input->post('pembeliandibayar');
+        $pembeliansisatagihan = $this->input->post('pembeliansisatagihan');
+
+        $dataPembelian = array(
+          // nama harus sama dengan nama field di tabel
+          //'kode_agen' => $kodeagen,
+          'tanggal_pembelian' => $tanggal,
+          'sancu' => $sancu,
+          'boncu' => $boncu,
+          'pretty' => $pretty,
+          'xtreme' => $xtreme,
+          'jumlah_item' => $pembelianjumlahitem,
+          'jumlah_pembelian' => $pembelianjumlah,
+          'jumlah_dibayar' => $pembeliandibayar,
+          'sisa_tagihan' => $pembeliansisatagihan,
+        );
+
+        // insert data ke database
+        $result = $this->admin_model->updatePembelian($dataPembelian, $kodepembelian);
+        if($result){
+          // jika sukses redirect ke halaman pembelian
+          redirect('admin/pembelian');
+        }
+      }
+    }
+
+    public function pembelianhapus($kodepembelian){
+      // hapus data dari database
+      $result = $this->admin_model->deletePembelian($kodepembelian);
+      if($result){
+        redirect('admin/pembelian');
+      }
     }
 
   }

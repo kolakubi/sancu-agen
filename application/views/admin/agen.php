@@ -3,7 +3,7 @@
 <a href="<?php echo base_url() ?>admin/agentambah" class="btn btn-info">Tambah Agen +</a>
 <br><br><br>
 
-<table class="table table-striped" id="datatableagen">
+<table class="table table-striped table-bordered table-hover table-condensed table-responsive" id="datatableagen">
   <thead>
     <tr>
       <th>No</th>
