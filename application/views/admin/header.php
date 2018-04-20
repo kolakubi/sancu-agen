@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- bootstrap -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>asset/bootstrap/css/bootstrap.css">
     <!-- datatables css -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>asset/datatables/datatables.min.css">
@@ -41,7 +42,7 @@
               </div>
 
               <!-- button logout -->
-              <a type="button" class="btn btn-default navbar-btn navbar-right">Sign out</a>
+              <a href="<?php echo base_url() ?>logout" class="btn btn-default navbar-btn navbar-right">Sign out</a>
             </div>
 
           </nav>

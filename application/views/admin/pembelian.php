@@ -40,9 +40,9 @@
   <tfoot>
     <td></td>
     <td>Kode</td>
+    <td>Nama Agen</td>
     <td>Tgl Pembelian</td>
     <td>Jumlah Item</td>
-    <td>Jumlah Pembelian</td>
     <td></td>
     <td></td>
     <td></td>

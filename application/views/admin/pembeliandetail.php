@@ -28,7 +28,7 @@
       <td><?php echo $datapembelian['jumlah_item'] ?></td>
       <td><?php echo 'Rp '.number_format($datapembelian['jumlah_pembelian'], 0, ',', '.') ?></td>
       <td><?php echo 'Rp '.number_format($datapembelian['jumlah_dibayar'], 0, ',', '.') ?></td>
-      <td><?php echo $datapembelian['sisa_tagihan'] ?></td>
+      <td><?php echo 'Rp '.number_format($datapembelian['sisa_tagihan'], 0, ',', '.') ?></td>
     </tr>
   </tbody>
 </table>

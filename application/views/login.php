@@ -8,14 +8,10 @@
 
 	<div class="container">
 		<div
-			class="row"
-			style="display: flex;
-			align-items: center;
-			justify-content: center;
-			height: 100vh"
+			class="row" style="display: flex;align-items: center;justify-content: center; height: 100vh;"
 		>
 			<div class="col-md-4 col-sm-12 col-xs-12" style="background-color: #00abc5; border-radius: 20px">
-				<h1 class="text-center">Login</h1>
+				<h2 class="text-center" style="color: white;">LOGIN</h2>
 				<p class="text-center">
 					<img src="<?php echo base_url() ?>asset/image/logo-sancu-new-2.png" alt="logo-sancu">
 				</p>

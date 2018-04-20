@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2018 at 11:14 AM
+-- Generation Time: Apr 20, 2018 at 10:54 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -108,15 +108,27 @@ CREATE TABLE `pembelian` (
   `pretty` int(11) NOT NULL,
   `xtreme` int(11) NOT NULL,
   `jumlah_item` int(11) NOT NULL,
-  `jumlah_pembelian` int(11) NOT NULL
+  `jumlah_pembelian` int(11) NOT NULL,
+  `jumlah_dibayar` int(11) NOT NULL,
+  `sisa_tagihan` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pembelian`
 --
 
-INSERT INTO `pembelian` (`kode_pembelian`, `kode_agen`, `tanggal_pembelian`, `sancu`, `boncu`, `pretty`, `xtreme`, `jumlah_item`, `jumlah_pembelian`) VALUES
-(1, 'agen001', '2018-04-18', 0, 20, 20, 40, 80, 2000000);
+INSERT INTO `pembelian` (`kode_pembelian`, `kode_agen`, `tanggal_pembelian`, `sancu`, `boncu`, `pretty`, `xtreme`, `jumlah_item`, `jumlah_pembelian`, `jumlah_dibayar`, `sisa_tagihan`) VALUES
+(1, 'agen001', '2018-04-18', 0, 20, 20, 400, 440, 2000000, 2000000, 0),
+(3, 'agen003', '2018-04-19', 12, 44, 13, 550, 619, 780000, 550000, 230000),
+(4, 'agen001', '2018-04-19', 11, 33, 22, 44, 110, 805000, 430000, 375000),
+(5, 'agen003', '2018-04-20', 100, 80, 1, 0, 181, 900001, 0, 900001),
+(6, 'agen002', '2018-04-20', 1000, 2, 0, 0, 1002, 5000000, 600000, 4400000),
+(7, 'agen001', '2018-04-20', 781, 0, 0, 500, 1281, 19002304, 501314, 18500990),
+(8, 'agen002', '2018-04-20', 400, 10, 0, 40, 450, 700000, 500000, 200000),
+(9, 'agen002', '2018-04-20', 99, 80, 70, 70, 319, 6000000, 400000, 5600000),
+(10, 'agen003', '2018-04-20', 1000, 10, 0, 0, 1010, 30000000, 400000, 29600000),
+(11, 'agen003', '2018-04-20', 600, 14, 51, 66, 731, 70704401, 14145155, 56559246),
+(12, 'agen001', '2018-04-20', 400, 500, 600, 0, 1500, 40000000, 5000000, 35000000);
 
 --
 -- Indexes for dumped tables
@@ -155,7 +167,7 @@ ALTER TABLE `pembelian`
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables

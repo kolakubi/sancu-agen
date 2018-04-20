@@ -115,8 +115,13 @@
         let pembelianSisaTagihan = document.getElementById('pembeliansisatagihan');
         let sisa = 0;
         function sisaTagihan(){
-          sisa = parseInt(pembelianJumlah.value) - parseInt(pembeliandibayar.value);
+          sisa = parseInt(pembelianJumlah.value) - parseInt(pembelianDibayar.value);
         }
+        pembelianJumlah.addEventListener('change', function(){
+          sisaTagihan();
+          pembelianSisaTagihan.value = sisa;
+        })
+
         pembelianDibayar.addEventListener('change', function(){
           sisaTagihan();
           pembelianSisaTagihan.value = sisa;
