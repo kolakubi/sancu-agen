@@ -28,4 +28,4 @@
           </nav>
 
           <!-- buat wrap konten -->
-          <div class="row" style="padding: 0px 10px; height: 455px; overflow: scroll;">
+          <div class="row" style="padding: 0px 10px;">

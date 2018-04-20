@@ -2,13 +2,15 @@
 <html>
 <head>
 	<title>Login</title>
-	<link rel="stylesheet" href="<?php echo base_url() ?>asset/bootstrap/css/bootstrap.css">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="<?php echo base_url() ?>asset/bootstrap/css/bootstrap.min.css">
 </head>
 <body style="padding: 10px;">
 
 	<div class="container">
 		<div
-			class="row" style="display: flex;align-items: center;justify-content: center; height: 100vh;"
+			class="row" style="display: flex; align-items: center; justify-content: center; height: 100vh;"
 		>
 			<div class="col-md-4 col-sm-12 col-xs-12" style="background-color: #00abc5; border-radius: 20px">
 				<h2 class="text-center" style="color: white;">LOGIN</h2>
@@ -17,17 +19,17 @@
 				</p>
 				<?php echo form_open('login/validasi') ?>
 					<div class="form-group">
-						<label>Username: </label>
+						<label style="color: #222">Username: </label>
 						<input type="text" name="username" class="form-control">
 						<span class="text-danger"><?php echo form_error('username') ?></span>
 					</div>
 					<div class="form-group">
-						<label>Password: </label>
+						<label style="color: #222">Password: </label>
 						<input type="password" name="password" class="form-control">
 						<span class="text-danger"><?php echo form_error('password') ?></span>
 					</div>
 					<div class="form-group">
-						<button type="submit" class="btn btn-lg btn-info">Login</button>
+						<button type="submit" class="btn btn-lg btn-info btn-block">Login</button>
 					</div>
 				<?php echo form_close() ?>
 			</div>

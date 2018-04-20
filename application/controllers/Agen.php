@@ -26,6 +26,10 @@
       $this->load->view('agen/footer');
     }
 
+    ///////////////////////////////////////////////
+    ///////////////////////////////////////////////
+    //////////////// P R O F I L ////////////////// 
+
     public function profil(){
       // ambil biodata agen
       $username = $_SESSION['username'];
@@ -35,6 +39,10 @@
       $this->load->view('agen/profil', $dataAgen);
       $this->load->view('agen/footer');
     }
+
+    ///////////////////////////////////////////////
+    ///////////////////////////////////////////////
+    //////////// P E M B E L I A N ////////////////
 
     public function pembelian(){
 
@@ -83,7 +91,17 @@
         // print_r($dataPembelian);
         // echo '</pre>';
       }
+    }
 
+    ///////////////////////////////////////////////
+    ///////////////////////////////////////////////
+    ///////////////// B O N U S ///////////////////
+
+    public function bonus(){
+
+      $this->load->view('agen/header');
+      $this->load->view('agen/bonus');
+      $this->load->view('agen/footer');
 
     }
 

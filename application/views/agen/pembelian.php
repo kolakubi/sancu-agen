@@ -18,10 +18,10 @@
   </div>
 </div>
 
-<?php $totalPembelian = 0; $totalTagihan = 0; $totalPembayaran = 0; ?>
+<?php $totalPembelian = 0; $totalTagihan = 0; $totalPembayaran = 0; $totalItem = 0;?>
 <?php foreach($datapembelian as $pembelian) : ?>
-<div class="row">
-  <div class="col-xs-12 table-responsive" style="padding: 0 20px">
+<div class="row" style="padding: 0 20px">
+  <div class="col-xs-12 table-responsive">
     <table class="table table-bordered table-condensed">
       <thead class="thead-dark">
         <tr class="info">
@@ -43,15 +43,19 @@
           <td><?php echo $pembelian['pretty'] ?></td>
           <td><?php echo $pembelian['xtreme'] ?></td>
         </tr>
-        <tr class="warning">
-          <td><strong>Harga</strong></td>
+        <tr class="text-center">
+          <td><strong>Total Item</strong></td>
+          <td colspan="4"><?php echo $pembelian['jumlah_item'] ?></td>
+        </tr>
+        <tr class="text-center warning">
+          <td><strong>Total Harga</strong></td>
           <td colspan="4"><?php echo 'Rp '.number_format($pembelian['jumlah_pembelian'], 0, ',', '.') ?></td>
         </tr>
-        <tr class="success">
+        <tr class="text-center success">
           <td><strong>Dibayar</strong></td>
           <td colspan="4"><?php echo 'Rp '.number_format($pembelian['jumlah_dibayar'], 0, ',', '.') ?></td>
         </tr>
-        <tr class="danger">
+        <tr class=" text-center danger">
           <td><strong>Hutang</strong></td>
           <td colspan="4"><?php echo 'Rp '.number_format($pembelian['sisa_tagihan'], 0, ',', '.') ?></td>
         </tr>
@@ -59,12 +63,14 @@
     </table>
   </div>
 </div>
+<?php $totalItem += $pembelian['jumlah_item']; ?>
 <?php $totalPembelian += $pembelian['jumlah_pembelian']; ?>
 <?php $totalPembayaran += $pembelian['jumlah_dibayar']; ?>
 <?php $totalTagihan += $pembelian['sisa_tagihan']; ?>
 <?php endforeach ?>
 
 <div class="row">
+  <h5 class="text-center">Total Item: <?php echo number_format($totalItem, 0, ',', '.') ?></h5>
   <h5 class="text-center">Total Pembelian: <?php echo 'Rp '.number_format($totalPembelian, 0, ',', '.') ?></h5>
   <h5 class="text-center">Total Pembayaran: <?php echo 'Rp '.number_format($totalPembayaran, 0, ',', '.') ?></h5>
   <h5 class="text-center">Total Hutang: <?php echo 'Rp '.number_format($totalTagihan, 0, ',', '.') ?></h5>

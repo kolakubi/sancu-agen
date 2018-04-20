@@ -21,7 +21,7 @@
   </div>
   <!-- bonus -->
   <div class="col-sm-4 col-xs-4 text-center">
-    <a href="#">
+    <a href="<?php echo base_url() ?>agen/bonus">
       <span class="glyphicon glyphicon-heart-empty" style="font-size:50px; color: #00abc5;" aria-hidden="true"></span>
       <br>
       Bonus

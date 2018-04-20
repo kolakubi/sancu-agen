@@ -23,7 +23,6 @@
 
 			if(!$this->form_validation->run()){
 				$this->load->view('login');
-				echo "salah";
 			}
 			else{
 				// ambil value dr field
