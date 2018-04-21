@@ -1,6 +1,39 @@
 <div class="row">
-  <div class="col-xs-12" style="padding: 0% 25%;">
+  <div class="col-xs-12" style="padding: 0% 15%;">
     <?php echo form_open('agen/pembelian') ?>
+      <h3 class="text-center">Cari Transaksi</h3>
+      <br>
+      <!-- //////////////////// -->
+      <!-- checkboxes -->
+      <div class="col-xs-4">
+        <div class="form-check">
+          <label class="form-check-label">semua </label>
+          <input type="checkbox" name="semua" value="semua" class="form-check-input" id="pembeliansemuacheck">
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <div class="form-check">
+          <label class="form-check-label">Sancu </label>
+          <input type="checkbox" name="sancu" value="sancu" class="form-check-input" id="pembeliansancucheck">
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">Boncu </label>
+          <input type="checkbox" name="boncu" value="boncu" class="form-check-input" id="pembelianboncucheck">
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <div class="form-check">
+          <input type="checkbox" name="pretty" value="pretty" class="form-check-input" id="pembelianprettycheck">
+          <label class="form-check-label">Pretty </label>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" name="xtreme" value="xtreme" class="form-check-input" id="pembelianxtremecheck">
+          <label class="form-check-label">Xtreme </label>
+        </div>
+      </div>
+      <!-- end of checkboxes -->
+
+      <!-- tanggal -->
       <div class="form-group">
         <label>Dari: </label>
         <input type="date" name="tanggaldari" class="form-control">
@@ -11,6 +44,8 @@
         <input type="date" name="tanggalsampai" class="form-control">
         <span class="text-danger"><?php echo form_error('tanggalsampai') ?></span>
       </div>
+      <!-- end of tanggal -->
+
       <div class="form-group">
         <button type="submit" name="button" class="btn btn-warning btn-block">Cari</button>
       </div>
@@ -56,7 +91,7 @@
           <td colspan="4"><?php echo 'Rp '.number_format($pembelian['jumlah_dibayar'], 0, ',', '.') ?></td>
         </tr>
         <tr class=" text-center danger">
-          <td><strong>Hutang</strong></td>
+          <td><strong>Kekurangan</strong></td>
           <td colspan="4"><?php echo 'Rp '.number_format($pembelian['sisa_tagihan'], 0, ',', '.') ?></td>
         </tr>
       </tbody>
