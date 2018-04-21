@@ -29,10 +29,33 @@
     })
   }
 
+  // submit form pembelian
+  function submitFormPembelian(){
+    let btnSubmit = $('#btnsubmitpembelian');
+    btnSubmit.on('click', (event) => {
+      event.preventDefault();
+
+      let sancu = $('#pembeliansancucheck').prop('checked');
+      let boncu = $('#pembelianboncucheck').prop('checked');
+      let pretty = $('#pembelianprettycheck').prop('checked');
+      let xtreme = $('#pembelianxtremecheck').prop('checked');
+
+      if(sancu == false && boncu == false && pretty == false && xtreme == false){
+        alert("pilih salah satu item");
+      }
+      else{
+        window.location = 'pembelian';
+      }
+
+
+    })
+  }
+
   ///////////////////////////////
   ////// manggil fungsi /////////
 
   fixedBottomFooter();
   checkSemuaItem();
+  //submitFormPembelian();
 
 }(jQuery))

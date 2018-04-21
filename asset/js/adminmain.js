@@ -103,26 +103,6 @@
     });
   }
 
-  // fungsi hitung sisa tagihan
-  function hitungSisaTagihan(){
-    let pembelianJumlah = document.getElementById('pembelianjumlah');
-    let pembelianDibayar = document.getElementById('pembeliandibayar');
-    let pembelianSisaTagihan = document.getElementById('pembeliansisatagihan');
-    let sisa = 0;
-    function sisaTagihan(){
-      sisa = parseInt(pembelianJumlah.value) - parseInt(pembelianDibayar.value);
-    }
-    pembelianJumlah.addEventListener('change', function(){
-      sisaTagihan();
-      pembelianSisaTagihan.value = sisa;
-    })
-
-    pembelianDibayar.addEventListener('change', function(){
-      sisaTagihan();
-      pembelianSisaTagihan.value = sisa;
-    })
-  }
-
   function jumlahPembelian(){
     let pembelianJumlah = $('#pembelianjumlah');
     let pembelianHargaSancu = $('#pembelianhargasancu');
@@ -131,7 +111,7 @@
     let pembelianHargaXtreme = $('#pembelianhargaxtreme');
 
     let jumlah = 0;
-    function jumlahPembelian(){
+    function totalPembelian(){
       jumlah = parseInt(pembelianHargaSancu.val()) +
       parseInt(pembelianHargaBoncu.val()) +
       parseInt(pembelianHargaPretty.val()) +
@@ -139,21 +119,45 @@
     }
 
     pembelianHargaSancu.on('change', () => {
-      jumlahPembelian();
+      totalPembelian();
       pembelianJumlah.val(jumlah);
+      sisaTagihan();
+      pembelianSisaTagihan.val(sisa);
     });
     pembelianHargaBoncu.on('change', () => {
-      jumlahPembelian();
+      totalPembelian();
       pembelianJumlah.val(jumlah);
+      sisaTagihan();
+      pembelianSisaTagihan.val(sisa);
     });
     pembelianHargaPretty.on('change', () => {
-      jumlahPembelian();
+      totalPembelian();
       pembelianJumlah.val(jumlah);
+      sisaTagihan();
+      pembelianSisaTagihan.val(sisa);
     });
     pembelianHargaXtreme.on('change', () => {
-      jumlahPembelian();
+      totalPembelian();
       pembelianJumlah.val(jumlah);
+      sisaTagihan();
+      pembelianSisaTagihan.val(sisa);
     });
+
+    let pembelianDibayar = $('#pembeliandibayar');
+    let pembelianSisaTagihan = $('#pembeliansisatagihan');
+    let sisa = 0;
+    function sisaTagihan(){
+      sisa = parseInt(pembelianJumlah.val()) - parseInt(pembelianDibayar.val());
+    }
+    pembelianJumlah.on('change', function(){
+      sisaTagihan();
+      pembelianSisaTagihan.val(sisa);
+    })
+
+    pembelianDibayar.on('change', function(){
+      sisaTagihan();
+      pembelianSisaTagihan.val(sisa);
+    })
 
   }
 
@@ -174,13 +178,21 @@
   //////////////////////////////////////////////////
   ////// Fungsi tambah pembelian ///////////////////
 
-  // fungsi otomatis date hari ini
-  dateOtomatisHariIni();
-  // fungsi hitung jumlah Item
-  hitungJumlahItem();
-  // fungsi hitung sisa tagihan
-  hitungSisaTagihan();
-  // fungsi hitung jumlah pembelian
-  jumlahPembelian();
+  // jika ada di halaman agen/pembelian
+  let kodeHalaman = window.location.pathname.split("/").pop();
+  if(window.location.pathname == "/sancu-agen/admin/pembeliantambah"){
+    // fungsi otomatis date hari ini
+    dateOtomatisHariIni();
+    // fungsi hitung jumlah Item
+    hitungJumlahItem();
+    // fungsi hitung jumlah pembelian
+    jumlahPembelian();
+  }
+  else if(window.location.pathname == "/sancu-agen/admin/pembelianubah/"+kodeHalaman){
+    // fungsi hitung jumlah Item
+    hitungJumlahItem();
+    // fungsi hitung jumlah pembelian
+    jumlahPembelian();
+  }
 
 }(jQuery))

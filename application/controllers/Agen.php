@@ -28,7 +28,7 @@
 
     ///////////////////////////////////////////////
     ///////////////////////////////////////////////
-    //////////////// P R O F I L ////////////////// 
+    //////////////// P R O F I L //////////////////
 
     public function profil(){
       // ambil biodata agen
@@ -58,7 +58,7 @@
             'field' => 'tanggalsampai',
             'label' => 'Tanggal Sampai',
             'rules' => 'required'
-          )
+          ),
         )
       );
 
@@ -74,11 +74,14 @@
         $kodeAgen = $_SESSION['username'];
         $tanggalDari = $this->input->post('tanggaldari');
         $tanggalSampai = $this->input->post('tanggalsampai');
+        $item = $this->input->post('item');
+        $item = implode(",", $item);
 
         $dataAmbil = array(
           'kodeagen' => $kodeAgen,
           'tanggaldari' => $tanggalDari,
-          'tanggalsampai' => $tanggalSampai
+          'tanggalsampai' => $tanggalSampai,
+          'item' => $item
         );
 
         $dataPembelian = $this->agen_model->getDataPembelianRange($dataAmbil);
@@ -87,9 +90,6 @@
         $this->load->view('agen/header');
         $this->load->view('agen/pembelian', $data);
         $this->load->view('agen/footer');
-        // echo '<pre>';
-        // print_r($dataPembelian);
-        // echo '</pre>';
       }
     }
 

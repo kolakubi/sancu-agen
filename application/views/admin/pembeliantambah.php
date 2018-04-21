@@ -24,12 +24,14 @@
       </div>
       <!-- ================================================ -->
       <!-- item -->
-      <!-- sancu -->
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <!-- sancu -->
         <div class="form-group">
+          <!-- item -->
           <label>Sancu: </label>
           <input type="number" name="sancu" value="0" class="form-control" id="pembeliansancu">
           <span class="text-danger"><?php echo form_error('sancu') ?></span>
+          <!-- harga -->
           <label>Harga: </label>
           <input type="number" name="sancuharga" value="0" class="form-control" id="pembelianhargasancu">
           <span class="text-danger"><?php echo form_error('sancuharga') ?></span>
@@ -37,20 +39,24 @@
         <hr>
         <!-- boncu -->
         <div class="form-group">
+          <!-- item -->
           <label>Boncu: </label>
           <input type="number" name="boncu" value="0" class="form-control" id="pembelianboncu">
           <span class="text-danger"><?php echo form_error('boncu') ?></span>
+          <!-- harga -->
           <label>Harga: </label>
           <input type="number" name="boncuharga" value="0" class="form-control" id="pembelianhargaboncu">
           <span class="text-danger"><?php echo form_error('boncuharga') ?></span>
         </div>
       </div>
-      <!-- pretty -->
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <!-- pretty -->
         <div class="form-group">
+          <!-- item -->
           <label>Pretty: </label>
           <input type="number" name="pretty" value="0" class="form-control" id="pembelianpretty">
           <span class="text-danger"><?php echo form_error('pretty') ?></span>
+          <!-- harga -->
           <label>Harga: </label>
           <input type="number" name="prettyharga" value="0" class="form-control" id="pembelianhargapretty">
           <span class="text-danger"><?php echo form_error('prettyharga') ?></span>
@@ -58,9 +64,11 @@
         <hr>
         <!-- xtreme -->
         <div class="form-group">
+          <!-- item -->
           <label>Xtreme: </label>
           <input type="number" name="xtreme" value="0" class="form-control" id="pembelianxtreme">
           <span class="text-danger"><?php echo form_error('xtreme') ?></span>
+          <!-- harga -->
           <label>Harga: </label>
           <input type="number" name="xtremeharga" value="0" class="form-control" id="pembelianhargaxtreme">
           <span class="text-danger"><?php echo form_error('xtremeharga') ?></span>

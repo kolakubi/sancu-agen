@@ -5,30 +5,35 @@
       <br>
       <!-- //////////////////// -->
       <!-- checkboxes -->
-      <div class="col-xs-4">
-        <div class="form-check">
-          <label class="form-check-label">semua </label>
-          <input type="checkbox" name="semua" value="semua" class="form-check-input" id="pembeliansemuacheck">
-        </div>
-      </div>
-      <div class="col-xs-4">
-        <div class="form-check">
-          <label class="form-check-label">Sancu </label>
-          <input type="checkbox" name="sancu" value="sancu" class="form-check-input" id="pembeliansancucheck">
-        </div>
-        <div class="form-check">
-          <label class="form-check-label">Boncu </label>
-          <input type="checkbox" name="boncu" value="boncu" class="form-check-input" id="pembelianboncucheck">
-        </div>
-      </div>
-      <div class="col-xs-4">
-        <div class="form-check">
-          <input type="checkbox" name="pretty" value="pretty" class="form-check-input" id="pembelianprettycheck">
-          <label class="form-check-label">Pretty </label>
-        </div>
-        <div class="form-check">
-          <input type="checkbox" name="xtreme" value="xtreme" class="form-check-input" id="pembelianxtremecheck">
-          <label class="form-check-label">Xtreme </label>
+      <p><strong>Item: </strong></p>
+      <div class="well well-sm">
+        <div class="row">
+          <div class="col-xs-4">
+            <div class="form-check">
+              <label class="form-check-label">semua </label>
+              <input type="checkbox" name="semua" value="semua" class="form-check-input" id="pembeliansemuacheck">
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <div class="form-check">
+              <label class="form-check-label">Sancu </label>
+              <input type="checkbox" name="item[]" value="sancu" class="form-check-input" id="pembeliansancucheck">
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">Boncu </label>
+              <input type="checkbox" name="item[]" value="boncu" class="form-check-input" id="pembelianboncucheck">
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <div class="form-check">
+              <input type="checkbox" name="item[]" value="pretty" class="form-check-input" id="pembelianprettycheck">
+              <label class="form-check-label">Pretty </label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" name="item[]" value="xtreme" class="form-check-input" id="pembelianxtremecheck">
+              <label class="form-check-label">Xtreme </label>
+            </div>
+          </div>
         </div>
       </div>
       <!-- end of checkboxes -->
@@ -47,7 +52,7 @@
       <!-- end of tanggal -->
 
       <div class="form-group">
-        <button type="submit" name="button" class="btn btn-warning btn-block">Cari</button>
+        <button type="submit" name="button" class="btn btn-warning btn-block" id="btnsubmitpembelian">Cari</button>
       </div>
     <?php echo form_close() ?>
   </div>

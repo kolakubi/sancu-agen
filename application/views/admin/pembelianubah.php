@@ -19,28 +19,54 @@
         <input type="date" name="tanggal" class="form-control" value="<?php echo $pembelian['tanggal_pembelian'] ?>">
         <span class="text-danger"><?php echo form_error('tanggal') ?></span>
       </div>
+
+      <!-- item -->
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <!-- sancu -->
         <div class="form-group">
+          <!-- item -->
           <label>Sancu: </label>
           <input type="number" name="sancu" value="<?php echo $pembelian['sancu'] ?>" class="form-control" id="pembeliansancu">
           <span class="text-danger"><?php echo form_error('sancu') ?></span>
+          <!-- harga -->
+          <label>Harga: </label>
+          <input type="number" name="sancuharga" value="<?php echo $pembelian['total_harga_sancu'] ?>" class="form-control" id="pembelianhargasancu">
+          <span class="text-danger"><?php echo form_error('sancuharga') ?></span>
         </div>
+        <!-- boncu -->
         <div class="form-group">
+          <!-- item -->
           <label>Boncu: </label>
           <input type="number" name="boncu" value="<?php echo $pembelian['boncu'] ?>" class="form-control" id="pembelianboncu">
           <span class="text-danger"><?php echo form_error('boncu') ?></span>
+          <!-- harga -->
+          <label>Harga: </label>
+          <input type="number" name="boncuharga" value="<?php echo $pembelian['total_harga_boncu'] ?>" class="form-control" id="pembelianhargaboncu">
+          <span class="text-danger"><?php echo form_error('boncuharga') ?></span>
         </div>
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <!-- pretty -->
         <div class="form-group">
+          <!-- item -->
           <label>Pretty: </label>
           <input type="number" name="pretty" value="<?php echo $pembelian['pretty'] ?>" class="form-control" id="pembelianpretty">
           <span class="text-danger"><?php echo form_error('pretty') ?></span>
+          <!-- harga -->
+          <label>Harga: </label>
+          <input type="number" name="prettyharga" value="<?php echo $pembelian['total_harga_pretty'] ?>" class="form-control" id="pembelianhargapretty">
+          <span class="text-danger"><?php echo form_error('prettyharga') ?></span>
         </div>
+        <!-- xtreme -->
         <div class="form-group">
+          <!-- item -->
           <label>Xtreme: </label>
           <input type="number" name="xtreme" value="<?php echo $pembelian['xtreme'] ?>" class="form-control" id="pembelianxtreme">
           <span class="text-danger"><?php echo form_error('xtreme') ?></span>
+          <!-- harga -->
+          <label>Harga: </label>
+          <input type="number" name="xtremeharga" value="<?php echo $pembelian['total_harga_xtreme'] ?>" class="form-control" id="pembelianhargaxtreme">
+          <span class="text-danger"><?php echo form_error('xtremeharga') ?></span>
         </div>
       </div>
       <!-- ======================================== -->
@@ -50,37 +76,10 @@
         <input type="number" name="pembelianjumlahitem" value="<?php echo $pembelian['jumlah_item'] ?>" class="form-control" id="pembelianjumlahitem" readonly="true">
         <span class="text-danger"><?php echo form_error('pembelianjumlahitem') ?></span>
       </div>
-      <script type="text/javascript">
-        let sancu = document.getElementById('pembeliansancu');
-        let boncu = document.getElementById('pembelianboncu');
-        let pretty = document.getElementById('pembelianpretty');
-        let xtreme = document.getElementById('pembelianxtreme');
-        let totalItem = 0;
-        function getAllValue(){
-          totalItem = parseInt(sancu.value) + parseInt(boncu.value) + parseInt(pretty.value) + parseInt(xtreme.value);
-        }
-        let jumlahItem = document.getElementById('pembelianjumlahitem');
-        sancu.addEventListener('change', function(){
-          getAllValue();
-          jumlahItem.value = totalItem;
-        });
-        boncu.addEventListener('change', function(){
-          getAllValue();
-          jumlahItem.value = totalItem;
-        });
-        pretty.addEventListener('change', function(){
-          getAllValue();
-          jumlahItem.value = totalItem;
-        });
-        xtreme.addEventListener('change', function(){
-          getAllValue();
-          jumlahItem.value = totalItem;
-        });
-      </script>
       <!-- ======================================== -->
       <div class="form-group">
         <label>Jumlah Pembelian: </label>
-        <input type="number" name="pembelianjumlah" value="<?php echo $pembelian['jumlah_pembelian'] ?>" class="form-control" id="pembelianjumlah">
+        <input type="number" name="pembelianjumlah" value="<?php echo $pembelian['jumlah_pembelian'] ?>" class="form-control" id="pembelianjumlah" readonly="true">
         <span class="text-danger"><?php echo form_error('pembelianjumlah') ?></span>
       </div>
       <div class="form-group">
@@ -94,24 +93,6 @@
         <input type="number" name="pembeliansisatagihan" value="<?php echo $pembelian['sisa_tagihan'] ?>" class="form-control" id="pembeliansisatagihan" readonly="true">
         <span class="text-danger"><?php echo form_error('pembeliansisatagihan') ?></span>
       </div>
-      <script type="text/javascript">
-        let pembelianJumlah = document.getElementById('pembelianjumlah');
-        let pembelianDibayar = document.getElementById('pembeliandibayar');
-        let pembelianSisaTagihan = document.getElementById('pembeliansisatagihan');
-        let sisa = 0;
-        function sisaTagihan(){
-          sisa = parseInt(pembelianJumlah.value) - parseInt(pembelianDibayar.value);
-        }
-        pembelianJumlah.addEventListener('change', function(){
-          sisaTagihan();
-          pembelianSisaTagihan.value = sisa;
-        })
-        
-        pembelianDibayar.addEventListener('change', function(){
-          sisaTagihan();
-          pembelianSisaTagihan.value = sisa;
-        })
-      </script>
       <!-- ==================================== -->
       <div class="form-group">
         <button type="submit" class="btn btn-info">Ubah</button>

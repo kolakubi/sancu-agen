@@ -269,8 +269,18 @@
             'rules' => 'required'
           ),
           array(
+            'field' => 'sancuharga',
+            'label' => 'Harga Sancu',
+            'rules' => 'required'
+          ),
+          array(
             'field' => 'boncu',
             'label' => 'Boncu',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'boncuharga',
+            'label' => 'Harga Boncu',
             'rules' => 'required'
           ),
           array(
@@ -279,8 +289,18 @@
             'rules' => 'required'
           ),
           array(
+            'field' => 'prettyharga',
+            'label' => 'Harga Pretty',
+            'rules' => 'required'
+          ),
+          array(
             'field' => 'xtreme',
             'label' => 'Xtreme',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'xtremeharga',
+            'label' => 'Harga Xtreme',
             'rules' => 'required'
           ),
           array(
@@ -315,9 +335,13 @@
         $kodeagen = $this->input->post('kodeagen');
         $tanggal = $this->input->post('tanggal');
         $sancu = $this->input->post('sancu');
+        $sancuharga = $this->input->post('sancuharga');
         $boncu = $this->input->post('boncu');
+        $boncuharga = $this->input->post('boncuharga');
         $pretty = $this->input->post('pretty');
+        $prettyharga = $this->input->post('prettyharga');
         $xtreme = $this->input->post('xtreme');
+        $xtremeharga = $this->input->post('xtremeharga');
         $pembelianjumlahitem = $this->input->post('pembelianjumlahitem');
         $pembelianjumlah = $this->input->post('pembelianjumlah');
         $pembeliandibayar = $this->input->post('pembeliandibayar');
@@ -328,9 +352,13 @@
           'kode_agen' => $kodeagen,
           'tanggal_pembelian' => $tanggal,
           'sancu' => $sancu,
+          'total_harga_sancu' => $sancuharga,
           'boncu' => $boncu,
+          'total_harga_boncu' => $boncuharga,
           'pretty' => $pretty,
+          'total_harga_pretty' => $prettyharga,
           'xtreme' => $xtreme,
+          'total_harga_xtreme' => $xtremeharga,
           'jumlah_item' => $pembelianjumlahitem,
           'jumlah_pembelian' => $pembelianjumlah,
           'jumlah_dibayar' => $pembeliandibayar,
@@ -374,8 +402,18 @@
             'rules' => 'required'
           ),
           array(
+            'field' => 'sancuharga',
+            'label' => 'Harga Sancu',
+            'rules' => 'required'
+          ),
+          array(
             'field' => 'boncu',
             'label' => 'Boncu',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'boncuharga',
+            'label' => 'Harga Boncu',
             'rules' => 'required'
           ),
           array(
@@ -384,8 +422,18 @@
             'rules' => 'required'
           ),
           array(
+            'field' => 'prettyharga',
+            'label' => 'Harga Pretty',
+            'rules' => 'required'
+          ),
+          array(
             'field' => 'xtreme',
             'label' => 'Xtreme',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'xtremeharga',
+            'label' => 'Harga Xtreme',
             'rules' => 'required'
           ),
           array(
@@ -421,9 +469,13 @@
         //$kodeagen = $this->input->post('kodeagen');
         $tanggal = $this->input->post('tanggal');
         $sancu = $this->input->post('sancu');
+        $sancuharga = $this->input->post('sancuharga');
         $boncu = $this->input->post('boncu');
+        $boncuharga = $this->input->post('boncuharga');
         $pretty = $this->input->post('pretty');
+        $prettyharga = $this->input->post('prettyharga');
         $xtreme = $this->input->post('xtreme');
+        $xtremeharga = $this->input->post('xtremeharga');
         $pembelianjumlahitem = $this->input->post('pembelianjumlahitem');
         $pembelianjumlah = $this->input->post('pembelianjumlah');
         $pembeliandibayar = $this->input->post('pembeliandibayar');
@@ -434,9 +486,13 @@
           //'kode_agen' => $kodeagen,
           'tanggal_pembelian' => $tanggal,
           'sancu' => $sancu,
+          'total_harga_sancu' => $sancuharga,
           'boncu' => $boncu,
+          'total_harga_boncu' => $boncuharga,
           'pretty' => $pretty,
+          'total_harga_pretty' => $prettyharga,
           'xtreme' => $xtreme,
+          'total_harga_xtreme' => $xtremeharga,
           'jumlah_item' => $pembelianjumlahitem,
           'jumlah_pembelian' => $pembelianjumlah,
           'jumlah_dibayar' => $pembeliandibayar,
