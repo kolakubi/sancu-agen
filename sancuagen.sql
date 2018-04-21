@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2018 at 10:54 AM
+-- Generation Time: Apr 21, 2018 at 10:09 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -71,7 +71,8 @@ CREATE TABLE `agen` (
 INSERT INTO `agen` (`kode_agen`, `tgl_gabung`, `nama`, `alamat`, `kota`, `telepon`, `email`, `kelamin`, `fotoprofil`) VALUES
 ('agen001', '2018-04-15', 'M Ikhsan', 'Jln Raya PKP ciracasssssssss', 'DKI Jakarta', '081293925404', 'ikhsanmuhammad74@yahoo.co.id', 'Laki-laki', 'upload/profil/profil-ihsan.jpg'),
 ('agen002', '2018-04-17', 'Abin', 'Jl. Cipinang Pulo RT.13/RW 12 no 24, kel. Cipinang Besar Utara Kec.Jatinegara Jakt-Tim 13410', 'Jakarta Timur', '085219441217', 'tary_minie@yahoo.co.id', 'Laki-laki', 'upload/profil/abin.jpg'),
-('agen003', '2018-04-18', 'Yuni', 'Jl.Jatimas Raya RT.03 RW.05 Karangroto Genuk Semarang', 'Semarang', '081325656978', 'izzdzak@ymail.com', 'Perempuan', '');
+('agen003', '2018-04-18', 'Yuni', 'Jl.Jatimas Raya RT.03 RW.05 Karangroto Genuk Semarang', 'Semarang', '081325656978', 'izzdzak@ymail.com', 'Perempuan', ''),
+('agen004', '2018-04-21', 'Mal', 'jalan jalan ah', 'Jakarta', '02101201020', 'mal@mal.com', 'Laki-laki', '');
 
 -- --------------------------------------------------------
 
@@ -104,9 +105,13 @@ CREATE TABLE `pembelian` (
   `kode_agen` varchar(10) NOT NULL,
   `tanggal_pembelian` date NOT NULL,
   `sancu` int(11) NOT NULL,
+  `total_harga_sancu` int(11) NOT NULL,
   `boncu` int(11) NOT NULL,
+  `total_harga_boncu` int(11) NOT NULL,
   `pretty` int(11) NOT NULL,
+  `total_harga_pretty` int(11) NOT NULL,
   `xtreme` int(11) NOT NULL,
+  `total_harga_xtreme` int(11) NOT NULL,
   `jumlah_item` int(11) NOT NULL,
   `jumlah_pembelian` int(11) NOT NULL,
   `jumlah_dibayar` int(11) NOT NULL,
@@ -117,18 +122,22 @@ CREATE TABLE `pembelian` (
 -- Dumping data for table `pembelian`
 --
 
-INSERT INTO `pembelian` (`kode_pembelian`, `kode_agen`, `tanggal_pembelian`, `sancu`, `boncu`, `pretty`, `xtreme`, `jumlah_item`, `jumlah_pembelian`, `jumlah_dibayar`, `sisa_tagihan`) VALUES
-(1, 'agen001', '2018-04-18', 0, 20, 20, 400, 440, 2000000, 2000000, 0),
-(3, 'agen003', '2018-04-19', 12, 44, 13, 550, 619, 780000, 550000, 230000),
-(4, 'agen001', '2018-04-19', 11, 33, 22, 44, 110, 805000, 430000, 375000),
-(5, 'agen003', '2018-04-20', 100, 80, 1, 0, 181, 900001, 0, 900001),
-(6, 'agen002', '2018-04-20', 1000, 2, 0, 0, 1002, 5000000, 600000, 4400000),
-(7, 'agen001', '2018-04-20', 781, 0, 0, 500, 1281, 19002304, 501314, 18500990),
-(8, 'agen002', '2018-04-20', 400, 10, 0, 40, 450, 700000, 500000, 200000),
-(9, 'agen002', '2018-04-20', 99, 80, 70, 70, 319, 6000000, 400000, 5600000),
-(10, 'agen003', '2018-04-20', 1000, 10, 0, 0, 1010, 30000000, 400000, 29600000),
-(11, 'agen003', '2018-04-20', 600, 14, 51, 66, 731, 70704401, 14145155, 56559246),
-(12, 'agen001', '2018-04-20', 400, 500, 600, 0, 1500, 40000000, 5000000, 35000000);
+INSERT INTO `pembelian` (`kode_pembelian`, `kode_agen`, `tanggal_pembelian`, `sancu`, `total_harga_sancu`, `boncu`, `total_harga_boncu`, `pretty`, `total_harga_pretty`, `xtreme`, `total_harga_xtreme`, `jumlah_item`, `jumlah_pembelian`, `jumlah_dibayar`, `sisa_tagihan`) VALUES
+(1, 'agen001', '2018-04-18', 0, 0, 20, 0, 20, 0, 400, 0, 440, 2000000, 2000000, 0),
+(3, 'agen003', '2018-04-19', 12, 0, 44, 0, 13, 0, 550, 0, 619, 780000, 550000, 230000),
+(4, 'agen001', '2018-04-19', 11, 0, 33, 0, 22, 0, 44, 0, 110, 805000, 430000, 375000),
+(5, 'agen003', '2018-04-20', 100, 0, 80, 0, 1, 0, 0, 0, 181, 900001, 0, 900001),
+(6, 'agen002', '2018-04-20', 1000, 0, 2, 0, 0, 0, 0, 0, 1002, 5000000, 600000, 4400000),
+(7, 'agen001', '2018-04-20', 781, 0, 0, 0, 0, 0, 500, 0, 1281, 19002304, 501314, 18500990),
+(8, 'agen002', '2018-04-20', 400, 0, 10, 0, 0, 0, 40, 0, 450, 700000, 500000, 200000),
+(9, 'agen002', '2018-04-20', 99, 0, 80, 0, 70, 0, 70, 0, 319, 6000000, 400000, 5600000),
+(10, 'agen003', '2018-04-20', 1000, 0, 10, 0, 0, 0, 0, 0, 1010, 30000000, 400000, 29600000),
+(12, 'agen001', '2018-04-20', 400, 0, 500, 0, 600, 0, 0, 0, 1500, 40000000, 5000000, 35000000),
+(13, 'agen001', '2018-04-21', 14, 100, 0, 10000, 12, 30000000, 100000, 200000, 100026, 30210100, 1000000, 0),
+(15, 'agen001', '2018-04-21', 10, 0, 1010, 0, 4040, 0, 11, 0, 5071, 822221, 200000, 622221),
+(16, 'agen001', '2018-04-21', 200, 200000, 100, 100000, 300, 100000, 100, 100000, 700, 500000, 450000, 50000),
+(17, 'agen002', '2018-04-21', 100, 100000, 200, 200000, 100, 100000, 400, 400000, 800, 800000, 750000, 50000),
+(18, 'agen001', '2018-04-21', 100, 100000, 200, 500000, 300, 300000, 400, 500000, 1000, 1400000, 400000, 1000000);
 
 --
 -- Indexes for dumped tables
@@ -167,7 +176,7 @@ ALTER TABLE `pembelian`
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
