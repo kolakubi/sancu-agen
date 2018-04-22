@@ -59,11 +59,18 @@
             'label' => 'Tanggal Sampai',
             'rules' => 'required'
           ),
+          array(
+            'field' => 'item[]',
+            'label' => 'item',
+            'rules' => 'required'
+          ),
         )
       );
 
       if(!$this->form_validation->run()){
         $data['datapembelian'] = array();
+        $data['defaultitem'] = array('sancu', 'boncu', 'pretty', 'xtreme');
+        $data['item'] = array();
 
         $this->load->view('agen/header');
         $this->load->view('agen/pembelian', $data);
@@ -75,21 +82,27 @@
         $tanggalDari = $this->input->post('tanggaldari');
         $tanggalSampai = $this->input->post('tanggalsampai');
         $item = $this->input->post('item');
-        $item = implode(",", $item);
+        $defaultItem = array('sancu', 'boncu', 'pretty', 'xtreme');
+
 
         $dataAmbil = array(
           'kodeagen' => $kodeAgen,
           'tanggaldari' => $tanggalDari,
-          'tanggalsampai' => $tanggalSampai,
-          'item' => $item
+          'tanggalsampai' => $tanggalSampai
         );
 
         $dataPembelian = $this->agen_model->getDataPembelianRange($dataAmbil);
         $data['datapembelian'] = $dataPembelian;
+        $data['item'] = $item;
+        $data['defaultitem'] = $defaultItem;
 
         $this->load->view('agen/header');
         $this->load->view('agen/pembelian', $data);
         $this->load->view('agen/footer');
+
+        // echo '<pre>';
+        // print_r($dataPembelian);
+        // echo '<pre>';
       }
     }
 
