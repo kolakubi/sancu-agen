@@ -20,13 +20,12 @@
     // ambil data pembelian berdasarkan range date
     public function getDataPembelianRange($dataAmbil){
 
-
       $this->db->select('*');
       $this->db->where("`tanggal_pembelian` >= '".$dataAmbil['tanggaldari']."' AND `tanggal_pembelian` <= '".$dataAmbil['tanggalsampai']."' AND `kode_agen` = '".$dataAmbil['kodeagen']."'");
       $result = $this->db->get('pembelian')->result_array();
       return $result;
 
-      
+
     }
 
   }

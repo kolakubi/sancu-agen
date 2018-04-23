@@ -74,7 +74,7 @@
   $totalItemXtreme = 0;
 ?>
 <?php foreach($datapembelian as $pembelian) : ?>
-<div class="row" style="padding: 0 20px">
+<div class="row text-sm" style="padding: 0; style="font-size: 12px;"">
   <div class="col-xs-12 table-responsive">
     <table class="table table-bordered table-condensed">
       <thead class="thead-dark">
@@ -145,12 +145,12 @@
           <?php endif ?>
         </tr>
         <tr class="text-center">
-          <td><strong>Harga Item</strong></td>
+          <td><strong>Harga Item (Rp)</strong></td>
           <!-- cek checkbox sancu -->
           <!-- tampilin total harga -->
           <?php if(in_array($defaultitem[0], $item)) : ?>
             <td>
-              <?php echo 'Rp '.number_format($pembelian['total_harga_sancu'], 0, ',', '.') ?>
+              <?php echo number_format($pembelian['total_harga_sancu'], 0, ',', '.') ?>
             </td>
           <?php else : ?>
               <?php $pembelian['total_harga_sancu'] = 0; ?>
@@ -158,7 +158,7 @@
           <!-- cek checkbox boncu -->
           <?php if(in_array($defaultitem[1], $item)) : ?>
             <td>
-              <?php echo 'Rp '.number_format($pembelian['total_harga_boncu'], 0, ',', '.') ?>
+              <?php echo number_format($pembelian['total_harga_boncu'], 0, ',', '.') ?>
             </td>
           <?php else : ?>
               <?php $pembelian['total_harga_boncu'] = 0; ?>
@@ -166,7 +166,7 @@
           <!-- cek checkbox pretty -->
           <?php if(in_array($defaultitem[2], $item)) : ?>
             <td>
-              <?php echo 'Rp '.number_format($pembelian['total_harga_pretty'], 0, ',', '.') ?>
+              <?php echo number_format($pembelian['total_harga_pretty'], 0, ',', '.') ?>
             </td>
           <?php else : ?>
               <?php $pembelian['total_harga_pretty'] = 0; ?>
@@ -174,7 +174,7 @@
           <!-- cek checkbox xtreme -->
           <?php if(in_array($defaultitem[3], $item)) : ?>
             <td>
-              <?php echo 'Rp '.number_format($pembelian['total_harga_xtreme'], 0, ',', '.') ?>
+              <?php echo number_format($pembelian['total_harga_xtreme'], 0, ',', '.') ?>
             </td>
           <?php else : ?>
               <?php $pembelian['total_harga_xtreme'] = 0; ?>
@@ -240,7 +240,7 @@
   <h5>
     <?php if(in_array($defaultitem[0], $item)) : ?>
       <td>
-        <?php echo '<strong>Total Item Sancu: '.$totalItemSancu.'</strong>' ?>
+        <?php echo '<strong>Total Item Sancu: '.number_format($totalItemSancu, 0, ',', '.').'</strong>' ?>
       </td>
     <?php endif ?>
   </h5>
@@ -248,7 +248,7 @@
   <h5>
     <?php if(in_array($defaultitem[1], $item)) : ?>
       <td>
-        <?php echo '<strong>Total Item Boncu: '.$totalItemBoncu.'</strong>' ?>
+        <?php echo '<strong>Total Item Boncu: '.number_format($totalItemBoncu, 0, ',', '.').'</strong>' ?>
       </td>
     <?php endif ?>
   </h5>
@@ -256,7 +256,7 @@
   <h5>
     <?php if(in_array($defaultitem[2], $item)) : ?>
       <td>
-        <?php echo '<strong>Total Item Pretty: '.$totalItemPretty.'</strong>' ?>
+        <?php echo '<strong>Total Item Pretty: '.number_format($totalItemPretty, 0, ',', '.').'</strong>' ?>
       </td>
     <?php endif ?>
   </h5>
@@ -264,16 +264,17 @@
   <h5>
     <?php if(in_array($defaultitem[3], $item)) : ?>
       <td>
-        <?php echo '<strong>Total Item Xtreme: '.$totalItemXtreme.'</strong>' ?>
+        <?php echo '<strong>Total Item Xtreme: '.number_format($totalItemXtreme, 0, ',', '.').'</strong>' ?>
       </td>
     <?php endif ?>
   </h5>
+  <hr>
   <!-- ========== -->
   <h5><strong>Grand Total Item:
-    <?php echo number_format($totalItem, 0, ',', '.') ?>
+    <?php echo number_format($totalItem, 0, ',', '.').' pasang' ?>
   </strong></h5>
   <h5><strong>Grand Total Pembelian:
-    <?php echo 'Rp '.number_format($totalPembelian, 0, ',', '.') ?>
+    <?php echo 'Rp '.number_format($totalPembelian, 0, ',', '.').' pasang' ?>
   </strong></h5>
   <!-- klo ga semua item dipilih -->
   <!-- ga usah tampilin info dibayar sama kekurangan -->
