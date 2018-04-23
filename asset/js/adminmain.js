@@ -161,6 +161,25 @@
 
   }
 
+  ////////////////////////////////////////
+  ///////// Fungsi Pembayaran ////////////
+
+  function autoSisaTagihan(){
+    let tagihanSebelumnya = $('#bayartagihansebelumnya');
+    let dibayar = $('#bayardibayar');
+    let sisaTagihan = $('#bayarsisatagihan');
+
+    let selisih = 0;
+    function sisaTagihanFunc(){
+      selisih = parseInt(tagihanSebelumnya.val()) - parseInt(dibayar.val());
+    }
+
+    dibayar.on('change', function(){
+      sisaTagihanFunc();
+      sisaTagihan.val(selisih);
+    })
+  }
+
 
   //////////////////////////////////////////////////
   //////////////////////////////////////////////////
@@ -194,5 +213,10 @@
     // fungsi hitung jumlah pembelian
     jumlahPembelian();
   }
+
+  //////////////////////////////////////////////////
+  //////////////////////////////////////////////////
+  ////// Fungsi pembayaran ///////////////////
+  autoSisaTagihan();
 
 }(jQuery))

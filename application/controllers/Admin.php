@@ -365,8 +365,15 @@
           'sisa_tagihan' => $pembeliansisatagihan,
         );
 
+        $dataPembayaran = array(
+          'kode_pembelian' => 0,
+          'tanggal_pembelian' => $tanggal,
+          'jumlah_pembelian' => $pembelianjumlah,
+          'sisa_tagihan' => $pembeliansisatagihan
+        );
+
         // insert data ke database
-        $result = $this->admin_model->insertPembelian($dataPembelian);
+        $result = $this->admin_model->insertPembelian($dataPembelian, $dataPembayaran);
         if($result){
           // jika sukses redirect ke halaman pembelian
           redirect('admin/pembelian');
@@ -514,6 +521,82 @@
       if($result){
         redirect('admin/pembelian');
       }
+    }
+
+    ///////////////////////////////////////////////
+    ///////////////////////////////////////////////
+    //////////// P E M B E L I A N ////////////////
+
+    public function pembayaran(){
+      // ambil data pembayaran dari database
+      $result = $this->admin_model->getPembayaran();
+
+      $data['dataPembayaran'] = $result;
+      // load view
+      $this->load->view('admin/header');
+      $this->load->view('admin/pembayaran', $data);
+      $this->load->view('admin/footer');
+    }
+
+    public function pembayaranDetail($kodePembayaran){
+      // ambil data pembayarandetail dari database
+      $result = $this->admin_model->getPembayaranDetail($kodePembayaran);
+
+      $data['dataPembayaran'] = $result;
+      // load view
+      $this->load->view('admin/header');
+      $this->load->view('admin/pembayarandetail', $data);
+      $this->load->view('admin/footer');
+    }
+
+    public function pembayaranDetailTambah($kodePembayaran){
+      // ambil data pembelian
+      $result = $this->admin_model->getPembayaran($kodePembayaran);
+      $data['dataPembayaran'] = $result;
+      // set form rules
+      $this->form_validation->set_rules(
+        array(
+          array(
+            'field' => 'tanggalpembayaran',
+            'label' => 'Tanggal Pembayaran',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'dibayar',
+            'label' => 'Dibayar',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'sisatagihan',
+            'label' => 'Sisa Tagihan',
+            'rules' => 'required'
+          ),
+        )
+      );
+
+      if(!$this->form_validation->run()){
+        $this->load->view('admin/header');
+        $this->load->view('admin/pembayarandetailtambah', $data);
+        $this->load->view('admin/footer');
+      }{
+        // ambil value dari form
+        $kodepembayaran = $this->input->post('kodepembayaran');
+        $tanggalpembayaran = $this->input->post('tanggalpembayaran');
+        $dibayar = $this->input->post('dibayar');
+        $sisatagihan = $this->input->post('sisatagihan');
+
+        $dataPembayaran = array(
+          'kode_pembayaran' => $kodepembayaran,
+          'tanggal_pembayaran' => $tanggalpembayaran,
+          'dibayar' => $dibayar,
+          'sisa_tagihan' => $sisa_tagihan
+        )
+
+        $this->admin_modal->insertBayar($dataPembayaran);
+
+      }
+
+
     }
 
   }

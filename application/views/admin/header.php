@@ -37,6 +37,7 @@
                 <ul class="nav nav-tabs">
                   <li><a href="<?php echo base_url() ?>admin/agen">Agen</a></li>
                   <li><a href="<?php echo base_url() ?>admin/pembelian">Pembelian</a></li>
+                  <li><a href="<?php echo base_url() ?>admin/pembayaran">Pembayaran</a></li>
                   <li><a href="#">Bonus</a></li>
                 </ul>
               </div>

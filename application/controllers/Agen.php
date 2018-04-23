@@ -68,12 +68,12 @@
       );
 
       if(!$this->form_validation->run()){
-        $data['datapembelian'] = array();
-        $data['defaultitem'] = array('sancu', 'boncu', 'pretty', 'xtreme');
-        $data['item'] = array();
+        // $data['datapembelian'] = array();
+        // $data['defaultitem'] = array('sancu', 'boncu', 'pretty', 'xtreme');
+        // $data['item'] = array();
 
         $this->load->view('agen/header');
-        $this->load->view('agen/pembelian', $data);
+        $this->load->view('agen/pembelian');
         $this->load->view('agen/footer');
       }
       else{
@@ -97,7 +97,7 @@
         $data['defaultitem'] = $defaultItem;
 
         $this->load->view('agen/header');
-        $this->load->view('agen/pembelian', $data);
+        $this->load->view('agen/pembelianhasil', $data);
         $this->load->view('agen/footer');
 
         // echo '<pre>';

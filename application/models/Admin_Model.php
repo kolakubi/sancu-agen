@@ -99,12 +99,16 @@
       }
     }
 
-    public function insertPembelian($dataPembelian){
+    public function insertPembelian($dataPembelian, $dataPembayaran){
       // insert data pembelian
-      if($this->db->insert('pembelian', $dataPembelian)){
-        return true;
-      }
-      return false;
+      $this->db->insert('pembelian', $dataPembelian);
+      // ambil id pembelian yg baru saja diinput
+      $insert_id = $this->db->insert_id();
+      // insert data pembayaran dengan foreign key id pembelian
+      $dataPembayaran['kode_pembelian'] = $insert_id;
+      $this->db->insert('pembayaran', $dataPembayaran);
+
+      return true;
     }
 
     public function updatePembelian($dataPembelian, $kodepembelian){
@@ -125,6 +129,37 @@
         return true;
       }
       return false;
+    }
+
+    ///////////////////////////////////////////////
+    ///////////////////////////////////////////////
+    //////////// P E M B A Y A R A N //////////////
+
+    public function getPembayaran($kodePembayaran = null){
+      // ambil data pembayaran
+      if($kodePembayaran){
+        // jika ada kode pembayaran
+        // ambil data berdasarkan kode
+        $result = $this->db->get_where('pembayaran', array('kode_pembayaran'=>$kodePembayaran));
+        return $result->row_array();
+      }
+      // jika tidak ada kode pembayaran
+      $result = $this->db->get('pembayaran')->result_array();
+      return $result;
+    }
+
+    public function getPembayaranDetail($kodePembayaran){
+      $this->db->select('*');
+      $this->db->from('pembayaran_detail');
+      $this->db->join('pembayaran', 'pembayaran.kode_pembayaran = pembayaran_detail.kode_pembayaran');
+      $this->db->where('kode_pembayaran', $kodePembayaran);
+      $result = $this->db->get()->result_array();
+
+      return $result;
+    }
+
+    public function insertPembayaran($dataPembayaran){
+      
     }
 
   }
