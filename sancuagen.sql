@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2018 at 04:46 AM
+-- Generation Time: Apr 24, 2018 at 09:09 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -97,6 +97,52 @@ INSERT INTO `login` (`username`, `password`, `level`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pembayaran`
+--
+
+CREATE TABLE `pembayaran` (
+  `kode_pembayaran` int(11) NOT NULL,
+  `kode_pembelian` int(11) NOT NULL,
+  `tanggal_pembelian` date NOT NULL,
+  `jumlah_pembelian` int(11) NOT NULL,
+  `sisa_tagihan` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pembayaran`
+--
+
+INSERT INTO `pembayaran` (`kode_pembayaran`, `kode_pembelian`, `tanggal_pembelian`, `jumlah_pembelian`, `sisa_tagihan`) VALUES
+(3, 27, '2018-04-24', 8000000, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pembayaran_detail`
+--
+
+CREATE TABLE `pembayaran_detail` (
+  `kode_pembayaran` int(11) NOT NULL,
+  `tanggal_pembayaran` date NOT NULL,
+  `tagihan_sebelumnya` int(11) NOT NULL,
+  `nominal_pembayaran` int(11) NOT NULL,
+  `sisa_tagihan` int(11) NOT NULL,
+  `kode_pembayaran_detail` int(11) NOT NULL,
+  `keterangan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pembayaran_detail`
+--
+
+INSERT INTO `pembayaran_detail` (`kode_pembayaran`, `tanggal_pembayaran`, `tagihan_sebelumnya`, `nominal_pembayaran`, `sisa_tagihan`, `kode_pembayaran_detail`, `keterangan`) VALUES
+(3, '2018-04-24', 8000000, 4000000, 4000000, 7, 'mandiri subi'),
+(3, '2018-04-25', 4000000, 3500000, 500000, 8, 'Bayar langsung'),
+(3, '2018-04-26', 500000, 500000, 0, 9, 'BCA');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pembelian`
 --
 
@@ -123,11 +169,7 @@ CREATE TABLE `pembelian` (
 --
 
 INSERT INTO `pembelian` (`kode_pembelian`, `kode_agen`, `tanggal_pembelian`, `sancu`, `total_harga_sancu`, `boncu`, `total_harga_boncu`, `pretty`, `total_harga_pretty`, `xtreme`, `total_harga_xtreme`, `jumlah_item`, `jumlah_pembelian`, `jumlah_dibayar`, `sisa_tagihan`) VALUES
-(19, 'agen001', '2018-04-20', 20, 200000, 30, 300000, 40, 400000, 50, 500000, 140, 1400000, 0, 1400000),
-(20, 'agen001', '2018-04-21', 1000, 10000000, 0, 0, 0, 0, 200, 200000, 1200, 10200000, 5000000, 5200000),
-(21, 'agen001', '2018-04-22', 0, 0, 100, 100000, 400, 400000, 0, 0, 500, 500000, 400000, 100000),
-(22, 'agen001', '2018-04-22', 1200, 12000000, 0, 0, 1000, 10000000, 0, 0, 2200, 22000000, 21000000, 1000000),
-(23, 'agen001', '2018-04-23', 52, 520000, 100, 1000000, 400, 4000000, 0, 0, 552, 5520000, 1000000, 4520000);
+(27, 'agen001', '2018-04-24', 100, 1000000, 200, 2000000, 100, 1000000, 400, 4000000, 800, 8000000, 0, 8000000);
 
 --
 -- Indexes for dumped tables
@@ -152,6 +194,19 @@ ALTER TABLE `login`
   ADD PRIMARY KEY (`username`);
 
 --
+-- Indexes for table `pembayaran`
+--
+ALTER TABLE `pembayaran`
+  ADD PRIMARY KEY (`kode_pembayaran`),
+  ADD KEY `kode_pembelian` (`kode_pembelian`);
+
+--
+-- Indexes for table `pembayaran_detail`
+--
+ALTER TABLE `pembayaran_detail`
+  ADD PRIMARY KEY (`kode_pembayaran_detail`);
+
+--
 -- Indexes for table `pembelian`
 --
 ALTER TABLE `pembelian`
@@ -163,14 +218,32 @@ ALTER TABLE `pembelian`
 --
 
 --
+-- AUTO_INCREMENT for table `pembayaran`
+--
+ALTER TABLE `pembayaran`
+  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `pembayaran_detail`
+--
+ALTER TABLE `pembayaran_detail`
+  MODIFY `kode_pembayaran_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `pembayaran`
+--
+ALTER TABLE `pembayaran`
+  ADD CONSTRAINT `pembayaran_ibfk_1` FOREIGN KEY (`kode_pembelian`) REFERENCES `pembelian` (`kode_pembelian`);
 
 --
 -- Constraints for table `pembelian`
