@@ -149,17 +149,26 @@
     }
 
     public function getPembayaranDetail($kodePembayaran){
+      // ambil data pembayaran detail sesuai kode pembayaran
       $this->db->select('*');
       $this->db->from('pembayaran_detail');
       $this->db->join('pembayaran', 'pembayaran.kode_pembayaran = pembayaran_detail.kode_pembayaran');
-      $this->db->where('kode_pembayaran', $kodePembayaran);
+      $this->db->where('pembayaran.kode_pembayaran', $kodePembayaran);
       $result = $this->db->get()->result_array();
 
       return $result;
     }
 
-    public function insertPembayaran($dataPembayaran){
-      
+    public function insertPembayaranDetail($dataPembayaran){
+      // insert ke table pembayaran_detail
+      $this->db->insert('pembayaran_detail', $dataPembayaran);
+      // update table pembayaran (sisa_tagihan)
+      $tagihanBaru = array('sisa_tagihan' => $dataPembayaran['sisa_tagihan']);
+      $this->db->set($tagihanBaru);
+      $this->db->where('kode_pembayaran', $dataPembayaran['kode_pembayaran']);
+      $this->db->update('pembayaran');
+
+      return true;
     }
 
   }

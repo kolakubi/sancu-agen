@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-xs-12" style="padding: 0% 15%;">
+  <div class="col-xs-12" style="padding: 0 15%;">
     <?php echo form_open('agen/pembelian') ?>
       <h3 class="text-center">Cari Transaksi</h3>
       <br>

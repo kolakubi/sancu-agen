@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-4">
     <h1 class="text-center">Bayar</h1>
-    <?php echo form_open('admin/pembayarandetailtambah') ?>
+    <?php echo form_open('admin/pembayarandetailtambah/'.$dataPembayaran['kode_pembayaran']) ?>
       <!-- kode pembelian -->
       <div class="form-group">
         <label>Kode Pembayaran: </label>
@@ -40,8 +40,14 @@
         <input type="number" name="sisatagihan" class="form-control" readonly="true" id="bayarsisatagihan">
         <span class="text-danger"><?php echo form_error('sisatagihan') ?></span>
       </div>
+      <!-- keterangan pembayaran -->
       <div class="form-group">
-        <button type="button" class="btn btn-info">Bayar</button>
+        <label>Keterangan: </label>
+        <textarea type="text" name="keterangan" class="form-control"></textarea>
+        <span class="text-danger"><?php echo form_error('keterangan') ?></span>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-info">Bayar</button>
       </div>
     <?php echo form_close() ?>
   </div>

@@ -25,6 +25,22 @@
       $result = $this->db->get('pembelian')->result_array();
       return $result;
 
+    }
+
+    /////////////////////////////////////////
+    /////////////////////////////////////////
+    ////////// P E M B A Y A R A N /////////
+
+    // ambil data pembelian berdasarkan range date
+    public function getDataPembayaranRange($dataAmbil){
+
+      $this->db->select('*');
+      $this->db->from('pembelian');
+      $this->db->join('pembayaran', 'pembelian.kode_pembelian = pembayaran.kode_pembelian', 'inner');
+      $this->db->join('pembayaran_detail', 'pembayaran_detail.kode_pembayaran = pembayaran.kode_pembayaran', 'inner');
+      $this->db->where("`pembelian.tanggal_pembelian` >= '".$dataAmbil['tanggaldari']."' AND `pembelian.tanggal_pembelian` <= '".$dataAmbil['tanggalsampai']."' AND `kode_agen` = '".$dataAmbil['kodeagen']."'");
+      $result = $this->db->get()->result_array();
+      return $result;
 
     }
 

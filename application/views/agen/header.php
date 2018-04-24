@@ -10,7 +10,7 @@
   <body>
 
     <div class="container-fluid">
-      <div class="row">
+      <div class="row" style="overflow-x: hidden">
         <div class="col-md-4 col-sm-12 col-xs-12" style="padding: 0px; height: 100vh">
 
           <!-- menu -->
@@ -28,4 +28,4 @@
           </nav>
 
           <!-- buat wrap konten -->
-          <div class="row" style="padding: 0px 10px;">
+          <div class="row">

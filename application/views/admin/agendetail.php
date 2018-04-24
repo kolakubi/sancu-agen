@@ -11,7 +11,7 @@
   </p>
 </div>
 <p class="text-center">
-  <a href="<?php echo base_url() ?>admin/agen" class="btn btn-default">Back</a>
+  <a href="<?php echo base_url() ?>admin/agen" class="btn btn-default">Kembali</a>
   <a class="btn btn-info" href="<?php echo base_url() ?>admin/agenubah/<?php echo $agen['kode_agen'] ?>">Edit</a>
   <a class="btn btn-danger btnhapus" href="<?php echo base_url() ?>admin/agenhapus/<?php echo $agen['kode_agen'] ?>">Delete</a>
 </p>

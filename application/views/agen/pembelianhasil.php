@@ -12,16 +12,16 @@
   $totalItemXtreme = 0;
 ?>
 <?php foreach($datapembelian as $pembelian) : ?>
-<div class="row text-sm" style="padding: 0; style="font-size: 12px;"">
-  <div class="col-xs-12 table-responsive">
+<div class="row" style="padding: 0 15px; font-size: 12px">
+  <div class="col-xs-12">
     <table class="table table-bordered table-condensed">
-      <thead class="thead-dark">
+      <thead>
         <tr class="info">
           <th class="text-center" colspan="5"><?php echo $pembelian['tanggal_pembelian'] ?></th>
         </tr>
       </thead>
       <tbody>
-        <tr class="text-center">
+        <tr class="text-center" style="font-size: 12px">
           <!-- cek checkbox sancu -->
           <!-- tampilin judul -->
           <!-- Judul sancu -->
@@ -143,7 +143,7 @@
         </tr>
         <!-- klo ga semua item dipilih -->
         <!-- ga usah tampilin info dibayar sama kekurangan -->
-        <?php if(in_array($defaultitem[0], $item) && in_array($defaultitem[1], $item) && in_array($defaultitem[2], $item) && in_array($defaultitem[3], $item)) : ?>
+        <!-- <?php if(in_array($defaultitem[0], $item) && in_array($defaultitem[1], $item) && in_array($defaultitem[2], $item) && in_array($defaultitem[3], $item)) : ?>
           <tr class="text-center success">
             <td><strong>Dibayar</strong></td>
             <td colspan="4"><?php echo 'Rp '.number_format($pembelian['jumlah_dibayar'], 0, ',', '.') ?></td>
@@ -152,7 +152,7 @@
             <td><strong>Kekurangan</strong></td>
             <td colspan="4"><?php echo 'Rp '.number_format($pembelian['sisa_tagihan'], 0, ',', '.') ?></td>
           </tr>
-        <?php endif ?>
+        <?php endif ?> -->
       </tbody>
     </table>
   </div>
@@ -172,7 +172,7 @@
 <?php endforeach ?>
 
 <!-- grand total -->
-<div class="row text-uppercase text-strong" style="padding: 0% 7%;">
+<div class="row text-uppercase text-strong text-center" style="padding: 0% 7%; font-size: 12px">
   <!-- grand total item -->
   <!-- sancu -->
   <h5>
@@ -212,16 +212,16 @@
     <?php echo number_format($totalItem, 0, ',', '.').' pasang' ?>
   </strong></h5>
   <h5><strong>Grand Total Pembelian:
-    <?php echo 'Rp '.number_format($totalPembelian, 0, ',', '.').' pasang' ?>
+    <?php echo 'Rp '.number_format($totalPembelian, 0, ',', '.') ?>
   </strong></h5>
   <!-- klo ga semua item dipilih -->
   <!-- ga usah tampilin info dibayar sama kekurangan -->
-  <?php if(in_array($defaultitem[0], $item) && in_array($defaultitem[1], $item) && in_array($defaultitem[2], $item) && in_array($defaultitem[3], $item)) : ?>
+  <!-- <?php if(in_array($defaultitem[0], $item) && in_array($defaultitem[1], $item) && in_array($defaultitem[2], $item) && in_array($defaultitem[3], $item)) : ?>
     <h5><strong>Total Pembayaran: <?php echo 'Rp '.number_format($totalPembayaran, 0, ',', '.') ?>
     </strong></h5>
     <h5><strong>Total Hutang: <?php echo 'Rp '.number_format($totalTagihan, 0, ',', '.') ?>
     </strong></h5>
-  <?php endif ?>
+  <?php endif ?> -->
 </div>
 
 <div class="row">

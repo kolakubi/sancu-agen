@@ -189,6 +189,10 @@
   prettyTable('datatableagen', 'Info Agen');
   //datatables pembelian
   prettyTable('datatablepembelian', 'Info Pembelian');
+  //datatables pembayaran
+  prettyTable('datatablepembayaran', 'Pembayaran');
+  //datatables pembayaran
+  prettyTable('datatablepembayarandetail', 'Detail Pembayaran');
   // peringatan saat menghapus data
   peringatanSaatHapusData();
 

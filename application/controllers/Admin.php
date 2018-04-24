@@ -213,6 +213,8 @@
           'tgl_gabung' => $joindate
         );
 
+        print_r($dataInput);
+
         //insert data ke database
         $result = $this->admin_model->updateAgen($dataInput, $kodeagen);
 
@@ -541,12 +543,14 @@
     public function pembayaranDetail($kodePembayaran){
       // ambil data pembayarandetail dari database
       $result = $this->admin_model->getPembayaranDetail($kodePembayaran);
-
       $data['dataPembayaran'] = $result;
       // load view
       $this->load->view('admin/header');
       $this->load->view('admin/pembayarandetail', $data);
       $this->load->view('admin/footer');
+      // echo '<pre>';
+      // print_r($result);
+      // echo '</pre>';
     }
 
     public function pembayaranDetailTambah($kodePembayaran){
@@ -570,7 +574,7 @@
             'field' => 'sisatagihan',
             'label' => 'Sisa Tagihan',
             'rules' => 'required'
-          ),
+          )
         )
       );
 
@@ -578,22 +582,28 @@
         $this->load->view('admin/header');
         $this->load->view('admin/pembayarandetailtambah', $data);
         $this->load->view('admin/footer');
-      }{
+      }
+      else{
         // ambil value dari form
-        $kodepembayaran = $this->input->post('kodepembayaran');
+        $kodepembayaran = $result['kode_pembayaran'];
         $tanggalpembayaran = $this->input->post('tanggalpembayaran');
         $dibayar = $this->input->post('dibayar');
         $sisatagihan = $this->input->post('sisatagihan');
+        $keterangan = $this->input->post('keterangan');
 
         $dataPembayaran = array(
           'kode_pembayaran' => $kodepembayaran,
           'tanggal_pembayaran' => $tanggalpembayaran,
-          'dibayar' => $dibayar,
-          'sisa_tagihan' => $sisa_tagihan
-        )
+          'nominal_pembayaran' => $dibayar,
+          'tagihan_sebelumnya' => $result['sisa_tagihan'],
+          'sisa_tagihan' => $sisatagihan,
+          'keterangan' => $keterangan
+        );
 
-        $this->admin_modal->insertBayar($dataPembayaran);
-
+        $result = $this->admin_model->insertPembayaranDetail($dataPembayaran);
+        if($result){
+          redirect('admin/pembayaran');
+        }
       }
 
 

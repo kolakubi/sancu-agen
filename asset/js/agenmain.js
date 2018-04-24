@@ -28,6 +28,41 @@
       pembelianxtremecheck.prop('checked', status);
     })
   }
+  // apabila check semua true
+  // lalu salah satu produk ada yg unChecked
+  // maka semua checked = false
+  function unCheckBtnSemua(){
+    let pembeliansemuacheck = $('#pembeliansemuacheck');
+    let pembeliansancucheck = $('#pembeliansancucheck');
+    let pembelianboncucheck = $('#pembelianboncucheck');
+    let pembelianprettycheck = $('#pembelianprettycheck');
+    let pembelianxtremecheck = $('#pembelianxtremecheck');
+
+    function unChecked(){
+      if(pembeliansemuacheck.prop('checked') == true){
+        if(pembeliansancucheck.prop('checked') == false
+        || pembelianboncucheck.prop('checked') == false
+        || pembelianprettycheck.prop('checked') == false
+        || pembelianxtremecheck.prop('checked') == false){
+          pembeliansemuacheck.prop('checked', false);
+        }
+      }
+    }
+
+    pembeliansancucheck.on('click', function(){
+      unChecked();
+    });
+    pembelianboncucheck.on('click', function(){
+      unChecked();
+    });
+    pembelianprettycheck.on('click', function(){
+      unChecked();
+    });
+    pembelianxtremecheck.on('click', function(){
+      unChecked();
+    });
+
+  }
 
   // submit form pembelian
   function submitFormPembelian(){
@@ -56,6 +91,7 @@
 
   fixedBottomFooter();
   checkSemuaItem();
+  unCheckBtnSemua();
   //submitFormPembelian();
 
 }(jQuery))
