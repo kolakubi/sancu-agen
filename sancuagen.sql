@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2018 at 09:09 AM
+-- Generation Time: Apr 25, 2018 at 11:19 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -43,7 +43,6 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`nik`, `nama`, `alamat`, `kota`, `telepon`, `kelamin`, `email`) VALUES
-('', '', 'jakarta timur', '', '', '', ''),
 ('admin001', 'Nurul', 'Jalan Persahabatan VI', 'jakarta timur', '082122694604', 'Perempuan', 'info.sancuindonesia@gmail.com');
 
 -- --------------------------------------------------------
@@ -113,7 +112,11 @@ CREATE TABLE `pembayaran` (
 --
 
 INSERT INTO `pembayaran` (`kode_pembayaran`, `kode_pembelian`, `tanggal_pembelian`, `jumlah_pembelian`, `sisa_tagihan`) VALUES
-(3, 27, '2018-04-24', 8000000, 0);
+(4, 32, '2018-04-24', 1000000, 500000),
+(5, 33, '2018-04-25', 1400000, 1400000),
+(6, 34, '2018-04-25', 500000, 500000),
+(7, 35, '2018-04-26', 700000, 700000),
+(8, 36, '2018-04-25', 1000000, 0);
 
 -- --------------------------------------------------------
 
@@ -136,9 +139,10 @@ CREATE TABLE `pembayaran_detail` (
 --
 
 INSERT INTO `pembayaran_detail` (`kode_pembayaran`, `tanggal_pembayaran`, `tagihan_sebelumnya`, `nominal_pembayaran`, `sisa_tagihan`, `kode_pembayaran_detail`, `keterangan`) VALUES
-(3, '2018-04-24', 8000000, 4000000, 4000000, 7, 'mandiri subi'),
-(3, '2018-04-25', 4000000, 3500000, 500000, 8, 'Bayar langsung'),
-(3, '2018-04-26', 500000, 500000, 0, 9, 'BCA');
+(4, '2018-04-24', 1000000, 500000, 500000, 10, 'mandiri subi'),
+(8, '2018-04-25', 1000000, 600000, 400000, 11, 'bayar '),
+(8, '2018-04-26', 400000, 300000, 100000, 12, 'bayar'),
+(8, '2018-04-27', 100000, 100000, 0, 13, 'bayar');
 
 -- --------------------------------------------------------
 
@@ -150,26 +154,97 @@ CREATE TABLE `pembelian` (
   `kode_pembelian` int(11) NOT NULL,
   `kode_agen` varchar(10) NOT NULL,
   `tanggal_pembelian` date NOT NULL,
-  `sancu` int(11) NOT NULL,
-  `total_harga_sancu` int(11) NOT NULL,
-  `boncu` int(11) NOT NULL,
-  `total_harga_boncu` int(11) NOT NULL,
-  `pretty` int(11) NOT NULL,
-  `total_harga_pretty` int(11) NOT NULL,
-  `xtreme` int(11) NOT NULL,
-  `total_harga_xtreme` int(11) NOT NULL,
-  `jumlah_item` int(11) NOT NULL,
-  `jumlah_pembelian` int(11) NOT NULL,
-  `jumlah_dibayar` int(11) NOT NULL,
-  `sisa_tagihan` int(11) NOT NULL
+  `total_item` int(11) NOT NULL,
+  `total_pembelian` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pembelian`
 --
 
-INSERT INTO `pembelian` (`kode_pembelian`, `kode_agen`, `tanggal_pembelian`, `sancu`, `total_harga_sancu`, `boncu`, `total_harga_boncu`, `pretty`, `total_harga_pretty`, `xtreme`, `total_harga_xtreme`, `jumlah_item`, `jumlah_pembelian`, `jumlah_dibayar`, `sisa_tagihan`) VALUES
-(27, 'agen001', '2018-04-24', 100, 1000000, 200, 2000000, 100, 1000000, 400, 4000000, 800, 8000000, 0, 8000000);
+INSERT INTO `pembelian` (`kode_pembelian`, `kode_agen`, `tanggal_pembelian`, `total_item`, `total_pembelian`) VALUES
+(32, 'agen001', '2018-04-24', 1000, 1000000),
+(33, 'agen001', '2018-04-25', 1400, 1400000),
+(34, 'agen001', '2018-04-25', 500, 500000),
+(35, 'agen001', '2018-04-26', 700, 700000),
+(36, 'agen001', '2018-04-25', 1000, 1000000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pembelian_detail`
+--
+
+CREATE TABLE `pembelian_detail` (
+  `kode_pembelian_detail` int(11) NOT NULL,
+  `kode_pembelian` int(11) NOT NULL,
+  `kode_item` varchar(255) NOT NULL,
+  `jumlah_item` int(11) NOT NULL,
+  `total_harga_item` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pembelian_detail`
+--
+
+INSERT INTO `pembelian_detail` (`kode_pembelian_detail`, `kode_pembelian`, `kode_item`, `jumlah_item`, `total_harga_item`) VALUES
+(9, 32, 'sancu', 100, 100000),
+(10, 32, 'boncu', 200, 200000),
+(11, 32, 'pretty', 300, 300000),
+(12, 32, 'xtreme', 400, 400000),
+(13, 33, 'sancu', 400, 400000),
+(14, 33, 'boncu', 500, 500000),
+(15, 33, 'pretty', 300, 300000),
+(16, 33, 'xtreme', 200, 200000),
+(17, 34, 'sancu', 100, 100000),
+(18, 34, 'boncu', 100, 100000),
+(19, 34, 'pretty', 200, 200000),
+(20, 34, 'xtreme', 100, 100000),
+(21, 35, 'sancu', 100, 100000),
+(22, 35, 'boncu', 100, 100000),
+(23, 35, 'pretty', 200, 200000),
+(24, 35, 'xtreme', 300, 300000),
+(25, 36, 'sancu', 100, 100000),
+(26, 36, 'boncu', 300, 300000),
+(27, 36, 'pretty', 200, 200000),
+(28, 36, 'xtreme', 400, 400000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `produk`
+--
+
+CREATE TABLE `produk` (
+  `kode_item` varchar(255) NOT NULL,
+  `Nama` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `produk`
+--
+
+INSERT INTO `produk` (`kode_item`, `Nama`) VALUES
+('boncu', 'boncu'),
+('pretty', 'pretty'),
+('sancu', 'sancu'),
+('xtreme', 'xtreme');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `saldo`
+--
+
+CREATE TABLE `saldo` (
+  `kode_saldo` int(11) NOT NULL,
+  `kode_agen` varchar(10) NOT NULL,
+  `tgl_perubahan` date NOT NULL,
+  `debet` int(11) NOT NULL,
+  `kredit` int(11) NOT NULL,
+  `nominal` int(11) NOT NULL,
+  `keterangan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -204,13 +279,36 @@ ALTER TABLE `pembayaran`
 -- Indexes for table `pembayaran_detail`
 --
 ALTER TABLE `pembayaran_detail`
-  ADD PRIMARY KEY (`kode_pembayaran_detail`);
+  ADD PRIMARY KEY (`kode_pembayaran_detail`),
+  ADD KEY `kode_pembayaran` (`kode_pembayaran`);
 
 --
 -- Indexes for table `pembelian`
 --
 ALTER TABLE `pembelian`
   ADD PRIMARY KEY (`kode_pembelian`),
+  ADD KEY `kode_agen` (`kode_agen`),
+  ADD KEY `kode_pembelian` (`kode_pembelian`);
+
+--
+-- Indexes for table `pembelian_detail`
+--
+ALTER TABLE `pembelian_detail`
+  ADD PRIMARY KEY (`kode_pembelian_detail`),
+  ADD KEY `kode_item` (`kode_item`),
+  ADD KEY `pembelian_detail_ibfk_1` (`kode_pembelian`);
+
+--
+-- Indexes for table `produk`
+--
+ALTER TABLE `produk`
+  ADD PRIMARY KEY (`kode_item`);
+
+--
+-- Indexes for table `saldo`
+--
+ALTER TABLE `saldo`
+  ADD PRIMARY KEY (`kode_saldo`),
   ADD KEY `kode_agen` (`kode_agen`);
 
 --
@@ -221,19 +319,31 @@ ALTER TABLE `pembelian`
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `pembayaran_detail`
 --
 ALTER TABLE `pembayaran_detail`
-  MODIFY `kode_pembayaran_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `kode_pembayaran_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
+-- AUTO_INCREMENT for table `pembelian_detail`
+--
+ALTER TABLE `pembelian_detail`
+  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `saldo`
+--
+ALTER TABLE `saldo`
+  MODIFY `kode_saldo` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -246,10 +356,29 @@ ALTER TABLE `pembayaran`
   ADD CONSTRAINT `pembayaran_ibfk_1` FOREIGN KEY (`kode_pembelian`) REFERENCES `pembelian` (`kode_pembelian`);
 
 --
+-- Constraints for table `pembayaran_detail`
+--
+ALTER TABLE `pembayaran_detail`
+  ADD CONSTRAINT `pembayaran_detail_ibfk_1` FOREIGN KEY (`kode_pembayaran`) REFERENCES `pembayaran` (`kode_pembayaran`);
+
+--
 -- Constraints for table `pembelian`
 --
 ALTER TABLE `pembelian`
   ADD CONSTRAINT `pembelian_ibfk_1` FOREIGN KEY (`kode_agen`) REFERENCES `agen` (`kode_agen`);
+
+--
+-- Constraints for table `pembelian_detail`
+--
+ALTER TABLE `pembelian_detail`
+  ADD CONSTRAINT `pembelian_detail_ibfk_1` FOREIGN KEY (`kode_pembelian`) REFERENCES `pembelian` (`kode_pembelian`),
+  ADD CONSTRAINT `pembelian_detail_ibfk_2` FOREIGN KEY (`kode_item`) REFERENCES `produk` (`kode_item`);
+
+--
+-- Constraints for table `saldo`
+--
+ALTER TABLE `saldo`
+  ADD CONSTRAINT `saldo_ibfk_1` FOREIGN KEY (`kode_agen`) REFERENCES `agen` (`kode_agen`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -12,7 +12,7 @@
       <th>Tgl Pembelian</th>
       <th>Jumlah Item</th>
       <th>Jumlah Pembelian</th>
-      <th>Sisa Tagihan</th>
+      <!-- <th>Sisa Tagihan</th> -->
       <th>Action</th>
     </tr>
   </thead>
@@ -24,11 +24,11 @@
         <td><?php echo $pembelianDetail['kode_pembelian']?></td>
         <td><?php echo $pembelianDetail['nama'] ?></td>
         <td><?php echo $pembelianDetail['tanggal_pembelian']?></td>
-        <td><?php echo $pembelianDetail['jumlah_item']?></td>
-        <td><?php echo 'Rp'.number_format($pembelianDetail['jumlah_pembelian'], 0, ',', '.')?></td>
-        <td><?php echo 'Rp'.number_format($pembelianDetail['sisa_tagihan'], 0, ',', '.')?></td>
+        <td><?php echo $pembelianDetail['total_item']?></td>
+        <td><?php echo 'Rp'.number_format($pembelianDetail['total_pembelian'], 0, ',', '.')?></td>
+        <!-- <td><?php echo 'Rp'.number_format($pembelianDetail['sisa_tagihan'], 0, ',', '.')?></td> -->
         <td>
-          <div class="btn-group btn-group-justified">
+          <div>
             <a href="<?php echo base_url() ?>admin/pembeliandetail/<?php echo $pembelianDetail['kode_pembelian'] ?>" class="btn btn-info">View</a>
             <a href="<?php echo base_url() ?>admin/pembelianubah/<?php echo $pembelianDetail['kode_pembelian'] ?>" class="btn btn-success">Edit</a>
             <a href="<?php echo base_url() ?>admin/pembelianhapus/<?php echo $pembelianDetail['kode_pembelian'] ?>" class="btn btn-danger btnhapus">Delete</a>

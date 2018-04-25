@@ -41,9 +41,13 @@
         History Pembayaran
       </a>
     </div>
-    <!-- kosong -->
+    <!-- saldo -->
     <div class="col-sm-4 col-xs-4 text-center">
-
+      <a href="<?php base_url() ?>agen/saldo">
+        <span class="glyphicon glyphicon-shopping-cart" style="font-size:50px; color: #00abc5;" aria-hidden="true"></span>
+        <br>
+        Saldo
+      </a>
     </div>
     <!-- kosong -->
     <div class="col-sm-4 col-xs-4 text-center">

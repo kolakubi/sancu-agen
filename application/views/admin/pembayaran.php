@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-xs-12">
     <!-- tombol tambah -->
-    <a href="<?php echo base_url() ?>admin/pembayarandetailtambah" class="btn btn-info">Tambah Pembayaran +</a>
-    <br><br><br>
+
+    <h1 class="text-center">Pembayaran</h1>
 
     <table class="table table-condensed table-borderd table-striped table-hover" id="datatablepembayaran">
       <thead>

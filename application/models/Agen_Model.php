@@ -21,8 +21,13 @@
     public function getDataPembelianRange($dataAmbil){
 
       $this->db->select('*');
-      $this->db->where("`tanggal_pembelian` >= '".$dataAmbil['tanggaldari']."' AND `tanggal_pembelian` <= '".$dataAmbil['tanggalsampai']."' AND `kode_agen` = '".$dataAmbil['kodeagen']."'");
-      $result = $this->db->get('pembelian')->result_array();
+      $this->db->from('pembelian');
+      $this->db->join('pembelian_detail', 'pembelian_detail.kode_pembelian = pembelian.kode_pembelian', 'inner');
+      $this->db->where('pembelian.tanggal_pembelian >=', $dataAmbil['tanggaldari']);
+      $this->db->where('pembelian.tanggal_pembelian <=', $dataAmbil['tanggalsampai']);
+      $this->db->where('kode_agen', $dataAmbil['kodeagen']);
+      $this->db->where_in('kode_item', $dataAmbil['item']);
+      $result = $this->db->get()->result_array();
       return $result;
 
     }
@@ -41,7 +46,13 @@
       $this->db->where("`pembelian.tanggal_pembelian` >= '".$dataAmbil['tanggaldari']."' AND `pembelian.tanggal_pembelian` <= '".$dataAmbil['tanggalsampai']."' AND `kode_agen` = '".$dataAmbil['kodeagen']."'");
       $result = $this->db->get()->result_array();
       return $result;
-
     }
 
+    /////////////////////////////////////////
+    /////////////////////////////////////////
+    ////////////// S A L D O  ///////////////
+
+    public function getSaldo($username){
+      
+    }
   }

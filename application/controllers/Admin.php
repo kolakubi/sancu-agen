@@ -241,6 +241,10 @@
       $dataPembelian = $this->admin_model->getDataPembelianJoin();
       $data['pembelian'] = $dataPembelian;
 
+      // echo '<pre>';
+      // print_r($dataPembelian);
+      // echo '</pre>';
+
       $this->load->view('admin/header');
       $this->load->view('admin/pembelian', $data);
       $this->load->view('admin/footer');
@@ -315,16 +319,16 @@
             'label' => 'Jumlah',
             'rules' => 'required'
           ),
-          array(
-            'field' => 'pembeliandibayar',
-            'label' => 'Dibayar',
-            'rules' => 'required'
-          ),
-          array(
-            'field' => 'pembeliansisatagihan',
-            'label' => 'Sisa Tagihan',
-            'rules' => 'required'
-          )
+          // array(
+          //   'field' => 'pembeliandibayar',
+          //   'label' => 'Dibayar',
+          //   'rules' => 'required'
+          // ),
+          // array(
+          //   'field' => 'pembeliansisatagihan',
+          //   'label' => 'Sisa Tagihan',
+          //   'rules' => 'required'
+          // )
         )
       );
 
@@ -353,6 +357,23 @@
           // nama harus sama dengan nama field di tabel
           'kode_agen' => $kodeagen,
           'tanggal_pembelian' => $tanggal,
+          // 'sancu' => $sancu,
+          // 'total_harga_sancu' => $sancuharga,
+          // 'boncu' => $boncu,
+          // 'total_harga_boncu' => $boncuharga,
+          // 'pretty' => $pretty,
+          // 'total_harga_pretty' => $prettyharga,
+          // 'xtreme' => $xtreme,
+          // 'total_harga_xtreme' => $xtremeharga,
+          'total_item' => $pembelianjumlahitem,
+          'total_pembelian' => $pembelianjumlah,
+          // 'jumlah_dibayar' => $pembeliandibayar,
+          // 'sisa_tagihan' => $pembeliansisatagihan,
+        );
+
+        $dataPembelianDetail = array(
+          // 'kode_agen' => $kodeagen,
+          'tanggal_pembelian' => $tanggal,
           'sancu' => $sancu,
           'total_harga_sancu' => $sancuharga,
           'boncu' => $boncu,
@@ -361,21 +382,21 @@
           'total_harga_pretty' => $prettyharga,
           'xtreme' => $xtreme,
           'total_harga_xtreme' => $xtremeharga,
-          'jumlah_item' => $pembelianjumlahitem,
-          'jumlah_pembelian' => $pembelianjumlah,
-          'jumlah_dibayar' => $pembeliandibayar,
-          'sisa_tagihan' => $pembeliansisatagihan,
+          // 'jumlah_item' => $pembelianjumlahitem,
+          // 'jumlah_pembelian' => $pembelianjumlah,
+          // 'jumlah_dibayar' => $pembeliandibayar,
+          // 'sisa_tagihan' => $pembeliansisatagihan,
         );
 
         $dataPembayaran = array(
-          'kode_pembelian' => 0,
+          'kode_pembelian' => $kodepembelian,
           'tanggal_pembelian' => $tanggal,
           'jumlah_pembelian' => $pembelianjumlah,
-          'sisa_tagihan' => $pembeliansisatagihan
+          'sisa_tagihan' => $pembelianjumlah
         );
 
         // insert data ke database
-        $result = $this->admin_model->insertPembelian($dataPembelian, $dataPembayaran);
+        $result = $this->admin_model->insertPembelian($dataPembelian, $dataPembelianDetail, $dataPembayaran);
         if($result){
           // jika sukses redirect ke halaman pembelian
           redirect('admin/pembelian');
@@ -385,8 +406,12 @@
 
     public function pembeliandetail($kodepembelian){
       // ambil data pembelian berdasarkan kode
-      $datapembelian = $this->admin_model->getDataPembelianJoin($kodepembelian);
+      $datapembelian = $this->admin_model->getDataPembelianDetail($kodepembelian);
       $data['datapembelian'] = $datapembelian;
+
+      // echo '<pre>';
+      // print_r($datapembelian);
+      // echo '</pre>';
 
       $this->load->view('admin/header');
       $this->load->view('admin/pembeliandetail', $data);
@@ -395,11 +420,16 @@
 
     public function pembelianubah($kodepembelian){
       // ambil data pembelian berdasarkan kode
-      $datapembelian = $this->admin_model->getDataPembelianJoin($kodepembelian);
+      $datapembelian = $this->admin_model->getDataPembelianDetail($kodepembelian);
       $data['pembelian'] = $datapembelian;
 
       $this->form_validation->set_rules(
         array(
+          // array(
+          //   'field' => 'kodeagen',
+          //   'label' => 'Kodeagen',
+          //   'rules' => 'required'
+          // ),
           array(
             'field' => 'tanggal',
             'label' => 'Tanggal',
@@ -455,27 +485,32 @@
             'label' => 'Jumlah',
             'rules' => 'required'
           ),
-          array(
-            'field' => 'pembeliandibayar',
-            'label' => 'Dibayar',
-            'rules' => 'required'
-          ),
-          array(
-            'field' => 'pembeliansisatagihan',
-            'label' => 'Sisa Tagihan',
-            'rules' => 'required'
-          )
+          // array(
+          //   'field' => 'pembeliandibayar',
+          //   'label' => 'Dibayar',
+          //   'rules' => 'required'
+          // ),
+          // array(
+          //   'field' => 'pembeliansisatagihan',
+          //   'label' => 'Sisa Tagihan',
+          //   'rules' => 'required'
+          // )
         )
       );
 
       if(!$this->form_validation->run()){
+        // echo '<pre>';
+        // print_r($datapembelian);
+        // echo '</pre>';
+
         $this->load->view('admin/header');
         $this->load->view('admin/pembelianubah', $data);
         $this->load->view('admin/footer');
       }
       else{
-        //$kodepembelian = $this->input->post('kode_pembelian');
-        //$kodeagen = $this->input->post('kodeagen');
+        //
+
+        $kodeagen = $this->input->post('kodeagen');
         $tanggal = $this->input->post('tanggal');
         $sancu = $this->input->post('sancu');
         $sancuharga = $this->input->post('sancuharga');
@@ -494,6 +529,23 @@
           // nama harus sama dengan nama field di tabel
           //'kode_agen' => $kodeagen,
           'tanggal_pembelian' => $tanggal,
+          // 'sancu' => $sancu,
+          // 'total_harga_sancu' => $sancuharga,
+          // 'boncu' => $boncu,
+          // 'total_harga_boncu' => $boncuharga,
+          // 'pretty' => $pretty,
+          // 'total_harga_pretty' => $prettyharga,
+          // 'xtreme' => $xtreme,
+          // 'total_harga_xtreme' => $xtremeharga,
+          'total_item' => $pembelianjumlahitem,
+          'total_pembelian' => $pembelianjumlah,
+          // 'jumlah_dibayar' => $pembeliandibayar,
+          // 'sisa_tagihan' => $pembeliansisatagihan,
+        );
+
+        $dataPembelianDetail = array(
+          // 'kode_agen' => $kodeagen,
+          'tanggal_pembelian' => $tanggal,
           'sancu' => $sancu,
           'total_harga_sancu' => $sancuharga,
           'boncu' => $boncu,
@@ -502,14 +554,21 @@
           'total_harga_pretty' => $prettyharga,
           'xtreme' => $xtreme,
           'total_harga_xtreme' => $xtremeharga,
-          'jumlah_item' => $pembelianjumlahitem,
+          // 'jumlah_item' => $pembelianjumlahitem,
+          // 'jumlah_pembelian' => $pembelianjumlah,
+          // 'jumlah_dibayar' => $pembeliandibayar,
+          // 'sisa_tagihan' => $pembeliansisatagihan,
+        );
+
+        $dataPembayaran = array(
+          //'kode_pembelian' => $kodepembelian,
+          'tanggal_pembelian' => $tanggal,
           'jumlah_pembelian' => $pembelianjumlah,
-          'jumlah_dibayar' => $pembeliandibayar,
-          'sisa_tagihan' => $pembeliansisatagihan,
+          'sisa_tagihan' => $pembelianjumlah
         );
 
         // insert data ke database
-        $result = $this->admin_model->updatePembelian($dataPembelian, $kodepembelian);
+        $result = $this->admin_model->updatePembelian($dataPembelian, $dataPembelianDetail, $dataPembayaran, $kodepembelian);
         if($result){
           // jika sukses redirect ke halaman pembelian
           redirect('admin/pembelian');

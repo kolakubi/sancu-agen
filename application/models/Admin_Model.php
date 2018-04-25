@@ -99,27 +99,128 @@
       }
     }
 
-    public function insertPembelian($dataPembelian, $dataPembayaran){
+    public function getDataPembelianDetail($kodepembelian){
+      $this->db->select('*');
+      $this->db->from('pembelian');
+      $this->db->join('pembelian_detail', 'pembelian.kode_pembelian = pembelian_detail.kode_pembelian', 'inner');
+      $this->db->join('agen', 'pembelian.kode_agen = agen.kode_agen', 'inner');
+      $this->db->where('pembelian.kode_pembelian', $kodepembelian);
+      $result = $this->db->get()->result_array();
+      return$result;
+    }
+
+    public function insertPembelian($dataPembelian, $dataPembelianDetail, $dataPembayaran){
       // insert data pembelian
+      // insert ke table pembelian
       $this->db->insert('pembelian', $dataPembelian);
+
       // ambil id pembelian yg baru saja diinput
       $insert_id = $this->db->insert_id();
       // insert data pembayaran dengan foreign key id pembelian
       $dataPembayaran['kode_pembelian'] = $insert_id;
+      $dataPembelianDetail['kode_pembelian'] = $insert_id;
+
+      // insert ke table pembelian_detail
+      // pembelian sancu
+      if($dataPembelianDetail['sancu'] != 0){
+        $dataBaru = array(
+          'kode_pembelian' => $dataPembelianDetail['kode_pembelian'],
+          'kode_item' =>  'sancu',
+          'jumlah_item' => $dataPembelianDetail['sancu'],
+          'total_harga_item' => $dataPembelianDetail['total_harga_sancu']
+        );
+        $this->db->insert('pembelian_detail', $dataBaru);
+      }
+      // pembelian boncu
+      if($dataPembelianDetail['boncu'] != 0){
+        $dataBaru = array(
+          'kode_pembelian' => $dataPembelianDetail['kode_pembelian'],
+          'kode_item' =>  'boncu',
+          'jumlah_item' => $dataPembelianDetail['boncu'],
+          'total_harga_item' => $dataPembelianDetail['total_harga_boncu']
+        );
+        $this->db->insert('pembelian_detail', $dataBaru);
+      }
+      // pembelian pretty
+      if($dataPembelianDetail['pretty'] != 0){
+        $dataBaru = array(
+          'kode_pembelian' => $dataPembelianDetail['kode_pembelian'],
+          'kode_item' =>  'pretty',
+          'jumlah_item' => $dataPembelianDetail['pretty'],
+          'total_harga_item' => $dataPembelianDetail['total_harga_pretty']
+        );
+        $this->db->insert('pembelian_detail', $dataBaru);
+      }
+      // pembelian pretty
+      if($dataPembelianDetail['xtreme'] != 0){
+        $dataBaru = array(
+          'kode_pembelian' => $dataPembelianDetail['kode_pembelian'],
+          'kode_item' =>  'xtreme',
+          'jumlah_item' => $dataPembelianDetail['xtreme'],
+          'total_harga_item' => $dataPembelianDetail['total_harga_xtreme']
+        );
+        $this->db->insert('pembelian_detail', $dataBaru);
+      }
+
       $this->db->insert('pembayaran', $dataPembayaran);
 
       return true;
     }
 
-    public function updatePembelian($dataPembelian, $kodepembelian){
-      //update database
+    public function updatePembelian($dataPembelian, $dataPembelianDetail, $dataPembayaran, $kodepembelian){
+      //update detail pembelian
+      //=============================================
+      //sancu
+      $dataSancu = array(
+        'kode_pembelian' => $kodepembelian,
+        'kode_item' => 'sancu',
+        'jumlah_item' => $dataPembelianDetail['sancu'],
+        'total_harga_item' => $dataPembelianDetail['total_harga_sancu']
+        );
+      $this->db->set($dataSancu);
+      $this->db->where('kode_item', 'sancu');
+      $this->db->update('pembelian_detail');
+      //Boncu
+      $dataBoncu = array(
+        'kode_pembelian' => $kodepembelian,
+        'kode_item' =>  'boncu',
+        'jumlah_item' => $dataPembelianDetail['boncu'],
+        'total_harga_item' => $dataPembelianDetail['total_harga_boncu']
+        );
+      $this->db->set($dataBoncu);
+      $this->db->where('kode_item', 'boncu');
+      $this->db->update('pembelian_detail');
+      //Pretty
+      $dataPretty = array(
+        'kode_pembelian' => $kodepembelian,
+        'kode_item' =>  'pretty',
+        'jumlah_item' => $dataPembelianDetail['pretty'],
+        'total_harga_item' => $dataPembelianDetail['total_harga_pretty']
+        );
+      $this->db->set($dataPretty);
+      $this->db->where('kode_item', 'pretty');
+      $this->db->update('pembelian_detail');
+      //Xtreme
+      $dataXtreme = array(
+        'kode_pembelian' => $kodepembelian,
+        'kode_item' =>  'xtreme',
+        'jumlah_item' => $dataPembelianDetail['xtreme'],
+        'total_harga_item' => $dataPembelianDetail['total_harga_xtreme']
+        );
+      $this->db->set($dataXtreme);
+      $this->db->where('kode_item', 'xtreme');
+      $this->db->update('pembelian_detail');
+      //==============================================
+      //Update Pembayaran
+      $this->db->set($dataPembayaran);
+      $this->db->where('kode_pembelian', $kodepembelian);
+      $this->db->update('pembayaran');
+      //update pembelian
       $this->db->set($dataPembelian);
       $this->db->where('kode_pembelian', $kodepembelian);
+      $this->db->update('pembelian');
 
-      if($this->db->update('pembelian')){
-          return true;
-      }
-      return false;
+      return true;
     }
 
     public function deletePembelian($kodepembelian){

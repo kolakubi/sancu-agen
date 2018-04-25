@@ -1,37 +1,26 @@
 <h1 class="text-center">Detail Pembelian</h1>
+<h2 class="text-center"><?php echo $datapembelian[0]['tanggal_pembelian'] ?></h2>
 
 <table class="table table-striped table-bordered table-hover table-condensed table-responsive" id="datatablepembelian">
   <thead>
     <tr>
-      <th>Kode Pembelian</th>
-      <th>Nama Agen</th>
-      <th>Tgl Pembelian</th>
-      <th>Sancu</th>
-      <th>Boncu</th>
-      <th>Pretty</th>
-      <th>Xtreme</th>
+      <th>Produk</th>
       <th>Jumlah Item</th>
-      <th>Jumlah Pembelian</th>
-      <th>Jumlah Dibayar</th>
-      <th>Sisa Tagihan</th>
+      <th>Total Harga Item</th>
     </tr>
   </thead>
   <tbody>
+    <?php foreach($datapembelian as $pembelian) : ?>
     <tr>
-      <td><?php echo $datapembelian['kode_pembelian'] ?></td>
-      <td><?php echo $datapembelian['nama'] ?></td>
-      <td><?php echo $datapembelian['tanggal_pembelian'] ?></td>
-      <td><?php echo $datapembelian['sancu'] ?></td>
-      <td><?php echo $datapembelian['boncu'] ?></td>
-      <td><?php echo $datapembelian['pretty'] ?></td>
-      <td><?php echo $datapembelian['xtreme'] ?></td>
-      <td><?php echo $datapembelian['jumlah_item'] ?></td>
-      <td><?php echo 'Rp '.number_format($datapembelian['jumlah_pembelian'], 0, ',', '.') ?></td>
-      <td><?php echo 'Rp '.number_format($datapembelian['jumlah_dibayar'], 0, ',', '.') ?></td>
-      <td><?php echo 'Rp '.number_format($datapembelian['sisa_tagihan'], 0, ',', '.') ?></td>
+      <td><?php echo $pembelian['kode_item'] ?></td>
+      <td><?php echo number_format($pembelian['jumlah_item'], 0, ',', '.') ?></td>
+      <td><?php echo 'Rp '.number_format($pembelian['total_harga_item'], 0, ',', '.') ?></td>
     </tr>
+    <?php endforeach; ?>
   </tbody>
 </table>
+<h3 class="text-center text-info">Total Item: <?php echo $datapembelian[0]['total_item'] ?></h3>
+<h3 class="text-center text-info">Total Pembelian: <?php echo 'Rp '.number_format($datapembelian[0]['total_pembelian'], 0, ',', '.')?></h3>
 <br>
 <p class="text-center">
   <a href="<?php echo base_url() ?>admin/pembelian" class="btn btn-info btn-lg">Kembali</a>

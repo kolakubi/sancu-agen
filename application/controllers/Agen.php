@@ -79,13 +79,14 @@
         $tanggalDari = $this->input->post('tanggaldari');
         $tanggalSampai = $this->input->post('tanggalsampai');
         $item = $this->input->post('item');
+        //$item = implode(',', $item);
         $defaultItem = array('sancu', 'boncu', 'pretty', 'xtreme');
-
 
         $dataAmbil = array(
           'kodeagen' => $kodeAgen,
           'tanggaldari' => $tanggalDari,
-          'tanggalsampai' => $tanggalSampai
+          'tanggalsampai' => $tanggalSampai,
+          'item' => $item
         );
 
         $dataPembelian = $this->agen_model->getDataPembelianRange($dataAmbil);
@@ -105,7 +106,7 @@
 
     ///////////////////////////////////////////////
     ///////////////////////////////////////////////
-    //////////// P E M B E L I A N ////////////////
+    ////////// P E M B A Y A R A N ////////////////
 
     public function pembayaran(){
 
@@ -153,8 +154,20 @@
         // print_r($dataPembelian);
         // echo '<pre>';
       }
+    }
 
+    ///////////////////////////////////////////////
+    ///////////////////////////////////////////////
+    ///////////////// S A L D O ///////////////////
 
+    public function saldo(){
+      // ambil saldo
+      $username = $_SESSION['username'];
+      $dataAgen = $this->agen_model->getSaldo($username);
+
+      $this->load->view('agen/header');
+      $this->load->view('agen/saldo');
+      $this->load->view('agen/footer');
     }
 
     ///////////////////////////////////////////////
