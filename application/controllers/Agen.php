@@ -161,13 +161,49 @@
     ///////////////// S A L D O ///////////////////
 
     public function saldo(){
-      // ambil saldo
-      $username = $_SESSION['username'];
-      $dataAgen = $this->agen_model->getSaldo($username);
 
-      $this->load->view('agen/header');
-      $this->load->view('agen/saldo');
-      $this->load->view('agen/footer');
+      $this->form_validation->set_rules(
+        array(
+          array(
+            'field' => 'tanggaldari',
+            'label' => 'Tanggal Dari',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'tanggalsampai',
+            'label' => 'Tanggal Sampai',
+            'rules' => 'required'
+          )
+        )
+      );
+
+      if(!$this->form_validation->run()){
+
+        $this->load->view('agen/header');
+        $this->load->view('agen/saldo');
+        $this->load->view('agen/footer');
+      }
+      else{
+        // ambil session username
+        $kodeAgen = $_SESSION['username'];
+        $tanggalDari = $this->input->post('tanggaldari');
+        $tanggalSampai = $this->input->post('tanggalsampai');
+
+        $dataAmbil = array(
+          'kodeagen' => $kodeAgen,
+          'tanggaldari' => $tanggalDari,
+          'tanggalsampai' => $tanggalSampai
+        );
+
+        // ambil saldo
+        $dataSaldo = $this->agen_model->getSaldo($dataAmbil);
+        $data['datasaldo'] = $dataSaldo;
+
+        $this->load->view('agen/header');
+        $this->load->view('agen/saldohasil', $data);
+        $this->load->view('agen/footer');
+
+      }
     }
 
     ///////////////////////////////////////////////

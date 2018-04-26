@@ -52,7 +52,14 @@
     /////////////////////////////////////////
     ////////////// S A L D O  ///////////////
 
-    public function getSaldo($username){
-      
+    public function getSaldo($dataAmbil){
+      $this->db->select('*');
+      $this->db->from('saldo');
+      $this->db->where('tgl_perubahan >=', $dataAmbil['tanggaldari']);
+      $this->db->where('tgl_perubahan <=', $dataAmbil['tanggalsampai']);
+      $this->db->where('kode_agen', $dataAmbil['kodeagen']);
+      $result = $this->db->get()->result_array();
+
+      return $result;
     }
   }

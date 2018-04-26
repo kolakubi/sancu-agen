@@ -44,7 +44,7 @@
     <td>Tgl Pembelian</td>
     <td>Jumlah Item</td>
     <td></td>
-    <td></td>
+    <!-- <td></td> -->
     <td></td>
   </tfoot>
 </table>

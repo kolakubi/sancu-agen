@@ -353,26 +353,17 @@
         $pembeliandibayar = $this->input->post('pembeliandibayar');
         $pembeliansisatagihan = $this->input->post('pembeliansisatagihan');
 
+        // data buat diinput ke pembelian
         $dataPembelian = array(
           // nama harus sama dengan nama field di tabel
           'kode_agen' => $kodeagen,
           'tanggal_pembelian' => $tanggal,
-          // 'sancu' => $sancu,
-          // 'total_harga_sancu' => $sancuharga,
-          // 'boncu' => $boncu,
-          // 'total_harga_boncu' => $boncuharga,
-          // 'pretty' => $pretty,
-          // 'total_harga_pretty' => $prettyharga,
-          // 'xtreme' => $xtreme,
-          // 'total_harga_xtreme' => $xtremeharga,
           'total_item' => $pembelianjumlahitem,
           'total_pembelian' => $pembelianjumlah,
-          // 'jumlah_dibayar' => $pembeliandibayar,
-          // 'sisa_tagihan' => $pembeliansisatagihan,
         );
 
+        // data buat diinput ke pembelian detail
         $dataPembelianDetail = array(
-          // 'kode_agen' => $kodeagen,
           'tanggal_pembelian' => $tanggal,
           'sancu' => $sancu,
           'total_harga_sancu' => $sancuharga,
@@ -382,21 +373,26 @@
           'total_harga_pretty' => $prettyharga,
           'xtreme' => $xtreme,
           'total_harga_xtreme' => $xtremeharga,
-          // 'jumlah_item' => $pembelianjumlahitem,
-          // 'jumlah_pembelian' => $pembelianjumlah,
-          // 'jumlah_dibayar' => $pembeliandibayar,
-          // 'sisa_tagihan' => $pembeliansisatagihan,
         );
 
+        // data buat diinput ke pembayaran
         $dataPembayaran = array(
-          'kode_pembelian' => $kodepembelian,
           'tanggal_pembelian' => $tanggal,
           'jumlah_pembelian' => $pembelianjumlah,
           'sisa_tagihan' => $pembelianjumlah
         );
 
+        // data buat di input ke saldo
+        $dataSaldo = array(
+          'kode_agen' => $kodeagen,
+          'tgl_perubahan' => $tanggal,
+          'debet' => $pembelianjumlah,
+          'kredit' => 0,
+          'keterangan' => 'pembelian'
+        );
+
         // insert data ke database
-        $result = $this->admin_model->insertPembelian($dataPembelian, $dataPembelianDetail, $dataPembayaran);
+        $result = $this->admin_model->insertPembelian($dataPembelian, $dataPembelianDetail, $dataPembayaran, $dataSaldo);
         if($result){
           // jika sukses redirect ke halaman pembelian
           redirect('admin/pembelian');
@@ -408,10 +404,6 @@
       // ambil data pembelian berdasarkan kode
       $datapembelian = $this->admin_model->getDataPembelianDetail($kodepembelian);
       $data['datapembelian'] = $datapembelian;
-
-      // echo '<pre>';
-      // print_r($datapembelian);
-      // echo '</pre>';
 
       $this->load->view('admin/header');
       $this->load->view('admin/pembeliandetail', $data);
@@ -425,11 +417,6 @@
 
       $this->form_validation->set_rules(
         array(
-          // array(
-          //   'field' => 'kodeagen',
-          //   'label' => 'Kodeagen',
-          //   'rules' => 'required'
-          // ),
           array(
             'field' => 'tanggal',
             'label' => 'Tanggal',
@@ -485,23 +472,10 @@
             'label' => 'Jumlah',
             'rules' => 'required'
           ),
-          // array(
-          //   'field' => 'pembeliandibayar',
-          //   'label' => 'Dibayar',
-          //   'rules' => 'required'
-          // ),
-          // array(
-          //   'field' => 'pembeliansisatagihan',
-          //   'label' => 'Sisa Tagihan',
-          //   'rules' => 'required'
-          // )
         )
       );
 
       if(!$this->form_validation->run()){
-        // echo '<pre>';
-        // print_r($datapembelian);
-        // echo '</pre>';
 
         $this->load->view('admin/header');
         $this->load->view('admin/pembelianubah', $data);
@@ -509,7 +483,6 @@
       }
       else{
         //
-
         $kodeagen = $this->input->post('kodeagen');
         $tanggal = $this->input->post('tanggal');
         $sancu = $this->input->post('sancu');
@@ -526,21 +499,10 @@
         $pembeliansisatagihan = $this->input->post('pembeliansisatagihan');
 
         $dataPembelian = array(
-          // nama harus sama dengan nama field di tabel
-          //'kode_agen' => $kodeagen,
           'tanggal_pembelian' => $tanggal,
-          // 'sancu' => $sancu,
-          // 'total_harga_sancu' => $sancuharga,
-          // 'boncu' => $boncu,
-          // 'total_harga_boncu' => $boncuharga,
-          // 'pretty' => $pretty,
-          // 'total_harga_pretty' => $prettyharga,
-          // 'xtreme' => $xtreme,
-          // 'total_harga_xtreme' => $xtremeharga,
           'total_item' => $pembelianjumlahitem,
           'total_pembelian' => $pembelianjumlah,
-          // 'jumlah_dibayar' => $pembeliandibayar,
-          // 'sisa_tagihan' => $pembeliansisatagihan,
+
         );
 
         $dataPembelianDetail = array(
@@ -554,10 +516,6 @@
           'total_harga_pretty' => $prettyharga,
           'xtreme' => $xtreme,
           'total_harga_xtreme' => $xtremeharga,
-          // 'jumlah_item' => $pembelianjumlahitem,
-          // 'jumlah_pembelian' => $pembelianjumlah,
-          // 'jumlah_dibayar' => $pembeliandibayar,
-          // 'sisa_tagihan' => $pembeliansisatagihan,
         );
 
         $dataPembayaran = array(
@@ -586,7 +544,7 @@
 
     ///////////////////////////////////////////////
     ///////////////////////////////////////////////
-    //////////// P E M B E L I A N ////////////////
+    /////////// P E M B A Y A R AN ///////////////
 
     public function pembayaran(){
       // ambil data pembayaran dari database
@@ -659,7 +617,16 @@
           'keterangan' => $keterangan
         );
 
-        $result = $this->admin_model->insertPembayaranDetail($dataPembayaran);
+        // data buat di input ke saldo
+        $dataSaldo = array(
+          'kode_agen' => $result['kode_agen'],
+          'tgl_perubahan' => $tanggalpembayaran,
+          'debet' => 0,
+          'kredit' => $dibayar,
+          'keterangan' => 'bayar pembelian '.$result['tanggal_pembelian']
+        );
+
+        $result = $this->admin_model->insertPembayaranDetail($dataPembayaran, $dataSaldo);
         if($result){
           redirect('admin/pembayaran');
         }

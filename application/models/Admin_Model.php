@@ -7,6 +7,10 @@
       $this->load->database();
     }
 
+    /////////////////////////////////////////////////
+    /////////////////////////////////////////////////
+    //////////////// A G E N ////////////////////////
+
     public function getDataAgen($kodeagen=null){
       // ambil data agen
       if($kodeagen){
@@ -109,7 +113,7 @@
       return$result;
     }
 
-    public function insertPembelian($dataPembelian, $dataPembelianDetail, $dataPembayaran){
+    public function insertPembelian($dataPembelian, $dataPembelianDetail, $dataPembayaran, $dataSaldo){
       // insert data pembelian
       // insert ke table pembelian
       $this->db->insert('pembelian', $dataPembelian);
@@ -119,50 +123,50 @@
       // insert data pembayaran dengan foreign key id pembelian
       $dataPembayaran['kode_pembelian'] = $insert_id;
       $dataPembelianDetail['kode_pembelian'] = $insert_id;
+      $this->db->insert('pembayaran', $dataPembayaran);
 
       // insert ke table pembelian_detail
-      // pembelian sancu
-      if($dataPembelianDetail['sancu'] != 0){
+      // fungsi insert berdasarkan nama item
+      // inisiai $this
+      $that = $this;
+      function insert_item_detail_pembelian($item, $dataPembelianDetail, $that){
         $dataBaru = array(
           'kode_pembelian' => $dataPembelianDetail['kode_pembelian'],
-          'kode_item' =>  'sancu',
-          'jumlah_item' => $dataPembelianDetail['sancu'],
-          'total_harga_item' => $dataPembelianDetail['total_harga_sancu']
+          'kode_item' =>  $item,
+          'jumlah_item' => $dataPembelianDetail[$item],
+          'total_harga_item' => $dataPembelianDetail['total_harga_'.$item]
         );
-        $this->db->insert('pembelian_detail', $dataBaru);
+        $that->db->insert('pembelian_detail', $dataBaru);
+      }
+      // pembelian sancu
+      if($dataPembelianDetail['sancu'] != 0){
+        insert_item_detail_pembelian('sancu', $dataPembelianDetail, $that);
       }
       // pembelian boncu
       if($dataPembelianDetail['boncu'] != 0){
-        $dataBaru = array(
-          'kode_pembelian' => $dataPembelianDetail['kode_pembelian'],
-          'kode_item' =>  'boncu',
-          'jumlah_item' => $dataPembelianDetail['boncu'],
-          'total_harga_item' => $dataPembelianDetail['total_harga_boncu']
-        );
-        $this->db->insert('pembelian_detail', $dataBaru);
+        insert_item_detail_pembelian('boncu', $dataPembelianDetail, $that);
       }
       // pembelian pretty
       if($dataPembelianDetail['pretty'] != 0){
-        $dataBaru = array(
-          'kode_pembelian' => $dataPembelianDetail['kode_pembelian'],
-          'kode_item' =>  'pretty',
-          'jumlah_item' => $dataPembelianDetail['pretty'],
-          'total_harga_item' => $dataPembelianDetail['total_harga_pretty']
-        );
-        $this->db->insert('pembelian_detail', $dataBaru);
+        insert_item_detail_pembelian('pretty', $dataPembelianDetail, $that);
       }
       // pembelian pretty
       if($dataPembelianDetail['xtreme'] != 0){
-        $dataBaru = array(
-          'kode_pembelian' => $dataPembelianDetail['kode_pembelian'],
-          'kode_item' =>  'xtreme',
-          'jumlah_item' => $dataPembelianDetail['xtreme'],
-          'total_harga_item' => $dataPembelianDetail['total_harga_xtreme']
-        );
-        $this->db->insert('pembelian_detail', $dataBaru);
+        insert_item_detail_pembelian('xtreme', $dataPembelianDetail, $that);
       }
 
-      $this->db->insert('pembayaran', $dataPembayaran);
+      ////////////////////////////////
+      /////// UPDATE SALDO ///////////
+      // ambil data paling akhir saldo
+      $this->db->where('kode_agen', $dataSaldo['kode_agen']);
+      $this->db->order_by('kode_saldo', 'DESC');
+      $this->db->limit(2);
+      $saldoAkhir = $this->db->get('saldo')->result_array();
+      $saldoAkhir = $saldoAkhir[0]['nominal'];
+
+      $dataSaldo['nominal'] = $saldoAkhir + $dataSaldo['debet'];
+      // insert saldo
+      $this->db->insert('saldo', $dataSaldo);
 
       return true;
     }
@@ -241,7 +245,11 @@
       if($kodePembayaran){
         // jika ada kode pembayaran
         // ambil data berdasarkan kode
-        $result = $this->db->get_where('pembayaran', array('kode_pembayaran'=>$kodePembayaran));
+        $this->db->select('*');
+        $this->db->from('pembayaran');
+        $this->db->join('pembelian', 'pembelian.kode_pembelian = pembayaran.kode_pembelian');
+        $this->db->where('kode_pembayaran', $kodePembayaran);
+        $result = $this->db->get();
         return $result->row_array();
       }
       // jika tidak ada kode pembayaran
@@ -254,13 +262,14 @@
       $this->db->select('*');
       $this->db->from('pembayaran_detail');
       $this->db->join('pembayaran', 'pembayaran.kode_pembayaran = pembayaran_detail.kode_pembayaran');
+      $this->db->join('pembelian', 'pembelian.kode_pembelian = pembayaran.kode_pembelian');
       $this->db->where('pembayaran.kode_pembayaran', $kodePembayaran);
       $result = $this->db->get()->result_array();
 
       return $result;
     }
 
-    public function insertPembayaranDetail($dataPembayaran){
+    public function insertPembayaranDetail($dataPembayaran, $dataSaldo){
       // insert ke table pembayaran_detail
       $this->db->insert('pembayaran_detail', $dataPembayaran);
       // update table pembayaran (sisa_tagihan)
@@ -268,6 +277,19 @@
       $this->db->set($tagihanBaru);
       $this->db->where('kode_pembayaran', $dataPembayaran['kode_pembayaran']);
       $this->db->update('pembayaran');
+
+      ////////////////////////////////
+      /////// UPDATE SALDO ///////////
+      // ambil data paling akhir saldo
+      $this->db->where('kode_agen', $dataSaldo['kode_agen']);
+      $this->db->order_by('kode_saldo', 'DESC');
+      $this->db->limit(2);
+      $saldoAkhir = $this->db->get('saldo')->result_array();
+      $saldoAkhir = $saldoAkhir[0]['nominal'];
+
+      $dataSaldo['nominal'] = $saldoAkhir - $dataSaldo['kredit'];
+      // insert saldo
+      $this->db->insert('saldo', $dataSaldo);
 
       return true;
     }
