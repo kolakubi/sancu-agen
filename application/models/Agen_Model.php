@@ -52,14 +52,42 @@
     /////////////////////////////////////////
     ////////////// S A L D O  ///////////////
 
-    public function getSaldo($dataAmbil){
+    public function getSaldo($dataAmbil, $kemarin){
       $this->db->select('*');
       $this->db->from('saldo');
       $this->db->where('tgl_perubahan >=', $dataAmbil['tanggaldari']);
       $this->db->where('tgl_perubahan <=', $dataAmbil['tanggalsampai']);
       $this->db->where('kode_agen', $dataAmbil['kodeagen']);
+      //$this->db->order_by('tgl_perubahan', 'ASC');
       $result = $this->db->get()->result_array();
+
+      // ambil data saldo 1 hari sebelumnya
+      $this->db->select('*');
+      $this->db->from('saldo');
+      $this->db->where('tgl_perubahan', $kemarin);
+      $kemarinArr = $this->db->get()->result_array();
+      $satuharilalu = array();
+      if(!empty($kemarinArr)){
+        // ambil index terakhir array
+        $satuharilalu = end($kemarinArr);
+        //tambah array ke index pertama
+        array_unshift($result, $satuharilalu);
+      }
+      else{
+        $kosong = array(
+          'kode_saldo' => 0,
+          'kode_agen' => 0,
+          'tgl_perubahan' => '',
+          'debet' => 0,
+          'kredit' => 0,
+          'nominal' => 0,
+        );
+
+        array_unshift($result, $kosong);
+      }
 
       return $result;
     }
-  }
+
+
+  } //end of class

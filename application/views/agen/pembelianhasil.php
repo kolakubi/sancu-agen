@@ -108,6 +108,7 @@
         <?php endif ?>
         <?php $tanggal = $pembelian['tanggal_pembelian'] ?>
         <?php endforeach ?>
+        <hr>
       </tbody>
     </table>
   </div>
@@ -134,8 +135,8 @@
 <!-- grand total harga -->
 <div class="row">
   <div class="col-xs-12">
-    <p class="text-center text-warning" style="font-weight: bold">Jumlah Item: <?php echo number_format($grandTotalItem, 0, ',', '.').' pasang' ?></p>
-    <p class="text-center text-warning" style="font-weight: bold">Jumlah Pembelian: <?php echo 'Rp '.number_format($total_harga_item, 0, ',', '.') ?></p>
+    <p class="text-center text-warning" style="font-weight: bold">Total Seluruh Item: <?php echo number_format($grandTotalItem, 0, ',', '.').' pasang' ?></p>
+    <p class="text-center text-warning" style="font-weight: bold">Total Seluruh Pembelian: <?php echo 'Rp '.number_format($total_harga_item, 0, ',', '.') ?></p>
   </div>
 </div>
 

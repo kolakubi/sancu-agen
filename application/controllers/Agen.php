@@ -89,18 +89,22 @@
           'item' => $item
         );
 
+        // ambil data pembelian
         $dataPembelian = $this->agen_model->getDataPembelianRange($dataAmbil);
-        $data['datapembelian'] = $dataPembelian;
-        $data['item'] = $item;
-        $data['defaultitem'] = $defaultItem;
+        // cek apakah data kosong
+        if(!empty($dataPembelian)){
+          $data['datapembelian'] = $dataPembelian;
+          $data['item'] = $item;
+          $data['defaultitem'] = $defaultItem;
 
-        $this->load->view('agen/header');
-        $this->load->view('agen/pembelianhasil', $data);
-        $this->load->view('agen/footer');
-
-        // echo '<pre>';
-        // print_r($dataPembelian);
-        // echo '<pre>';
+          $this->load->view('agen/header');
+          $this->load->view('agen/pembelianhasil', $data);
+          $this->load->view('agen/footer');
+        }else{
+          $this->load->view('agen/header');
+          $this->load->view('agen/datakosong');
+          $this->load->view('agen/footer');
+        }
       }
     }
 
@@ -143,16 +147,21 @@
           'tanggalsampai' => $tanggalSampai
         );
 
+        // ambil data pembayaran
         $dataPembelian = $this->agen_model->getDataPembayaranRange($dataAmbil);
-        $data['datapembayaran'] = $dataPembelian;
+        // cek apakah data kosong
+        if(!empty($dataPembelian)){
+          $data['datapembayaran'] = $dataPembelian;
 
-        $this->load->view('agen/header');
-        $this->load->view('agen/pembayaranhasil', $data);
-        $this->load->view('agen/footer');
-
-        // echo '<pre>';
-        // print_r($dataPembelian);
-        // echo '<pre>';
+          $this->load->view('agen/header');
+          $this->load->view('agen/pembayaranhasil', $data);
+          $this->load->view('agen/footer');
+        }
+        else{
+          $this->load->view('agen/header');
+          $this->load->view('agen/datakosong');
+          $this->load->view('agen/footer');
+        }
       }
     }
 
@@ -188,6 +197,10 @@
         $kodeAgen = $_SESSION['username'];
         $tanggalDari = $this->input->post('tanggaldari');
         $tanggalSampai = $this->input->post('tanggalsampai');
+        // ambil 1 hari sebelumnya
+        // untuk cek saldo terakhir
+        $date = $tanggalDari;
+        $kemarin = date('Y-m-d',strtotime($date . "-1 days"));
 
         $dataAmbil = array(
           'kodeagen' => $kodeAgen,
@@ -195,14 +208,21 @@
           'tanggalsampai' => $tanggalSampai
         );
 
-        // ambil saldo
-        $dataSaldo = $this->agen_model->getSaldo($dataAmbil);
-        $data['datasaldo'] = $dataSaldo;
+        //ambil saldo
+        $dataSaldo = $this->agen_model->getSaldo($dataAmbil, $kemarin);
+        // cek apakah data kosong
+        if(!empty($dataSaldo)){
+          $data['datasaldo'] = $dataSaldo;
 
-        $this->load->view('agen/header');
-        $this->load->view('agen/saldohasil', $data);
-        $this->load->view('agen/footer');
-
+          $this->load->view('agen/header');
+          $this->load->view('agen/saldohasil', $data);
+          $this->load->view('agen/footer');
+        }
+        else{
+          $this->load->view('agen/header');
+          $this->load->view('agen/datakosong');
+          $this->load->view('agen/footer');
+        }
       }
     }
 

@@ -1,10 +1,10 @@
           </div> <!-- row di header buat wrap konten-->
 
-          <nav class="navbar navbar-default" id="footer">
+          <nav class="navbar navbar-default" id="footer" style="background-color: #00abc5">
 
             <div class="container-fluid">
               <p class="navbar-text" style="color: white;">Copyright Sancu Creative Indonesia @2018</p>
-              <p class="navbar-text text-right" style="color: white;">ver 1.0</p>
+              <p class="navbar-text text-right" style="color: white;">ver 1.1</p>
             </div>
 
           </nav>

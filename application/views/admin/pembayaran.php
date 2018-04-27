@@ -4,9 +4,9 @@
 
     <h1 class="text-center">Pembayaran</h1>
 
-    <table class="table table-condensed table-borderd table-striped table-hover" id="datatablepembayaran">
-      <thead>
-        <tr>
+    <table class="table table-condensed table-bordered table-striped table-hover" id="datatablepembayaran">
+      <thead class="text-center">
+        <tr class="info">
           <th>Kode Pembayaran</th>
           <th>Kode Pembelian</th>
           <th>Tanggal Pembelian</th>
@@ -21,8 +21,8 @@
             <td><?php echo $pembayaran['kode_pembayaran'] ?></td>
             <td><?php echo $pembayaran['kode_pembelian'] ?></td>
             <td><?php echo $pembayaran['tanggal_pembelian'] ?></td>
-            <td><?php echo $pembayaran['jumlah_pembelian'] ?></td>
-            <td><?php echo $pembayaran['sisa_tagihan'] ?></td>
+            <td><?php echo 'Rp'.number_format($pembayaran['jumlah_pembelian'], 0, ',', '.') ?></td>
+            <td><?php echo 'Rp'.number_format($pembayaran['sisa_tagihan'], 0, ',', '.') ?></td>
             <td>
               <div class="btn-group">
                 <a href="<?php echo base_url() ?>admin/pembayarandetail/<?php echo $pembayaran['kode_pembayaran'] ?>" class="btn btn-info">View</a>

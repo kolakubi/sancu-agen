@@ -1,6 +1,6 @@
 <div class="row" style="padding: 0 30px;">
   <div class="col-xs-12">
-    <h3 class="text-center">History Pembayaran</h3>.
+    <h3 class="text-center">History Pembayaran</h3>
 
     <!-- <table class="table table-bordered table-condensed table-responsive table-striped" style="font-size: 12px">
       <thead>

@@ -21,6 +21,19 @@
         Pembelian
       </a>
     </div>
+    <!-- saldo -->
+    <div class="col-sm-4 col-xs-4 text-center">
+      <a href="<?php base_url() ?>agen/saldo">
+        <span class="glyphicon glyphicon-shopping-cart" style="font-size:50px; color: #00abc5;" aria-hidden="true"></span>
+        <br>
+        <!-- Saldo -->
+        History Pembayaran
+      </a>
+    </div>
+  </div>
+  <hr>
+  <!-- baris 2 -->
+  <div class="row" style="padding: 10px 15px;">
     <!-- bonus -->
     <div class="col-sm-4 col-xs-4 text-center">
       <a href="<?php echo base_url() ?>agen/bonus">
@@ -29,26 +42,15 @@
         Bonus
       </a>
     </div>
-  </div>
-  <hr>
-  <!-- baris 2 -->
-  <div class="row" style="padding: 10px 15px;">
     <!-- history pembayaran -->
     <div class="col-sm-4 col-xs-4 text-center">
-      <a href="<?php base_url() ?>agen/pembayaran">
+      <!-- <a href="<?php base_url() ?>agen/pembayaran">
         <span class="glyphicon glyphicon-time" style="font-size:50px; color: #00abc5;" aria-hidden="true"></span>
         <br>
         History Pembayaran
-      </a>
+      </a> -->
     </div>
-    <!-- saldo -->
-    <div class="col-sm-4 col-xs-4 text-center">
-      <a href="<?php base_url() ?>agen/saldo">
-        <span class="glyphicon glyphicon-shopping-cart" style="font-size:50px; color: #00abc5;" aria-hidden="true"></span>
-        <br>
-        Saldo
-      </a>
-    </div>
+
     <!-- kosong -->
     <div class="col-sm-4 col-xs-4 text-center">
 

@@ -29,35 +29,21 @@
           <td></td>
           <td><?php echo number_format(($datasaldo[0]['nominal']*(-1)), 0, ',', '.') ?></td>
         </tr>
-        <!-- ==================================== -->
-        <!-- ==================================== -->
-        <!-- ==================================== -->
-        <!-- <?php foreach($datasaldo as $saldo) : ?>
-        <?php $index++ ?>
-        <tr>
-          <td><?php echo $saldo['tgl_perubahan'] ?></td>
-          <td><?php echo $saldo['keterangan'] ?></td>
-          <td><?php echo number_format($saldo['debet'], 0, ',', '.') ?></td>
-          <td><?php echo number_format($saldo['kredit'], 0, ',', '.') ?></td>
-          <td><?php echo number_format(($saldo['nominal']*(-1)), 0, ',', '.') ?></td>
-        </tr>
-        <?php
-          $totalDebet += $saldo['debet'];
-          $totalKredit += $saldo['kredit'];
-        ?>
-        <?php endforeach ?> -->
-        <!-- ==================================== -->
-        <!-- ==================================== -->
-        <!-- ==================================== -->
+
         <?php for($i=0; $i<count($datasaldo); $i++) : ?>
           <?php if($i > 0) : ?>
-          <tr>
-            <td><?php echo $datasaldo[$i]['tgl_perubahan'] ?></td>
-            <td><?php echo $datasaldo[$i]['keterangan'] ?></td>
-            <td><?php echo number_format($datasaldo[$i]['debet'], 0, ',', '.') ?></td>
-            <td><?php echo number_format($datasaldo[$i]['kredit'], 0, ',', '.') ?></td>
-            <td><?php echo number_format(($datasaldo[$i]['nominal']*(-1)), 0, ',', '.') ?></td>
-          </tr>
+            <?php $index++ ?>
+            <?php
+              $totalDebet += $datasaldo[$i]['debet'];
+              $totalKredit += $datasaldo[$i]['kredit'];
+            ?>
+            <tr>
+              <td><?php echo $datasaldo[$i]['tgl_perubahan'] ?></td>
+              <td><?php echo $datasaldo[$i]['keterangan'] ?></td>
+              <td><?php echo number_format($datasaldo[$i]['debet'], 0, ',', '.') ?></td>
+              <td><?php echo number_format($datasaldo[$i]['kredit'], 0, ',', '.') ?></td>
+              <td><?php echo number_format(($datasaldo[$i]['nominal']*(-1)), 0, ',', '.') ?></td>
+            </tr>
           <?php endif ?>
         <?php endfor ?>
       </tbody>
@@ -67,7 +53,7 @@
           <td></td>
           <td><?php echo number_format($totalDebet, 0, ',', '.')?></td>
           <td><?php echo number_format($totalKredit, 0, ',', '.')?></td>
-          <td><?php echo number_format(($datasaldo[$index-1]['nominal']*(-1)), 0, ',', '.') ?></td>
+          <td><?php echo number_format(($datasaldo[$index]['nominal']*(-1)), 0, ',', '.') ?></td>
         </tr>
       </tfoot>
     </table>
@@ -76,13 +62,13 @@
 
 <div class="row">
   <!-- jika saldo surplus -->
-  <?php if(($datasaldo[$index-1]['nominal']*(-1)) > 0) : ?>
+  <?php if(($datasaldo[$index]['nominal']*(-1)) > 0) : ?>
     <p class="text-center text-info text-uppercase">
-      <strong>lebih bayar: <?php echo number_format(($datasaldo[$index-1]['nominal']*(-1)), 0, ',', '.') ?></strong>
+      <strong>lebih bayar: <?php echo number_format(($datasaldo[$index]['nominal']*(-1)), 0, ',', '.') ?></strong>
     </p>
-  <?php elseif(($datasaldo[$index-1]['nominal']*(-1)) < 0 ) : ?>
+  <?php elseif(($datasaldo[$index]['nominal']*(-1)) < 0 ) : ?>
     <p class="text-center text-danger text-uppercase">
-      <strong>kurang bayar: <?php echo number_format(($datasaldo[$index-1]['nominal']*(-1)), 0, ',', '.') ?></strong>
+      <strong>kurang bayar: <?php echo number_format(($datasaldo[$index]['nominal']*(-1)), 0, ',', '.') ?></strong>
     </p>
   <?php endif ?>
 </div>

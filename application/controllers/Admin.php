@@ -623,7 +623,8 @@
           'tgl_perubahan' => $tanggalpembayaran,
           'debet' => 0,
           'kredit' => $dibayar,
-          'keterangan' => 'bayar pembelian '.$result['tanggal_pembelian']
+          'keterangan' => $keterangan
+          //'keterangan' => 'bayar pembelian '.$result['tanggal_pembelian']
         );
 
         $result = $this->admin_model->insertPembayaranDetail($dataPembayaran, $dataSaldo);

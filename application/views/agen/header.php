@@ -14,7 +14,7 @@
         <div class="col-md-4 col-sm-12 col-xs-12" style="padding: 0px; height: 100vh">
 
           <!-- menu -->
-          <nav class="navbar navbar-default">
+          <nav class="navbar navbar-default" style="background-color: #00abc5">
 
             <div class="container-fluid">
               <div class="navbar-header">

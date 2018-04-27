@@ -3,7 +3,7 @@
   <div class="col-xs-12">
     <table class="table table-condensed table-borderd table-striped table-hover" id="datatablepembayarandetail">
       <thead>
-        <tr>
+        <tr class="info">
           <th>Kode</th>
           <th>Tgl Pembayaran</th>
           <th>Tagihan Sebelumnya</th>
@@ -17,9 +17,9 @@
           <tr>
             <td><?php echo $pembayaran['kode_pembayaran'] ?></td>
             <td><?php echo $pembayaran['tanggal_pembayaran'] ?></td>
-            <td><?php echo $pembayaran['tagihan_sebelumnya'] ?></td>
-            <td><?php echo $pembayaran['nominal_pembayaran'] ?></td>
-            <td><?php echo $pembayaran['sisa_tagihan'] ?></td>
+            <td><?php echo 'Rp'.number_format($pembayaran['tagihan_sebelumnya'], 0, ',', '.')?></td>
+            <td><?php echo 'Rp'.number_format($pembayaran['nominal_pembayaran'], 0, ',', '.')?></td>
+            <td><?php echo 'Rp'.number_format($pembayaran['sisa_tagihan'], 0, ',', '.')?></td>
             <td><?php echo $pembayaran['keterangan'] ?></td>
           </tr>
         <?php endforeach ?>

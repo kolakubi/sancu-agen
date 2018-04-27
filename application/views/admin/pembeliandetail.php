@@ -3,7 +3,7 @@
 
 <table class="table table-striped table-bordered table-hover table-condensed table-responsive" id="datatablepembelian">
   <thead>
-    <tr>
+    <tr class="info">
       <th>Produk</th>
       <th>Jumlah Item</th>
       <th>Total Harga Item</th>

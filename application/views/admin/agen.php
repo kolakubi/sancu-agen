@@ -5,7 +5,7 @@
 
 <table class="table table-striped table-bordered table-hover table-condensed table-responsive" id="datatableagen">
   <thead>
-    <tr>
+    <tr class="info">
       <th>No</th>
       <th>Kode Agen</th>
       <th>Nama</th>
