@@ -8,17 +8,17 @@
 <h3 class="text-center text-info">Saldo Anda</h3>
 <h5 class="text-center text-info">berdasarkan tanggal</h5>
 
-<div class="row" style="padding: 0px 15px; font-size: 12px">
+<div class="row" style="font-size: 12px">
   <div class="col-xs-12">
 
     <table class="table table-condensed table-hover table-bordered table-striped">
       <thead>
         <tr class="info">
-          <th>Tgl</th>
-          <th>Ket</th>
-          <th>Debet(Rp)</th>
-          <th>Kredit(Rp)</th>
-          <th>Saldo(Rp)</th>
+          <th style="text-align: center">Tgl</th>
+          <th style="text-align: center">Ket</th>
+          <th style="text-align: center">Debet(Rp)</th>
+          <th style="text-align: center">Kredit(Rp)</th>
+          <th style="text-align: center">Saldo(Rp)</th>
         </tr>
       </thead>
       <tbody>
@@ -78,3 +78,4 @@
     <a href="<?php echo base_url() ?>agen/saldo" class="btn btn-info">Kembali</a>
   </p>
 </div>
+<br><br>

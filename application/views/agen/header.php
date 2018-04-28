@@ -9,23 +9,20 @@
   </head>
   <body>
 
-    <div class="container-fluid">
-      <div class="row" style="overflow-x: hidden">
-        <div class="col-md-4 col-sm-12 col-xs-12" style="padding: 0px; height: 100vh">
+    <!-- menu -->
+    <nav class="navbar navbar-default" style="background-color: #00abc5">
 
-          <!-- menu -->
-          <nav class="navbar navbar-default" style="background-color: #00abc5">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="<?php echo base_url() ?>agen">
+            <img alt="brand" src="<?php echo base_url() ?>asset/image/logo-sancu-new-2.png" style="max-width: 100px; margin-top: -10px;">
+          </a>
+        </div>
+        <a href="<?php echo base_url() ?>logout" class="btn btn-default navbar-btn navbar-right" style="margin-right: 5px;">Sign out</a>
+      </div>
 
-            <div class="container-fluid">
-              <div class="navbar-header">
-                <a class="navbar-brand" href="<?php echo base_url() ?>agen">
-                  <img alt="brand" src="<?php echo base_url() ?>asset/image/logo-sancu-new-2.png" style="max-width: 100px; margin-top: -10px;">
-                </a>
-              </div>
-              <a href="<?php echo base_url() ?>logout" class="btn btn-default navbar-btn navbar-right" style="margin-right: 5px;">Sign out</a>
-            </div>
+    </nav>
 
-          </nav>
-
-          <!-- buat wrap konten -->
-          <div class="row">
+    <!-- buat wrap konten -->
+    <div class="container">
+      <div class="col-xs-12">

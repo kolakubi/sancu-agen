@@ -14,7 +14,7 @@
   $totalItemXtreme = 0;
   $i = 0;
 ?>
-<div class="row" style="padding: 0 20px;">
+<div class="row">
   <div class="col-xs-12">
 
     <?php $tanggal = $datapembelian[0]['tanggal_pembelian'] ?>
@@ -26,7 +26,7 @@
         <tr>
           <th>Item</th>
           <th>jumlah</th>
-          <th>Harga</th>
+          <th>Harga(Rp)</th>
         </tr>
       </thead>
     <?php foreach($datapembelian as $pembelian) : ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2018 at 11:19 AM
+-- Generation Time: Apr 28, 2018 at 09:54 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -112,11 +112,8 @@ CREATE TABLE `pembayaran` (
 --
 
 INSERT INTO `pembayaran` (`kode_pembayaran`, `kode_pembelian`, `tanggal_pembelian`, `jumlah_pembelian`, `sisa_tagihan`) VALUES
-(4, 32, '2018-04-24', 1000000, 500000),
-(5, 33, '2018-04-25', 1400000, 1400000),
-(6, 34, '2018-04-25', 500000, 500000),
-(7, 35, '2018-04-26', 700000, 700000),
-(8, 36, '2018-04-25', 1000000, 0);
+(33, 61, '2018-04-24', 1000000, -900000),
+(34, 62, '2018-04-26', 2100000, 300000);
 
 -- --------------------------------------------------------
 
@@ -139,10 +136,11 @@ CREATE TABLE `pembayaran_detail` (
 --
 
 INSERT INTO `pembayaran_detail` (`kode_pembayaran`, `tanggal_pembayaran`, `tagihan_sebelumnya`, `nominal_pembayaran`, `sisa_tagihan`, `kode_pembayaran_detail`, `keterangan`) VALUES
-(4, '2018-04-24', 1000000, 500000, 500000, 10, 'mandiri subi'),
-(8, '2018-04-25', 1000000, 600000, 400000, 11, 'bayar '),
-(8, '2018-04-26', 400000, 300000, 100000, 12, 'bayar'),
-(8, '2018-04-27', 100000, 100000, 0, 13, 'bayar');
+(33, '2018-04-25', 1000000, 600000, 400000, 23, 'Bayar pembelian 24 April lewat mandiri'),
+(33, '2018-04-25', 400000, 300000, 100000, 24, 'bayar pembelian tgl 24 April BCA'),
+(33, '2018-04-27', 100000, 1000000, -900000, 25, 'Bayar tagihan tgl 24 April Lebih 900rb'),
+(34, '2018-04-27', 2100000, 800000, 1300000, 26, 'Bayar tagihan tgl 26 April BCA'),
+(34, '2018-04-28', 1300000, 1000000, 300000, 27, 'bayar pembelian tgl 26 April Mandiri');
 
 -- --------------------------------------------------------
 
@@ -163,11 +161,8 @@ CREATE TABLE `pembelian` (
 --
 
 INSERT INTO `pembelian` (`kode_pembelian`, `kode_agen`, `tanggal_pembelian`, `total_item`, `total_pembelian`) VALUES
-(32, 'agen001', '2018-04-24', 1000, 1000000),
-(33, 'agen001', '2018-04-25', 1400, 1400000),
-(34, 'agen001', '2018-04-25', 500, 500000),
-(35, 'agen001', '2018-04-26', 700, 700000),
-(36, 'agen001', '2018-04-25', 1000, 1000000);
+(61, 'agen001', '2018-04-24', 1000, 1000000),
+(62, 'agen001', '2018-04-26', 1650, 2100000);
 
 -- --------------------------------------------------------
 
@@ -188,26 +183,14 @@ CREATE TABLE `pembelian_detail` (
 --
 
 INSERT INTO `pembelian_detail` (`kode_pembelian_detail`, `kode_pembelian`, `kode_item`, `jumlah_item`, `total_harga_item`) VALUES
-(9, 32, 'sancu', 100, 100000),
-(10, 32, 'boncu', 200, 200000),
-(11, 32, 'pretty', 300, 300000),
-(12, 32, 'xtreme', 400, 400000),
-(13, 33, 'sancu', 400, 400000),
-(14, 33, 'boncu', 500, 500000),
-(15, 33, 'pretty', 300, 300000),
-(16, 33, 'xtreme', 200, 200000),
-(17, 34, 'sancu', 100, 100000),
-(18, 34, 'boncu', 100, 100000),
-(19, 34, 'pretty', 200, 200000),
-(20, 34, 'xtreme', 100, 100000),
-(21, 35, 'sancu', 100, 100000),
-(22, 35, 'boncu', 100, 100000),
-(23, 35, 'pretty', 200, 200000),
-(24, 35, 'xtreme', 300, 300000),
-(25, 36, 'sancu', 100, 100000),
-(26, 36, 'boncu', 300, 300000),
-(27, 36, 'pretty', 200, 200000),
-(28, 36, 'xtreme', 400, 400000);
+(88, 61, 'sancu', 100, 100000),
+(89, 61, 'boncu', 200, 200000),
+(90, 61, 'pretty', 300, 300000),
+(91, 61, 'xtreme', 400, 400000),
+(92, 62, 'sancu', 50, 500000),
+(93, 62, 'boncu', 600, 600000),
+(94, 62, 'pretty', 300, 300000),
+(95, 62, 'xtreme', 700, 700000);
 
 -- --------------------------------------------------------
 
@@ -245,6 +228,19 @@ CREATE TABLE `saldo` (
   `nominal` int(11) NOT NULL,
   `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `saldo`
+--
+
+INSERT INTO `saldo` (`kode_saldo`, `kode_agen`, `tgl_perubahan`, `debet`, `kredit`, `nominal`, `keterangan`) VALUES
+(28, 'agen001', '2018-04-24', 1000000, 0, 1000000, 'pembelian'),
+(29, 'agen001', '2018-04-25', 0, 600000, 400000, 'Bayar pembelian 24 April lewat mandiri'),
+(30, 'agen001', '2018-04-25', 0, 300000, 100000, 'bayar pembelian tgl 24 April BCA'),
+(31, 'agen001', '2018-04-26', 2100000, 0, 2200000, 'pembelian'),
+(32, 'agen001', '2018-04-27', 0, 1000000, 1200000, 'Bayar tagihan tgl 24 April Lebih 900rb'),
+(33, 'agen001', '2018-04-27', 0, 800000, 400000, 'Bayar tagihan tgl 26 April BCA'),
+(34, 'agen001', '2018-04-28', 0, 1000000, -600000, 'bayar pembelian tgl 26 April Mandiri');
 
 --
 -- Indexes for dumped tables
@@ -319,31 +315,31 @@ ALTER TABLE `saldo`
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `pembayaran_detail`
 --
 ALTER TABLE `pembayaran_detail`
-  MODIFY `kode_pembayaran_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `kode_pembayaran_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `pembelian_detail`
 --
 ALTER TABLE `pembelian_detail`
-  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT for table `saldo`
 --
 ALTER TABLE `saldo`
-  MODIFY `kode_saldo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `kode_saldo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Constraints for dumped tables

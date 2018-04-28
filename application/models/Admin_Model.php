@@ -242,18 +242,19 @@
 
     public function getPembayaran($kodePembayaran = null){
       // ambil data pembayaran
+      $this->db->select('*');
+      $this->db->from('pembayaran');
+      $this->db->join('pembelian', 'pembelian.kode_pembelian = pembayaran.kode_pembelian');
+      $this->db->join('agen', 'agen.kode_agen = pembelian.kode_agen');
       if($kodePembayaran){
         // jika ada kode pembayaran
         // ambil data berdasarkan kode
-        $this->db->select('*');
-        $this->db->from('pembayaran');
-        $this->db->join('pembelian', 'pembelian.kode_pembelian = pembayaran.kode_pembelian');
         $this->db->where('kode_pembayaran', $kodePembayaran);
         $result = $this->db->get();
         return $result->row_array();
       }
       // jika tidak ada kode pembayaran
-      $result = $this->db->get('pembayaran')->result_array();
+      $result = $this->db->get()->result_array();
       return $result;
     }
 

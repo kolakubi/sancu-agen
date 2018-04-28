@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-xs-12" style="padding: 0 15%;">
+  <div class="col-xs-12">
     <?php echo form_open('agen/pembelian') ?>
       <h3 class="text-center">Cari Transaksi</h3>
       <br>
@@ -36,7 +36,7 @@
           </div>
         </div>
         <!-- notif checkbox untuk tampilin jumlah tagihan -->
-        <h5 class="text-center text-info">*Klik semua item untuk menampilkan jumlah yang dibayar dan kekurangan pembayaran</h5>
+        <h5 class="text-center text-info">*Klik semua item untuk menampilkan <br>jumlah yang dibayar dan <br>kekurangan pembayaran</h5>
         <!-- ==================================== -->
       </div>
       <span class="text-danger"><?php echo form_error('item[]') ?></span>
@@ -70,3 +70,5 @@
     </p>
   </div>
 </div>
+
+<br><br>

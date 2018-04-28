@@ -87,21 +87,9 @@
         <input type="number" name="pembelianjumlah" value="0" class="form-control" id="pembelianjumlah" readonly="true">
         <span class="text-danger"><?php echo form_error('pembelianjumlah') ?></span>
       </div>
-      <!-- jumlah dibayar -->
-      <!-- <div class="form-group">
-        <label>Jumlah Dibayar: </label>
-        <input type="number" name="pembeliandibayar" value="0" class="form-control" id="pembeliandibayar">
-        <span class="text-danger"><?php echo form_error('pembeliandibayar') ?></span>
-      </div> -->
-      <!-- perhitungan sisa pembayaran -->
-      <!-- <div class="form-group">
-        <label>Sisa Tagihan: </label>
-        <input type="number" name="pembeliansisatagihan" value="0" class="form-control" id="pembeliansisatagihan" readonly="true">
-        <span class="text-danger"><?php echo form_error('pembeliansisatagihan') ?></span>
-      </div> -->
-      <!-- ==================================== -->
       <div class="form-group">
         <button type="submit" class="btn btn-info">Simpan</button>
+        <a href="<?php echo base_url() ?>admin/pembelian" class="btn btn-default">Kembali</a>
       </div>
     <?php echo form_close() ?>
   </div>

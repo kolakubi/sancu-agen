@@ -13,37 +13,40 @@
   </head>
   <body>
 
+    <!-- menu -->
+    <nav class="navbar navbar-default">
+
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <!-- menu mobile -->
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- logo -->
+          <a class="navbar-brand" href="<?php echo base_url() ?>admin">
+            <img alt="brand" src="<?php echo base_url() ?>asset/image/logo-sancu-new-2.png" style="max-width: 100px; margin-top: -10px;">
+          </a>
+        </div> <!-- end of nav-header -->
+
+        <div class="nav navbar-nav">
+          <ul class="nav nav-tabs">
+            <li><a href="<?php echo base_url() ?>admin/agen">Agen</a></li>
+            <li><a href="<?php echo base_url() ?>admin/pembelian">Pembelian</a></li>
+            <li><a href="<?php echo base_url() ?>admin/pembayaran">Pembayaran</a></li>
+            <li><a href="#">Bonus</a></li>
+          </ul>
+        </div>
+
+        <!-- button logout -->
+        <ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
+          <li><a href="<?php echo base_url() ?>logout" class="btn btn-default navbar-btn navbar-right">Sign out</a></li>
+        </ul>
+      </div>
+
+    </nav>
+
+    <!-- body wrapper -->
     <div class="container">
-      <div class="row">
-          <!-- menu -->
-          <nav class="navbar navbar-default">
-
-            <div class="container-fluid">
-              <div class="navbar-header">
-                <!-- menu mobile -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                <!-- logo -->
-                <a class="navbar-brand" href="<?php echo base_url() ?>admin">
-                  <img alt="brand" src="<?php echo base_url() ?>asset/image/logo-sancu-new-2.png" style="max-width: 100px; margin-top: -10px;">
-                </a>
-              </div> <!-- end of nav-header -->
-
-              <div class="collapse navbar-collapse">
-                <ul class="nav nav-tabs">
-                  <li><a href="<?php echo base_url() ?>admin/agen">Agen</a></li>
-                  <li><a href="<?php echo base_url() ?>admin/pembelian">Pembelian</a></li>
-                  <li><a href="<?php echo base_url() ?>admin/pembayaran">Pembayaran</a></li>
-                  <li><a href="#">Bonus</a></li>
-                </ul>
-              </div>
-
-              <!-- button logout -->
-              <a href="<?php echo base_url() ?>logout" class="btn btn-default navbar-btn navbar-right">Sign out</a>
-            </div>
-
-          </nav>

@@ -96,6 +96,7 @@
       <!-- ==================================== -->
       <div class="form-group">
         <button type="submit" class="btn btn-info">Ubah</button>
+        <a class="btn btn-default" href="<?php echo base_url() ?>admin/pembelian">Batal</a>
       </div>
     <?php echo form_close() ?>
   </div>

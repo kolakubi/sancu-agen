@@ -241,10 +241,6 @@
       $dataPembelian = $this->admin_model->getDataPembelianJoin();
       $data['pembelian'] = $dataPembelian;
 
-      // echo '<pre>';
-      // print_r($dataPembelian);
-      // echo '</pre>';
-
       $this->load->view('admin/header');
       $this->load->view('admin/pembelian', $data);
       $this->load->view('admin/footer');
@@ -319,16 +315,6 @@
             'label' => 'Jumlah',
             'rules' => 'required'
           ),
-          // array(
-          //   'field' => 'pembeliandibayar',
-          //   'label' => 'Dibayar',
-          //   'rules' => 'required'
-          // ),
-          // array(
-          //   'field' => 'pembeliansisatagihan',
-          //   'label' => 'Sisa Tagihan',
-          //   'rules' => 'required'
-          // )
         )
       );
 
@@ -632,8 +618,7 @@
           redirect('admin/pembayaran');
         }
       }
-
-
     }
+
 
   }

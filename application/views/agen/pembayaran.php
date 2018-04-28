@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-xs-12" style="padding: 0% 15%;">
+  <div class="col-xs-12">
     <?php echo form_open('agen/pembayaran') ?>
       <h3 class="text-center">Cari History Pembayaran</h3>
       <h5 class="text-center">berdasarkan tanggal pembelian</h5>

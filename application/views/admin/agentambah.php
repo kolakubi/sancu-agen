@@ -50,6 +50,7 @@
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-info">Simpan</button>
+        <a href="<?php echo base_url() ?>admin/agen" class="btn btn-default">Kembali</a>
       </div>
     <?php echo form_close() ?>
   </div>

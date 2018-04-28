@@ -48,6 +48,7 @@
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-info">Bayar</button>
+        <a class="btn btn-default" href="<?php echo base_url() ?>admin/pembayaran">Batal</a>
       </div>
     <?php echo form_close() ?>
   </div>
