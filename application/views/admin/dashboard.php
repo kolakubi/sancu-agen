@@ -6,9 +6,9 @@
 <div class="row">
   <!-- profil -->
   <div class="col-sm-3 col-xs-3 text-center">
-    <a href="<?php base_url() ?>admin/profil">
+    <a href="<?php base_url() ?>admin/agen">
       <img src="<?php base_url() ?>asset/image/user.png" alt="user" class="img-responsive" style="margin: 0 auto;">
-      <strong class="text-uppercase">Profil</strong>
+      <strong class="text-uppercase">Agen</strong>
       <br>
     </a>
   </div>
@@ -31,10 +31,12 @@
   </div>
   <!-- bonus -->
   <div class="col-sm-3 col-xs-3 text-center">
-    <a href="<?php echo base_url() ?>admin/bonus">
+    <a href="<?php base_url() ?>admin/bonus">
       <img src="<?php base_url() ?>asset/image/bonus.png" alt="bonus" class="img-responsive" style="margin: 0 auto;">
       <br>
       <strong>Bonus</strong>
     </a>
   </div>
-</div>
+
+</div> <!-- end of row -->
+<br><br>

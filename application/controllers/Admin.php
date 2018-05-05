@@ -379,10 +379,11 @@
 
         // insert data ke database
         $result = $this->admin_model->insertPembelian($dataPembelian, $dataPembelianDetail, $dataPembayaran, $dataSaldo);
-        if($result){
-          // jika sukses redirect ke halaman pembelian
-          redirect('admin/pembelian');
-        }
+        // if($result){
+        //   // jika sukses redirect ke halaman pembelian
+        //   redirect('admin/pembelian');
+        // }
+        echo $result;
       }
     }
 
@@ -618,6 +619,16 @@
           redirect('admin/pembayaran');
         }
       }
+    }
+
+    ///////////////////////////////////////////////
+    ///////////////////////////////////////////////
+    //////////////// B O N U S ////////////////////
+
+    public function bonus(){
+      $this->load->view('admin/header');
+      $this->load->view('admin/bonus');
+      $this->load->view('admin/footer');
     }
 
 

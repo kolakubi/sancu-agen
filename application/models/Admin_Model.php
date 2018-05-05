@@ -115,60 +115,184 @@
 
     public function insertPembelian($dataPembelian, $dataPembelianDetail, $dataPembayaran, $dataSaldo){
       // insert data pembelian
-      // insert ke table pembelian
-      $this->db->insert('pembelian', $dataPembelian);
-
-      // ambil id pembelian yg baru saja diinput
-      $insert_id = $this->db->insert_id();
-      // insert data pembayaran dengan foreign key id pembelian
-      $dataPembayaran['kode_pembelian'] = $insert_id;
-      $dataPembelianDetail['kode_pembelian'] = $insert_id;
-      $this->db->insert('pembayaran', $dataPembayaran);
-
-      // insert ke table pembelian_detail
-      // fungsi insert berdasarkan nama item
-      // inisiai $this
-      $that = $this;
-      function insert_item_detail_pembelian($item, $dataPembelianDetail, $that){
-        $dataBaru = array(
-          'kode_pembelian' => $dataPembelianDetail['kode_pembelian'],
-          'kode_item' =>  $item,
-          'jumlah_item' => $dataPembelianDetail[$item],
-          'total_harga_item' => $dataPembelianDetail['total_harga_'.$item]
-        );
-        $that->db->insert('pembelian_detail', $dataBaru);
-      }
-      // pembelian sancu
-      if($dataPembelianDetail['sancu'] != 0){
-        insert_item_detail_pembelian('sancu', $dataPembelianDetail, $that);
-      }
-      // pembelian boncu
-      if($dataPembelianDetail['boncu'] != 0){
-        insert_item_detail_pembelian('boncu', $dataPembelianDetail, $that);
-      }
-      // pembelian pretty
-      if($dataPembelianDetail['pretty'] != 0){
-        insert_item_detail_pembelian('pretty', $dataPembelianDetail, $that);
-      }
-      // pembelian pretty
-      if($dataPembelianDetail['xtreme'] != 0){
-        insert_item_detail_pembelian('xtreme', $dataPembelianDetail, $that);
-      }
+      // // insert ke table pembelian
+      // $this->db->insert('pembelian', $dataPembelian);
+      //
+      // // ambil id pembelian yg baru saja diinput
+      // $insert_id = $this->db->insert_id();
+      // // insert data pembayaran dengan foreign key id pembelian
+      // $dataPembayaran['kode_pembelian'] = $insert_id;
+      // $dataPembelianDetail['kode_pembelian'] = $insert_id;
+      // $this->db->insert('pembayaran', $dataPembayaran);
+      //
+      // // insert ke table pembelian_detail
+      // // fungsi insert berdasarkan nama item
+      // // inisiai $this
+      // $that = $this;
+      // function insert_item_detail_pembelian($item, $dataPembelianDetail, $that){
+      //   $dataBaru = array(
+      //     'kode_pembelian' => $dataPembelianDetail['kode_pembelian'],
+      //     'kode_item' =>  $item,
+      //     'jumlah_item' => $dataPembelianDetail[$item],
+      //     'total_harga_item' => $dataPembelianDetail['total_harga_'.$item]
+      //   );
+      //   $that->db->insert('pembelian_detail', $dataBaru);
+      // }
+      // // pembelian sancu
+      // if($dataPembelianDetail['sancu'] != 0){
+      //   insert_item_detail_pembelian('sancu', $dataPembelianDetail, $that);
+      // }
+      // // pembelian boncu
+      // if($dataPembelianDetail['boncu'] != 0){
+      //   insert_item_detail_pembelian('boncu', $dataPembelianDetail, $that);
+      // }
+      // // pembelian pretty
+      // if($dataPembelianDetail['pretty'] != 0){
+      //   insert_item_detail_pembelian('pretty', $dataPembelianDetail, $that);
+      // }
+      // // pembelian pretty
+      // if($dataPembelianDetail['xtreme'] != 0){
+      //   insert_item_detail_pembelian('xtreme', $dataPembelianDetail, $that);
+      // }
+      //
+      // ////////////////////////////////
+      // /////// UPDATE SALDO ///////////
+      // // ambil data paling akhir saldo
+      // $this->db->where('kode_agen', $dataSaldo['kode_agen']);
+      // $this->db->order_by('kode_saldo', 'DESC');
+      // $this->db->limit(2);
+      // $saldoAkhir = $this->db->get('saldo')->result_array();
+      // $saldoAkhir = $saldoAkhir[0]['nominal'];
+      //
+      // $dataSaldo['nominal'] = $saldoAkhir + $dataSaldo['debet'];
+      // // insert saldo
+      // $this->db->insert('saldo', $dataSaldo);
+      //
+      // return true;
 
       ////////////////////////////////
-      /////// UPDATE SALDO ///////////
-      // ambil data paling akhir saldo
-      $this->db->where('kode_agen', $dataSaldo['kode_agen']);
-      $this->db->order_by('kode_saldo', 'DESC');
-      $this->db->limit(2);
-      $saldoAkhir = $this->db->get('saldo')->result_array();
-      $saldoAkhir = $saldoAkhir[0]['nominal'];
+      ////////////////////////////////
+      ////////// B O N U S ///////////
 
-      $dataSaldo['nominal'] = $saldoAkhir + $dataSaldo['debet'];
-      // insert saldo
-      $this->db->insert('saldo', $dataSaldo);
+      $bonus = 0;
+      $ribuan = 0;
+      $puluhanribu = 0;
+      $totalItem = $dataPembelian['total_item'];
+      $selisihribuan = 0;
+      $selisihpuluhanribu = 0;
+      $totalbonus = 0;
 
-      return true;
+      // ambil data bonus
+      $this->db->select('*');
+      $this->db->from('bonus');
+      $this->db->where('kode_agen', $dataPembelian['kode_agen']);
+      $dataBonus = $this->db->get()->row_array();
+      // jika data ada
+      if(!empty($dataBonus)){
+        $totalItem += ($totalItem + $dataBonus['total_pembelian']);
+        $kode_bonus = $dataBonus['kode_agen'];
+        $ribuan = $dataBonus['ribuan'];
+        $puluhanribu = $dataBonus['puluhan_ribu'];
+        $totalbonus = $dataBonus['jumlah_bonus'];
+
+        // jika pembelian lbh besar dr ribuan
+        if(@($totalItem/$ribuan) >= 1){
+          // stack kelipatan ribuan
+          $selisihribuan = $totalItem - $ribuan;
+          if(($selisihribuan/1000) >= 1){
+            $selisihribuan = $selisihribuan/1000;
+            $ribuan += (1000*$selisihribuan);
+            $bonus += (300000*$selisihribuan);
+          }
+        }
+
+        // jika pembelian lbh besar dr puluhan ribu
+        if(@($totalItem/$puluhanribu) >= 1){
+          // stack kelipatan puluhan ribu
+          $selisihpuluhanribu = $totalItem - $puluhanribu;
+          if(($selisihpuluhanribu/10000) >= 1){
+            $selisihpuluhanribu = $selisihpuluhanribu/10000;
+            $puluhanribu += (10000*$selisihpuluhanribu);
+            $bonus += (800000*$selisihpuluhanribu);
+          }
+        }
+
+        // pembelian langsung 1000
+        if($dataPembelian['total_item'] >= 1000){
+          $bonus += 50000;
+        }
+
+        // update table bonus
+        $this->db->set(array(
+          'jumlah_bonus' => ($totalbonus+$bonus),
+          'ribuan' => $ribuan,
+          'puluhan_ribu' => $puluhanribu,
+          'total_pembelian' => $totalItem
+        ));
+        $this->db->where('kode_agen', $dataPembelian['kode_agen']);
+        $this->db->update('bonus');
+        // ambil id pembelian yg baru saja diinput
+        //$insert_id = $this->db->insert_id();
+        $this->db->insert('bonus_detail', array(
+          'kode_bonus' => $kode_bonus,
+          'jumlah_pembelian' => $dataPembelian['total_item'],
+          'tanggal_pembelian' => $dataPembelian['tanggal_pembelian'],
+          'bonus' => $bonus
+        ));
+
+        return true;
+
+      }
+
+      // jika data kosong
+      else{
+
+        // jika pembelian lbh besar dr ribuan
+        if(@($totalItem/$ribuan) >= 1){
+          // stack kelipatan ribuan
+          $selisihribuan = $totalItem - $ribuan;
+          if(($selisihribuan/1000) >= 1){
+            $selisihribuan = $selisihribuan/1000;
+            $ribuan += (1000*$selisihribuan);
+            $bonus += (300000*$selisihribuan);
+          }
+        }
+
+        // jika pembelian lbh besar dr puluhan ribu
+        if(@($totalItem/$puluhanribu) >= 1){
+          // stack kelipatan puluhan ribu
+          $selisihpuluhanribu = $totalItem - $puluhanribu;
+          if(($selisihpuluhanribu/10000) >= 1){
+            $selisihpuluhanribu = $selisihpuluhanribu/10000;
+            $puluhanribu += (10000*$selisihpuluhanribu);
+            $bonus += (800000*$selisihpuluhanribu);
+          }
+        }
+
+        // pembelian langsung 1000
+        if($dataPembelian['total_item'] >= 1000){
+          $bonus += 50000;
+        }
+
+        // insert ke db
+        $this->db->insert('bonus', array(
+          'kode_agen' => $dataPembelian['kode_agen'],
+          'jumlah_bonus' => $totalbonus+$bonus,
+          'ribuan' => $ribuan,
+          'puluhan_ribu' => $puluhanribu,
+          'total_pembelian' => $totalItem
+        ));
+        // ambil id pembelian yg baru saja diinput
+        $insert_id = $this->db->insert_id();
+        $this->db->insert('bonus_detail', array(
+          'kode_bonus' => $insert_id,
+          'jumlah_pembelian' => $dataPembelian['total_item'],
+          'tanggal_pembelian' => $dataPembelian['tanggal_pembelian'],
+          'bonus' => $bonus
+        ));
+        return true;
+      }
+
     }
 
     public function updatePembelian($dataPembelian, $dataPembelianDetail, $dataPembayaran, $kodepembelian){

@@ -36,7 +36,7 @@
             <li><a href="<?php echo base_url() ?>admin/agen">Agen</a></li>
             <li><a href="<?php echo base_url() ?>admin/pembelian">Pembelian</a></li>
             <li><a href="<?php echo base_url() ?>admin/pembayaran">Pembayaran</a></li>
-            <li><a href="#">Bonus</a></li>
+            <li><a href="<?php echo base_url() ?>admin/bonus">Bonus</a></li>
           </ul>
         </div>
 
@@ -44,7 +44,8 @@
         <ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
           <li><a href="<?php echo base_url() ?>logout" class="btn btn-default navbar-btn navbar-right">Sign out</a></li>
         </ul>
-      </div>
+
+      </div> <!-- end of container-->
 
     </nav>
 
