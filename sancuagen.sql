@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2018 at 09:54 AM
+-- Generation Time: May 05, 2018 at 09:51 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -72,6 +72,51 @@ INSERT INTO `agen` (`kode_agen`, `tgl_gabung`, `nama`, `alamat`, `kota`, `telepo
 ('agen002', '2018-04-17', 'Abin', 'Jl. Cipinang Pulo RT.13/RW 12 no 24, kel. Cipinang Besar Utara Kec.Jatinegara Jakt-Tim 13410', 'Jakarta Timur', '085219441217', 'tary_minie@yahoo.co.id', 'Laki-laki', 'upload/profil/abin.jpg'),
 ('agen003', '2018-04-18', 'Yuni', 'Jl.Jatimas Raya RT.03 RW.05 Karangroto Genuk Semarang', 'Semarang', '081325656978', 'izzdzak@ymail.com', 'Perempuan', ''),
 ('agen004', '2018-04-21', 'Mal', 'jalan jalan ah', 'Jakarta', '02101201020', 'mal@mal.com', 'Laki-laki', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bonus`
+--
+
+CREATE TABLE `bonus` (
+  `kode_bonus` int(11) NOT NULL,
+  `kode_agen` varchar(10) NOT NULL,
+  `jumlah_bonus` int(11) NOT NULL,
+  `ribuan` int(11) NOT NULL,
+  `puluhan_ribu` int(11) NOT NULL,
+  `total_pembelian` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bonus`
+--
+
+INSERT INTO `bonus` (`kode_bonus`, `kode_agen`, `jumlah_bonus`, `ribuan`, `puluhan_ribu`, `total_pembelian`) VALUES
+(0, 'agen001', 480000, 1600, 0, 1600);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bonus_detail`
+--
+
+CREATE TABLE `bonus_detail` (
+  `kode_bonus` int(11) NOT NULL,
+  `status` varchar(10) NOT NULL,
+  `bonus` int(11) NOT NULL,
+  `jumlah_pembelian` int(11) NOT NULL,
+  `tanggal_pembelian` date NOT NULL,
+  `kode_bonus_detail` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bonus_detail`
+--
+
+INSERT INTO `bonus_detail` (`kode_bonus`, `status`, `bonus`, `jumlah_pembelian`, `tanggal_pembelian`, `kode_bonus_detail`) VALUES
+(0, '', 0, 600, '2018-05-05', 13),
+(0, '', 480000, 500, '2018-05-05', 14);
 
 -- --------------------------------------------------------
 
@@ -259,6 +304,20 @@ ALTER TABLE `agen`
   ADD PRIMARY KEY (`kode_agen`);
 
 --
+-- Indexes for table `bonus`
+--
+ALTER TABLE `bonus`
+  ADD PRIMARY KEY (`kode_bonus`),
+  ADD KEY `kode_agen` (`kode_agen`);
+
+--
+-- Indexes for table `bonus_detail`
+--
+ALTER TABLE `bonus_detail`
+  ADD PRIMARY KEY (`kode_bonus_detail`),
+  ADD KEY `kode_bonus` (`kode_bonus`);
+
+--
 -- Indexes for table `login`
 --
 ALTER TABLE `login`
@@ -312,6 +371,12 @@ ALTER TABLE `saldo`
 --
 
 --
+-- AUTO_INCREMENT for table `bonus_detail`
+--
+ALTER TABLE `bonus_detail`
+  MODIFY `kode_bonus_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
@@ -344,6 +409,18 @@ ALTER TABLE `saldo`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `bonus`
+--
+ALTER TABLE `bonus`
+  ADD CONSTRAINT `bonus_ibfk_1` FOREIGN KEY (`kode_agen`) REFERENCES `agen` (`kode_agen`);
+
+--
+-- Constraints for table `bonus_detail`
+--
+ALTER TABLE `bonus_detail`
+  ADD CONSTRAINT `bonus_detail_ibfk_1` FOREIGN KEY (`kode_bonus`) REFERENCES `bonus` (`kode_bonus`);
 
 --
 -- Constraints for table `pembayaran`
