@@ -379,11 +379,10 @@
 
         // insert data ke database
         $result = $this->admin_model->insertPembelian($dataPembelian, $dataPembelianDetail, $dataPembayaran, $dataSaldo);
-        // if($result){
-        //   // jika sukses redirect ke halaman pembelian
-        //   redirect('admin/pembelian');
-        // }
-        echo $result;
+        if($result){
+          // jika sukses redirect ke halaman pembelian
+          redirect('admin/pembelian');
+        }
       }
     }
 
