@@ -89,5 +89,20 @@
       return $result;
     }
 
+    /////////////////////////////////////////
+    /////////////////////////////////////////
+    ////////////// B O N U S  ///////////////
+
+    public function getBonus($dataAmbil){
+      $this->db->select('*');
+      $this->db->from('bonus_detail');
+      $this->db->join('bonus', 'bonus_detail.kode_bonus = bonus.kode_bonus');
+      $this->db->join('agen', 'bonus.kode_agen = agen.kode_agen');
+      $this->db->where('tanggal_pembelian >=', $dataAmbil['tanggaldari']);
+      $this->db->where('tanggal_pembelian <=', $dataAmbil['tanggalsampai']);
+      $this->db->where('bonus.kode_agen', $dataAmbil['kodeagen']);
+      $result = $this->db->get()->result_array();
+      return $result;
+    }
 
   } //end of class

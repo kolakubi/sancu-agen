@@ -7,36 +7,30 @@
       <thead class="text-center">
         <tr class="info">
           <th>Kode Bonus</th>
-          <th>Kode Pembelian</th>
           <th>Nama Agen</th>
-          <th>Tanggal Pembelian</th>
-          <th>Jumlah Pembelian</th>
-          <th>Bonus</th>
+          <th>Total Item</th>
+          <th>Total Bonus</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
+        <?php foreach($dataBonus as $bonus) : ?>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><?php echo $bonus['kode_bonus'] ?></td>
+            <td><?php echo $bonus['nama'] ?></td>
+            <td><?php echo number_format($bonus['total_item'], 0, ',', '.') ?></td>
+            <td><?php echo 'Rp'.number_format($bonus['jumlah_bonus'], 0, ',', '.') ?></td>
             <td>
               <div class="btn-group">
-                <a href="" class="btn btn-info">View</a>
-                <a href="" class="btn btn-success">Bayar</a>
-                <a href="#" class="btn btn-danger btnhapus">Delete</a>
+                <a href="<?php echo base_url() ?>admin/bonus_detail/<?php echo $bonus['kode_bonus']  ?>" class="btn btn-info">View</a>
               </div>
             </td>
           </tr>
+        <?php endforeach ?>
       </tbody>
       <tfoot>
         <td></td>
-        <td></td>
         <td>Nama</td>
-        <td>Tgl Pembelian</td>
         <td></td>
         <td></td>
         <td></td>

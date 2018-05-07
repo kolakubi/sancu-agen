@@ -232,10 +232,55 @@
 
     public function bonus(){
 
-      $this->load->view('agen/header');
-      $this->load->view('agen/bonus');
-      $this->load->view('agen/footer');
+      $this->form_validation->set_rules(
+        array(
+          array(
+            'field' => 'tanggaldari',
+            'label' => 'Tanggal Dari',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'tanggalsampai',
+            'label' => 'Tanggal Sampai',
+            'rules' => 'required'
+          )
+        )
+      );
 
+      if(!$this->form_validation->run()){
+
+        $this->load->view('agen/header');
+        $this->load->view('agen/bonus');
+        $this->load->view('agen/footer');
+      }
+      else{
+        // ambil session username
+        $kodeAgen = $_SESSION['username'];
+        $tanggalDari = $this->input->post('tanggaldari');
+        $tanggalSampai = $this->input->post('tanggalsampai');
+
+        $dataAmbil = array(
+          'kodeagen' => $kodeAgen,
+          'tanggaldari' => $tanggalDari,
+          'tanggalsampai' => $tanggalSampai
+        );
+
+        //ambil bonus
+        $dataBonus = $this->agen_model->getBonus($dataAmbil);
+        // cek apakah data kosong
+        if(!empty($dataBonus)){
+          $data['databonus'] = $dataBonus;
+
+          $this->load->view('agen/header');
+          $this->load->view('agen/bonushasil', $data);
+          $this->load->view('agen/footer');
+        }
+        else{
+          $this->load->view('agen/header');
+          $this->load->view('agen/datakosong');
+          $this->load->view('agen/footer');
+        }
+      }
     }
 
   }

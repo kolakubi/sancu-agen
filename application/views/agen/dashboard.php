@@ -35,7 +35,7 @@
       </a>
     </div>
   </div>
-  <hr>
+  <br>
   <!-- baris 2 -->
   <div class="row">
     <!-- bonus -->

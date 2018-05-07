@@ -625,8 +625,25 @@
     //////////////// B O N U S ////////////////////
 
     public function bonus(){
+
+      // ambil data bonus
+      $dataBonus = $this->admin_model->getBonus();
+      $data['dataBonus'] = $dataBonus;
+
       $this->load->view('admin/header');
-      $this->load->view('admin/bonus');
+      $this->load->view('admin/bonus', $data);
+      $this->load->view('admin/footer');
+    }
+
+    public function bonus_detail($kode_bonus){
+
+      // ambil data bonus_setail berdasarkan $kode_bonus
+
+      $dataBonusDetail = $this->admin_model->getBonusDetail($kode_bonus);
+      $data['databonusdetail'] = $dataBonusDetail;
+
+      $this->load->view('admin/header');
+      $this->load->view('admin/bonusdetail', $data);
       $this->load->view('admin/footer');
     }
 

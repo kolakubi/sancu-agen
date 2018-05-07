@@ -114,18 +114,23 @@
     }
 
     public function insertPembelian($dataPembelian, $dataPembelianDetail, $dataPembayaran, $dataSaldo){
-      // insert data pembelian
+      // I N S E R T   P E M B E L I A N
       // insert ke table pembelian
       $this->db->insert('pembelian', $dataPembelian);
-      
+      /////////////////////////////////////////////////////
+
+      // I N S E R T   P E M B A Y A R A N
       // ambil id pembelian yg baru saja diinput
       $id_pembelian_baru_diinput = $this->db->insert_id();
       // insert data pembayaran dengan foreign key id pembelian
       $dataPembayaran['kode_pembelian'] = $id_pembelian_baru_diinput;
       $dataPembelianDetail['kode_pembelian'] = $id_pembelian_baru_diinput;
       $this->db->insert('pembayaran', $dataPembayaran);
-      
-      // insert ke table pembelian_detail
+      // ambil id Pembayaran baru diinput
+      $id_pembayaran_baru_diinput = $this->db->insert_id();
+      //////////////////////////////////////////////////////
+
+      // I N S E R T   P E M B E L I A N   D E T A I L
       // fungsi insert berdasarkan nama item
       // inisiai $this
       $that = $this;
@@ -154,24 +159,27 @@
       if($dataPembelianDetail['xtreme'] != 0){
         insert_item_detail_pembelian('xtreme', $dataPembelianDetail, $that);
       }
-      
-      ////////////////////////////////
-      /////// UPDATE SALDO ///////////
+      ///////////////////////////////////////////////////////
+
+      // I N S E R T   S A L D O
       // ambil data paling akhir saldo
       $this->db->where('kode_agen', $dataSaldo['kode_agen']);
       $this->db->order_by('kode_saldo', 'DESC');
       $this->db->limit(2);
       $saldoAkhir = $this->db->get('saldo')->result_array();
-      $saldoAkhir = $saldoAkhir[0]['nominal'];
-      
+      if(!empty($saldoAkhir)){
+        $saldoAkhir = $saldoAkhir[0]['nominal'];
+      }
+      else{
+        $saldoAkhir = 0;
+      }
       $dataSaldo['nominal'] = $saldoAkhir + $dataSaldo['debet'];
       // insert saldo
       $this->db->insert('saldo', $dataSaldo);
+      //////////////////////////////////////////////////////
 
-      ////////////////////////////////
-      ////////////////////////////////
-      ////////// B O N U S ///////////
-
+      // I N S E R T   B O N U S
+      // inisiasi variabel
       $bonus = 0;
       $ribuan = 1;
       $puluhanribu = 1;
@@ -187,7 +195,7 @@
       $dataBonus = $this->db->get()->row_array();
       // jika data ada
       if(!empty($dataBonus)){
-        $totalItem += $dataBonus['total_pembelian'];
+        $totalItem += $dataBonus['total_item'];
         $kode_bonus = $dataBonus['kode_bonus'];
         $ribuan = $dataBonus['ribuan'];
         $puluhanribu = $dataBonus['puluhan_ribu'];
@@ -211,7 +219,7 @@
           if(($selisihpuluhanribu/10000) >= 1){
             $selisihpuluhanribu = floor($selisihpuluhanribu/10000);
             $puluhanribu += (10000*$selisihpuluhanribu);
-            $bonus += (800000*$selisihpuluhanribu);
+            $bonus += (500000*$selisihpuluhanribu);
           }
         }
 
@@ -225,17 +233,71 @@
           'jumlah_bonus' => ($totalbonus+$bonus),
           'ribuan' => $ribuan,
           'puluhan_ribu' => $puluhanribu,
-          'total_pembelian' => $totalItem
+          'total_item' => $totalItem
         ));
         $this->db->where('kode_agen', $dataPembelian['kode_agen']);
         $this->db->update('bonus');
         // ambil id pembelian yg baru saja diinput
         $this->db->insert('bonus_detail', array(
           'kode_bonus' => $kode_bonus,
-          'jumlah_pembelian' => $dataPembelian['total_item'],
+          'jumlah_item' => $dataPembelian['total_item'],
+          'history_item' => $totalItem,
           'tanggal_pembelian' => $dataPembelian['tanggal_pembelian'],
           'bonus' => $bonus
         ));
+
+        // jika ada bonus
+        // langsung masukin ke pembayaran
+        if($bonus > 0){
+
+          // U P D A T E   P E M B A Y A R A N
+          // ambil saldo terakhir dari table pembayaran
+          $tagihanSekarangArray = $this->db->get_where('pembayaran', array('kode_pembayaran' => $id_pembayaran_baru_diinput))->row_array();
+          //$tagihanSekarang = $tagihanSekarangArray['jumlah_pembelian'];
+          $sisaTagihanSekarang = $tagihanSekarangArray['sisa_tagihan'];
+          $sisaTagihanKurangBonus = $sisaTagihanSekarang - $bonus;
+
+          // update pembayaran
+          $this->db->set('sisa_tagihan', $sisaTagihanKurangBonus);
+          $this->db->where('kode_pembayaran', $id_pembayaran_baru_diinput);
+          $this->db->update('pembayaran');
+          //////////////////////////////////////////////////
+
+          // I N S E R T   P E M B A Y A R A N   D E T A I L
+          $dataBonusPembayaranDetail = array(
+            'kode_pembayaran' => $id_pembayaran_baru_diinput,
+            'tanggal_pembayaran' => $dataPembelian['tanggal_pembelian'],
+            'tagihan_sebelumnya' => $sisaTagihanSekarang,
+            'nominal_pembayaran' => $bonus,
+            'sisa_tagihan' => $sisaTagihanKurangBonus,
+            'keterangan' => 'bonus pembelian '.$dataPembelian['tanggal_pembelian']
+          );
+
+          $this->db->insert('pembayaran_detail', $dataBonusPembayaranDetail);
+          //////////////////////////////////////////////////
+
+          // I N S E R T   S A L D O
+          // ambil data paling akhir saldo
+          $this->db->where('kode_agen', $dataSaldo['kode_agen']);
+          $this->db->order_by('kode_saldo', 'DESC');
+          $this->db->limit(2);
+          $saldoAkhir = $this->db->get('saldo')->result_array();
+          $saldoAkhir = $saldoAkhir[0]['nominal'];
+          // kurangin saldo akhir dengan bonus
+          $saldoBaru = $saldoAkhir-$bonus;
+          // buat array input saldo
+          $dataSaldoBonus = array(
+            'kode_agen' => $dataPembelian['kode_agen'],
+            'tgl_perubahan' => $dataPembelian['tanggal_pembelian'],
+            'debet' => 0,
+            'kredit' => $bonus,
+            'nominal' => $saldoBaru,
+            'keterangan' => 'bonus pembelian '.$dataPembelian['tanggal_pembelian']
+          );
+          // insert saldo
+          $this->db->insert('saldo', $dataSaldoBonus);
+          //////////////////////////////////////////////////
+        }
 
         // $hasilPerhitungan = array(
         //   'Total Item' => $totalItem,
@@ -245,9 +307,7 @@
         //   'Bonus' => $bonus,
         //   'Ket' => 'data Ada'
         // );
-
         return true;
-
       }
 
       // jika data kosong
@@ -263,8 +323,8 @@
             $bonus += (300000*$selisihribuan);
           }
         }
-        
-          
+
+
         // jika pembelian lbh besar dr puluhan ribu
         if(($totalItem/$puluhanribu) >= 1){
           // stack kelipatan puluhan ribu
@@ -272,10 +332,10 @@
           if(($selisihpuluhanribu/10000) >= 1){
             $selisihpuluhanribu = floor($selisihpuluhanribu/10000);
             $puluhanribu += (10000*$selisihpuluhanribu);
-            $bonus += (800000*$selisihpuluhanribu);
+            $bonus += (500000*$selisihpuluhanribu);
           }
         }
-        
+
         // pembelian langsung 1000
         if($dataPembelian['total_item'] >= 1000){
           $bonus += 50000;
@@ -287,16 +347,70 @@
           'jumlah_bonus' => $totalbonus+$bonus,
           'ribuan' => $ribuan,
           'puluhan_ribu' => $puluhanribu,
-          'total_pembelian' => $totalItem
+          'total_item' => $totalItem
         ));
         // ambil id pembelian yg baru saja diinput
         $kode_bonus_baru_diinput = $this->db->insert_id();
         $this->db->insert('bonus_detail', array(
           'kode_bonus' => $kode_bonus_baru_diinput,
-          'jumlah_pembelian' => $dataPembelian['total_item'],
+          'jumlah_item' => $dataPembelian['total_item'],
+          'history_item' => $dataPembelian['total_item'],
           'tanggal_pembelian' => $dataPembelian['tanggal_pembelian'],
           'bonus' => $bonus
         ));
+
+        // jika ada bonus
+        // langsung masukin ke pembayaran
+        if($bonus > 0){
+
+          // U P D A T E   P E M B A Y A R A N
+          // ambil saldo terakhir dari table pembayaran
+          $tagihanSekarangArray = $this->db->get_where('pembayaran', array('kode_pembayaran' => $id_pembayaran_baru_diinput))->row_array();
+          //$tagihanSekarang = $tagihanSekarangArray['jumlah_pembelian'];
+          $sisaTagihanSekarang = $tagihanSekarangArray['sisa_tagihan'];
+          $sisaTagihanKurangBonus = $sisaTagihanSekarang - $bonus;
+
+          // update pembayaran
+          $this->db->set('sisa_tagihan', $sisaTagihanKurangBonus);
+          $this->db->where('kode_pembayaran', $id_pembayaran_baru_diinput);
+          $this->db->update('pembayaran');
+          //////////////////////////////////////////////////
+
+          // I N S E R T   P E M B A Y A R A N   D E T A I L
+          $dataBonusPembayaranDetail = array(
+            'kode_pembayaran' => $id_pembayaran_baru_diinput,
+            'tanggal_pembayaran' => $dataPembelian['tanggal_pembelian'],
+            'tagihan_sebelumnya' => $sisaTagihanSekarang,
+            'nominal_pembayaran' => $bonus,
+            'sisa_tagihan' => $sisaTagihanKurangBonus,
+            'keterangan' => 'bonus pembelian '.$dataPembelian['tanggal_pembelian']
+          );
+
+          $this->db->insert('pembayaran_detail', $dataBonusPembayaranDetail);
+          //////////////////////////////////////////////////
+
+          // I N S E R T   S A L D O
+          // ambil data paling akhir saldo
+          $this->db->where('kode_agen', $dataSaldo['kode_agen']);
+          $this->db->order_by('kode_saldo', 'DESC');
+          $this->db->limit(2);
+          $saldoAkhir = $this->db->get('saldo')->result_array();
+          $saldoAkhir = $saldoAkhir[0]['nominal'];
+          // kurangin saldo akhir dengan bonus
+          $saldoBaru = $saldoAkhir-$bonus;
+          // buat array input saldo
+          $dataSaldoBonus = array(
+            'kode_agen' => $dataPembelian['kode_agen'],
+            'tgl_perubahan' => $dataPembelian['tanggal_pembelian'],
+            'debet' => 0,
+            'kredit' => $bonus,
+            'nominal' => $saldoBaru,
+            'keterangan' => 'bonus pembelian '.$dataPembelian['tanggal_pembelian']
+          );
+          // insert saldo
+          $this->db->insert('saldo', $dataSaldoBonus);
+          //////////////////////////////////////////////////
+        }
 
         // $hasilPerhitungan = array(
         //   'Total Item' => $totalItem,
@@ -308,7 +422,6 @@
         //   'Bonus' => $bonus,
         //   'Ket' => 'data Kosong'
         // );
-
         return true;
       }
 
@@ -414,16 +527,17 @@
     }
 
     public function insertPembayaranDetail($dataPembayaran, $dataSaldo){
-      // insert ke table pembayaran_detail
+
+      // I N S E R T   P E M B E L I A N   D E T A I L
       $this->db->insert('pembayaran_detail', $dataPembayaran);
       // update table pembayaran (sisa_tagihan)
       $tagihanBaru = array('sisa_tagihan' => $dataPembayaran['sisa_tagihan']);
       $this->db->set($tagihanBaru);
       $this->db->where('kode_pembayaran', $dataPembayaran['kode_pembayaran']);
       $this->db->update('pembayaran');
+      ////////////////////////////////////////////////
 
-      ////////////////////////////////
-      /////// UPDATE SALDO ///////////
+      // I N S E R T   S A L D O
       // ambil data paling akhir saldo
       $this->db->where('kode_agen', $dataSaldo['kode_agen']);
       $this->db->order_by('kode_saldo', 'DESC');
@@ -434,8 +548,32 @@
       $dataSaldo['nominal'] = $saldoAkhir - $dataSaldo['kredit'];
       // insert saldo
       $this->db->insert('saldo', $dataSaldo);
+      ///////////////////////////////////////////////
 
       return true;
+    }
+
+
+    //////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////
+    ///////////////////// B O N U S //////////////////////
+
+    public function getBonus(){
+      $this->db->select('*');
+      $this->db->from('bonus');
+      $this->db->join('agen', 'bonus.kode_agen = agen.kode_agen');
+      $data = $this->db->get()->result_array();
+
+      return $data;
+    }
+
+    public function getBonusDetail($kode_bonus){
+      $this->db->select('*');
+      $this->db->from('bonus_detail');
+      $this->db->where('kode_bonus', $kode_bonus);
+      $data = $this->db->get()->result_array();
+
+      return $data;
     }
 
   }
