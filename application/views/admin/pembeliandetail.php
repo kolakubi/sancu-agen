@@ -19,9 +19,9 @@
     <?php endforeach; ?>
   </tbody>
 </table>
-<h3 class="text-center text-info">Total Item: <?php echo $datapembelian[0]['total_item'] ?></h3>
-<h3 class="text-center text-info">Total Pembelian: <?php echo 'Rp '.number_format($datapembelian[0]['total_pembelian'], 0, ',', '.')?></h3>
+<h4 class="text-center text-success">Total Item: <?php echo $datapembelian[0]['total_item'] ?></h4>
+<h4 class="text-center text-success">Total Pembelian: <?php echo 'Rp '.number_format($datapembelian[0]['total_pembelian'], 0, ',', '.')?></h4>
 <br>
 <p class="text-center">
-  <a href="<?php echo base_url() ?>admin/pembelian" class="btn btn-info btn-lg">Kembali</a>
+  <a href="<?php echo base_url() ?>admin/pembelian" class="btn btn-danger btn-lg">Kembali</a>
 </p>

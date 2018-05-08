@@ -1,3 +1,41 @@
+<?php
+
+  $itemSancu = 0;
+  $hargaSancu = 0;
+  $itemBoncu = 0;
+  $hargaBoncu = 0;
+  $itemPretty = 0;
+  $hargaPretty = 0;
+  $itemXtreme = 0;
+  $hargaXtreme = 0;
+
+  for($i=0; $i<count($pembelian); $i++){
+    // sancu
+    if($pembelian[$i]['kode_item'] == 'sancu'){
+      $itemSancu = $pembelian[$i]['jumlah_item'];
+      $hargaSancu = $pembelian[$i]['total_harga_item'];
+    }
+    // boncu
+    if($pembelian[$i]['kode_item'] == 'boncu'){
+      $itemBoncu = $pembelian[$i]['jumlah_item'];
+      $hargaBoncu = $pembelian[$i]['total_harga_item'];
+    }
+    // pretty
+    if($pembelian[$i]['kode_item'] == 'pretty'){
+      $itemPretty = $pembelian[$i]['jumlah_item'];
+      $hargaPretty = $pembelian[$i]['total_harga_item'];
+    }
+    // xtreme
+    if($pembelian[$i]['kode_item'] == 'xtreme'){
+      $itemXtreme = $pembelian[$i]['jumlah_item'];
+      $hargaXtreme = $pembelian[$i]['total_harga_item'];
+    }
+
+  }
+
+?>
+
+
 <h1 class="text-center">Pembelian Ubah</h1>
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-4">
@@ -26,22 +64,22 @@
         <div class="form-group">
           <!-- item -->
           <label>Sancu: </label>
-          <input type="number" name="sancu" value="<?php echo $pembelian[0]['jumlah_item'] ?>" class="form-control" id="pembeliansancu">
+          <input type="number" name="sancu" value="<?php echo $itemSancu ?>" class="form-control" id="pembeliansancu">
           <span class="text-danger"><?php echo form_error('sancu') ?></span>
           <!-- harga -->
           <label>Harga: </label>
-          <input type="number" name="sancuharga" value="<?php echo $pembelian[0]['total_harga_item'] ?>" class="form-control" id="pembelianhargasancu">
+          <input type="number" name="sancuharga" value="<?php echo $hargaSancu ?>" class="form-control" id="pembelianhargasancu">
           <span class="text-danger"><?php echo form_error('sancuharga') ?></span>
         </div>
         <!-- boncu -->
         <div class="form-group">
           <!-- item -->
           <label>Boncu: </label>
-          <input type="number" name="boncu" value="<?php echo $pembelian[1]['jumlah_item'] ?>" class="form-control" id="pembelianboncu">
+          <input type="number" name="boncu" value="<?php echo $itemBoncu ?>" class="form-control" id="pembelianboncu">
           <span class="text-danger"><?php echo form_error('boncu') ?></span>
           <!-- harga -->
           <label>Harga: </label>
-          <input type="number" name="boncuharga" value="<?php echo $pembelian[1]['total_harga_item'] ?>" class="form-control" id="pembelianhargaboncu">
+          <input type="number" name="boncuharga" value="<?php echo $hargaBoncu ?>" class="form-control" id="pembelianhargaboncu">
           <span class="text-danger"><?php echo form_error('boncuharga') ?></span>
         </div>
       </div>
@@ -50,22 +88,22 @@
         <div class="form-group">
           <!-- item -->
           <label>Pretty: </label>
-          <input type="number" name="pretty" value="<?php echo $pembelian[2]['jumlah_item'] ?>" class="form-control" id="pembelianpretty">
+          <input type="number" name="pretty" value="<?php echo $itemPretty ?>" class="form-control" id="pembelianpretty">
           <span class="text-danger"><?php echo form_error('pretty') ?></span>
           <!-- harga -->
           <label>Harga: </label>
-          <input type="number" name="prettyharga" value="<?php echo $pembelian[2]['total_harga_item'] ?>" class="form-control" id="pembelianhargapretty">
+          <input type="number" name="prettyharga" value="<?php echo $hargaPretty ?>" class="form-control" id="pembelianhargapretty">
           <span class="text-danger"><?php echo form_error('prettyharga') ?></span>
         </div>
         <!-- xtreme -->
         <div class="form-group">
           <!-- item -->
           <label>Xtreme: </label>
-          <input type="number" name="xtreme" value="<?php echo $pembelian[3]['jumlah_item'] ?>" class="form-control" id="pembelianxtreme">
+          <input type="number" name="xtreme" value="<?php echo $itemXtreme ?>" class="form-control" id="pembelianxtreme">
           <span class="text-danger"><?php echo form_error('xtreme') ?></span>
           <!-- harga -->
           <label>Harga: </label>
-          <input type="number" name="xtremeharga" value="<?php echo $pembelian[3]['total_harga_item'] ?>" class="form-control" id="pembelianhargaxtreme">
+          <input type="number" name="xtremeharga" value="<?php echo $hargaXtreme ?>" class="form-control" id="pembelianhargaxtreme">
           <span class="text-danger"><?php echo form_error('xtremeharga') ?></span>
         </div>
       </div>

@@ -30,8 +30,6 @@
         </tr>
       </thead>
     <?php foreach($datapembelian as $pembelian) : ?>
-    <!-- jika tanggal sudah berbeda -->
-    <!-- buat tabel baru -->
 
     <!-- ===================================== -->
     <!-- grand total -->
@@ -64,7 +62,8 @@
 
 
 
-
+    <!-- jika tanggal sudah berbeda -->
+    <!-- buat tabel baru -->
     <?php if($pembelian['tanggal_pembelian'] != $tanggal) : ?>
     <table class="table table-striped table-condensed table-hovered table-bordered">
       <thead>
@@ -147,3 +146,4 @@
     </p>
   </div>
 </div>
+<br><br>

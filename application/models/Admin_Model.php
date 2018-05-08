@@ -155,7 +155,7 @@
       if($dataPembelianDetail['pretty'] != 0){
         insert_item_detail_pembelian('pretty', $dataPembelianDetail, $that);
       }
-      // pembelian pretty
+      // pembelian xtreme
       if($dataPembelianDetail['xtreme'] != 0){
         insert_item_detail_pembelian('xtreme', $dataPembelianDetail, $that);
       }
@@ -552,7 +552,6 @@
 
       return true;
     }
-
 
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////

@@ -3,7 +3,8 @@
 	class Login extends CI_Controller{
 
 		public function index(){
-			$this->load->view('login');
+			$data['gagal'] = false;
+			$this->load->view('login', $data);
 		}
 
 		public function validasi(){
@@ -22,7 +23,8 @@
 			));
 
 			if(!$this->form_validation->run()){
-				$this->load->view('login');
+				$data['gagal'] = true;
+				$this->load->view('login', $data);
 			}
 			else{
 				// ambil value dr field
@@ -47,7 +49,8 @@
 				}
 				// jika tdk ada result
 				else{
-					$this->load->view('login'); // kembali ke login
+					$data['gagal'] = true;
+					$this->load->view('login', $data); // kembali ke login
 				}
 			}
 
