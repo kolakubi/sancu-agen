@@ -67,9 +67,9 @@
     let tanggal = new Date();
     let tahun = tanggal.getFullYear();
     let bulan = tanggal.getMonth()+1;
-    bulan = bulan < 9 ? '0'+bulan : bulan;
+    bulan = bulan <= 9 ? '0'+bulan : bulan;
     let hari = tanggal.getDate();
-    hari = hari < 9 ? '0'+hari : hari;
+    hari = hari <= 9 ? '0'+hari : hari;
     let time = tahun+'-'+bulan+'-'+hari;
     document.getElementById("datepembelian").defaultValue = time;
   }

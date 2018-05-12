@@ -22,8 +22,10 @@
 				)
 			));
 
+			$this->form_validation->set_message('required', '%s tidak boleh kosong');
+
 			if(!$this->form_validation->run()){
-				$data['gagal'] = true;
+				$data['gagal'] = false;
 				$this->load->view('login', $data);
 			}
 			else{

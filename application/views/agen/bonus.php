@@ -4,6 +4,16 @@
       <h3 class="text-center">Cari History Bonus</h3>
       <h5 class="text-center">berdasarkan tanggal pembelian</h5>
       <br>
+      <div class="well well-sm">
+        <p class="text text-info">Ketentuan Bonus</p>
+        <ul class="list-group">
+          <li class="list-group-item">Bonus diberikan hanya untuk pembelian Sancu dan Boncu</li>
+          <li class="list-group-item">Pembelian kelipatan 1.000(seribu) mendapatkan Rp.300.000</li>
+          <li class="list-group-item">Pembelian langsung 1.000(seribu) item mendapatakan tambahan Rp.50.000</li>
+          <li class="list-group-item">Pembelian kelipatan 10.000(sepuluh ribu) mendapatkan Rp.1.000.000</li>
+        </ul>
+        <p class="text text-info"></p>
+      </div>
 
       <!-- tanggal -->
       <div class="form-group">

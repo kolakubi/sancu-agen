@@ -67,6 +67,8 @@
         )
       );
 
+      $this->form_validation->set_message('required', 'mohon lengkapi %s');
+
       if(!$this->form_validation->run()){
 
         $this->load->view('agen/header');
@@ -129,6 +131,8 @@
         )
       );
 
+      $this->form_validation->set_message('required', 'mohon lengkapi %s');
+
       if(!$this->form_validation->run()){
 
         $this->load->view('agen/header');
@@ -185,6 +189,8 @@
           )
         )
       );
+
+      $this->form_validation->set_message('required', 'mohon lengkapi %s');
 
       if(!$this->form_validation->run()){
 
@@ -246,6 +252,8 @@
           )
         )
       );
+
+      $this->form_validation->set_message('required', 'mohon lengkapi %s');
 
       if(!$this->form_validation->run()){
 

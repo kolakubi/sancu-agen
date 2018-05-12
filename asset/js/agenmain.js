@@ -5,11 +5,14 @@
 
   // footer tetap di bawah
   function fixedBottomFooter(){
+    let footer = $('#footer');
     let docHeight = $(window).height();
-    let footerHeight = $('#footer').height();
-    let footerTop = $('#footer').position().top + footerHeight;
-    if (footerTop < docHeight)
-        $('#footer').css('margin-top', 10+ (docHeight - footerTop) + 'px');
+    let footerHeight = footer.height();
+    let footerTop = footer.position().top + footerHeight;
+    if (footerTop < docHeight){
+      footer.css('margin-top', 10+(docHeight - footerTop) + 'px');
+    }
+    footer.css({'margin-bottom': 0});
   }
 
   // fungsi checkbox

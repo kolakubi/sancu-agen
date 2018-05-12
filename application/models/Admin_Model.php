@@ -183,7 +183,7 @@
       $bonus = 0;
       $ribuan = 1;
       $puluhanribu = 1;
-      $totalItem = $dataPembelian['total_item'];
+      $totalItem = ($dataPembelianDetail['sancu']+$dataPembelianDetail['boncu']);
       $selisihribuan = 0;
       $selisihpuluhanribu = 0;
       $totalbonus = 0;
@@ -219,12 +219,12 @@
           if(($selisihpuluhanribu/10000) >= 1){
             $selisihpuluhanribu = floor($selisihpuluhanribu/10000);
             $puluhanribu += (10000*$selisihpuluhanribu);
-            $bonus += (500000*$selisihpuluhanribu);
+            $bonus += (700000*$selisihpuluhanribu);
           }
         }
 
         // pembelian langsung 1000
-        if($dataPembelian['total_item'] >= 1000){
+        if(($dataPembelianDetail['sancu']+$dataPembelianDetail['boncu']) >= 1000){
           $bonus += 50000;
         }
 
@@ -240,7 +240,7 @@
         // ambil id pembelian yg baru saja diinput
         $this->db->insert('bonus_detail', array(
           'kode_bonus' => $kode_bonus,
-          'jumlah_item' => $dataPembelian['total_item'],
+          'jumlah_item' => ($dataPembelianDetail['sancu']+$dataPembelianDetail['boncu']),
           'history_item' => $totalItem,
           'tanggal_pembelian' => $dataPembelian['tanggal_pembelian'],
           'bonus' => $bonus
@@ -337,7 +337,7 @@
         }
 
         // pembelian langsung 1000
-        if($dataPembelian['total_item'] >= 1000){
+        if(($dataPembelianDetail['sancu']+$dataPembelianDetail['boncu']) >= 1000){
           $bonus += 50000;
         }
 
@@ -353,8 +353,8 @@
         $kode_bonus_baru_diinput = $this->db->insert_id();
         $this->db->insert('bonus_detail', array(
           'kode_bonus' => $kode_bonus_baru_diinput,
-          'jumlah_item' => $dataPembelian['total_item'],
-          'history_item' => $dataPembelian['total_item'],
+          'jumlah_item' => ($dataPembelianDetail['sancu']+$dataPembelianDetail['boncu']),
+          'history_item' => ($dataPembelianDetail['sancu']+$dataPembelianDetail['boncu']),
           'tanggal_pembelian' => $dataPembelian['tanggal_pembelian'],
           'bonus' => $bonus
         ));
