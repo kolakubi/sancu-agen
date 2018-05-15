@@ -5,6 +5,18 @@
     <?php echo form_open('admin/pembeliantambah') ?>
       <span class="text-danger text-center"><?php echo validation_errors(); ?></span>
       <div class="form-group">
+        <label>Nama Agen:</label>
+        <div class="input-group">
+          <input type="text" value="" class="form-control" name="kodeagen" id="ajaxNamaAgen">
+          <span class="input-group-addon" style="cursor: pointer;" id="btnajaxNamaAgen"><i class="glyphicon glyphicon-search"></i></span>
+        </div>
+        <div class="list-group" id="ulajaxNamaAgen">
+          <!-- <li class="list-group-item"></li> -->
+        </div>
+        <span class="text-danger"><?php echo form_error('kodeagen') ?></span>
+      </div>
+
+      <!-- <div class="form-group">
         <label>Nama Agen: </label>
         <select type="text" name="kodeagen" class="form-control">
           <?php foreach ($agen as $detailagen) : ?>
@@ -14,7 +26,7 @@
           <?php endforeach ?>
         </select>
         <span class="text-danger"><?php echo form_error('kodeagen') ?></span>
-      </div>
+      </div> -->
       <!-- ============================================ -->
       <!-- date -->
       <div class="form-group">

@@ -22,9 +22,18 @@
         <td><?php echo $agenDetail['nama']?></td>
         <td><?php echo $agenDetail['kota']?></td>
         <td>
-          <a href="<?php echo base_url() ?>admin/agendetail/<?php echo $agenDetail['kode_agen'] ?>" class="btn btn-info">View</a>
-          <a href="<?php echo base_url() ?>admin/agenubah/<?php echo $agenDetail['kode_agen'] ?>" class="btn btn-success">Edit</a>
-          <a href="<?php echo base_url() ?>admin/agenhapus/<?php echo $agenDetail['kode_agen'] ?>" class="btn btn-danger btnhapus">Delete</a>
+          <a href="<?php echo base_url() ?>admin/agendetail/<?php echo $agenDetail['kode_agen'] ?>" class="btn btn-info">
+            lihat
+            <span class="glyphicon glyphicon-eye-open"></span>
+          </a>
+          <a href="<?php echo base_url() ?>admin/agenubah/<?php echo $agenDetail['kode_agen'] ?>" class="btn btn-success">
+            ubah
+            <span class="glyphicon glyphicon-edit"></span>
+          </a>
+          <a href="<?php echo base_url() ?>admin/agenhapus/<?php echo $agenDetail['kode_agen'] ?>" class="btn btn-danger btnhapus">
+            hapus
+            <span class="glyphicon glyphicon-trash"></span>
+          </a>
         </td>
       </tr>
     <?php endforeach ?>

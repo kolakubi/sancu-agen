@@ -29,9 +29,18 @@
         <!-- <td><?php echo 'Rp'.number_format($pembelianDetail['sisa_tagihan'], 0, ',', '.')?></td> -->
         <td>
           <div class="btn-group">
-            <a href="<?php echo base_url() ?>admin/pembeliandetail/<?php echo $pembelianDetail['kode_pembelian'] ?>" class="btn btn-info">View</a>
-            <a href="<?php echo base_url() ?>admin/pembelianubah/<?php echo $pembelianDetail['kode_pembelian'] ?>" class="btn btn-success">Edit</a>
-            <a href="<?php echo base_url() ?>admin/pembelianhapus/<?php echo $pembelianDetail['kode_pembelian'] ?>" class="btn btn-danger btnhapus">Delete</a>
+            <a href="<?php echo base_url() ?>admin/pembeliandetail/<?php echo $pembelianDetail['kode_pembelian'] ?>" class="btn btn-info">
+              lihat
+              <span class="glyphicon glyphicon-eye-open"></span>
+            </a>
+            <a href="<?php echo base_url() ?>admin/pembelianubah/<?php echo $pembelianDetail['kode_pembelian'] ?>" class="btn btn-success">
+              ubah
+              <span class="glyphicon glyphicon-edit"></span>
+            </a>
+            <a href="<?php echo base_url() ?>admin/pembelianhapus/<?php echo $pembelianDetail['kode_pembelian'] ?>" class="btn btn-danger btnhapus">
+              hapus
+              <span class="glyphicon glyphicon-trash"></span>
+            </a>
           </div>
         </td>
       </tr>

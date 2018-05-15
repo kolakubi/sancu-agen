@@ -37,6 +37,16 @@
             <li><a href="<?php echo base_url() ?>admin/pembelian">Pembelian</a></li>
             <li><a href="<?php echo base_url() ?>admin/pembayaran">Pembayaran</a></li>
             <li><a href="<?php echo base_url() ?>admin/bonus">Bonus</a></li>
+            <!-- dropdown -->
+            <li class="dropdown">
+              <a class="btn dropdown-toggle" data-toggle="dropdown">Laporan
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="<?php echo base_url() ?>admin/laporanpembelian">Pembelian</a></li>
+              </ul>
+            </li>
+            <!-- end of dropdown -->
           </ul>
         </div>
 

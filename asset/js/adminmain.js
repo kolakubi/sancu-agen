@@ -161,6 +161,77 @@
 
   }
 
+  function ilanginNol(){
+    // target input type number di form
+    let inputForm = $('.form-group input[type=number]');
+
+      inputForm.on('focus', function(){
+        let that = $(this);
+        // jika tidak ada attribut readonly
+        if(!$(this).attr('readonly')){
+          // jika value nya nol
+          if($(this).val() == 0){
+            $(this).val('');
+          }
+        }
+      });
+
+      inputForm.on('blur', function(){
+        let val = $(this).val();
+        if(val == null || val == ''){
+          $(this).val(0);
+        }
+      })
+  }
+
+  function ajaxGetAgen(){
+    let agen = $('#ajaxNamaAgen');
+    let btnCari = $('#btnajaxNamaAgen');
+
+    btnCari.on('click', function(){
+      let val = agen.val();
+      let ul = $('#ulajaxNamaAgen');
+      ul.children().remove();
+
+      $.ajax({
+        method: 'POST',
+        dataType: 'text',
+        url: "getAgenJson",
+        data: {
+          nama: val
+        },
+        success: function(data){
+          data = JSON.parse(data);
+          for(let i = 0; i<data.length; i++){
+            ul.append("<a href='#' class='list-group-item list-group-item-action pilih-agen' data-kode-agen="+data[i]['kode_agen']+">"+data[i]['nama']+"</a>");
+          }
+          console.log(data);
+
+          // regis event klik ke list yg baru dibuat
+          let listAgen = $('.pilih-agen');
+          listAgen.on('click', function(e){
+            e.preventDefault();
+
+            let nama = $(this).html();
+            let kodeAgen = $(this).attr('data-kode-agen');
+
+            agen.val(kodeAgen);
+
+            ul.children().remove();
+          }) // end of listAgen click
+          ///////////////////////////////////////////
+          
+        },
+        error: function(err1, err2, err3){
+          console.log(err1);
+          console.log(err2);
+          console.log(err3);
+        }
+      });
+    }) // end of btnCari click
+
+  }
+
   ////////////////////////////////////////
   ///////// Fungsi Pembayaran ////////////
 
@@ -195,6 +266,10 @@
   prettyTable('datatablepembayarandetail', 'Detail Pembayaran');
   // peringatan saat menghapus data
   peringatanSaatHapusData();
+  // ilangin nol saat focus
+  ilanginNol();
+  // ambil ketikan data agen
+  ajaxGetAgen();
 
 
   //////////////////////////////////////////////////

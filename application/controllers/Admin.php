@@ -236,6 +236,13 @@
     ///////////////////////////////////////////////
     //////////// P E M B E L I A N ////////////////
 
+    public function getAgenJson(){
+      $nama = $this->input->post('nama');
+
+      $result = $this->admin_model->getDataAgenJson($nama);
+      echo json_encode($result);
+    }
+
     public function pembelian(){
       // ambil semua data pembelian
       $dataPembelian = $this->admin_model->getDataPembelianJoin();
@@ -647,5 +654,56 @@
       $this->load->view('admin/footer');
     }
 
+    ///////////////////////////////////////////////
+    ///////////////////////////////////////////////
+    ////////////// L A P O R A N //////////////////
 
+    public function laporanpembelian(){
+
+      $this->form_validation->set_rules(
+        array(
+          array(
+            'field' => 'tanggaldari',
+            'label' => 'Tanggal Dari',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'tanggalsampai',
+            'label' => 'Tanggal Sampai',
+            'rules' => 'required'
+          ),
+        )
+      );
+
+      $this->form_validation->set_message('required', 'mohon lengkapi %s');
+
+      if(!$this->form_validation->run()){
+        $data['datapembelian'] = array();
+
+        $this->load->view('admin/header');
+        $this->load->view('admin/laporanpembelian', $data);
+        $this->load->view('admin/footer');
+      }
+      else{
+        $tanggaldari = $this->input->post('tanggaldari');
+        $tanggalsampai = $this->input->post('tanggalsampai');
+        $datalaporan = array(
+          'dari' => $tanggaldari,
+          'sampai' => $tanggalsampai
+        );
+
+        $result = $this->admin_model->getLaporanPembelian($datalaporan);
+
+        // echo '<pre>';
+        // print_r($result);
+        // echo '</pre>';
+
+        $data['datapembelian'] = $result;
+
+        $this->load->view('admin/header');
+        $this->load->view('admin/laporanpembelian', $data);
+        $this->load->view('admin/footer');
+      }
+
+    }
   }

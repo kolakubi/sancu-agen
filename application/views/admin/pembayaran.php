@@ -26,12 +26,20 @@
             <td><?php echo 'Rp'.number_format($pembayaran['sisa_tagihan'], 0, ',', '.') ?></td>
             <td>
               <div class="btn-group">
-                <a href="<?php echo base_url() ?>admin/pembayarandetail/<?php echo $pembayaran['kode_pembayaran'] ?>" class="btn btn-info">View</a>
+                <a href="<?php echo base_url() ?>admin/pembayarandetail/<?php echo $pembayaran['kode_pembayaran'] ?>" class="btn btn-info">
+                  lihat
+                  <span class="glyphicon glyphicon-eye-open"></span>
+                </a>
                 <?php if($pembayaran['sisa_tagihan'] > 0) : ?>
-                  <a href="<?php echo base_url() ?>admin/pembayarandetailtambah/<?php echo $pembayaran['kode_pembayaran'] ?>" class="btn btn-success">Bayar</a>
+                  <a href="<?php echo base_url() ?>admin/pembayarandetailtambah/<?php echo $pembayaran['kode_pembayaran'] ?>" class="btn btn-success">
+                    Bayar
+                    <span class="glyphicon glyphicon-edit"></span>
+                  </a>
                 <?php endif ?>
-
-                <a href="#" class="btn btn-danger btnhapus">Delete</a>
+                <a href="#" class="btn btn-danger btnhapus">
+                  Hapus
+                  <span class="glyphicon glyphicon-trash"></span>
+                </a>
               </div>
             </td>
           </tr>

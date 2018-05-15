@@ -110,7 +110,15 @@
       $this->db->join('agen', 'pembelian.kode_agen = agen.kode_agen', 'inner');
       $this->db->where('pembelian.kode_pembelian', $kodepembelian);
       $result = $this->db->get()->result_array();
-      return$result;
+      return $result;
+    }
+
+    public function getDataAgenJson($nama){
+      $this->db->select('kode_agen, nama');
+      $this->db->from('agen');
+      $this->db->like('nama', $nama);
+      $result = $this->db->get()->result_array();
+      return $result;
     }
 
     public function insertPembelian($dataPembelian, $dataPembelianDetail, $dataPembayaran, $dataSaldo){
@@ -573,6 +581,25 @@
       $data = $this->db->get()->result_array();
 
       return $data;
+    }
+
+    ///////////////////////////////////////////////
+    ///////////////////////////////////////////////
+    ////////////// L A P O R A N //////////////////
+
+    public function getLaporanPembelian($datalaporan){
+
+      $this->db->select('*');
+      $this->db->from('pembelian');
+      $this->db->join('pembelian_detail', 'pembelian_detail.kode_pembelian = pembelian.kode_pembelian');
+      $this->db->join('agen', 'pembelian.kode_agen = agen.kode_agen');
+      $this->db->where('tanggal_pembelian >=', $datalaporan['dari']);
+      $this->db->where('tanggal_pembelian <=', $datalaporan['sampai']);
+      $this->db->order_by('pembelian.kode_agen');
+      $result = $this->db->get()->result_array();
+
+      return $result;
+
     }
 
   }

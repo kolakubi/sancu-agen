@@ -8,8 +8,8 @@
   <div class="col-sm-3 col-xs-3 text-center">
     <a href="<?php base_url() ?>admin/agen">
       <img src="<?php base_url() ?>asset/image/user.png" alt="user" class="img-responsive" style="margin: 0 auto;">
-      <strong class="text-uppercase">Agen</strong>
       <br>
+      <strong>Agen</strong>
     </a>
   </div>
   <!-- transaksi -->
@@ -25,7 +25,6 @@
     <a href="<?php base_url() ?>admin/pembayaran">
       <img src="<?php base_url() ?>asset/image/pembayaran.png" alt="pembayaran" class="img-responsive" style="margin: 0 auto;">
       <br>
-      <!-- Saldo -->
       <strong>Pembayaran</strong>
     </a>
   </div>
@@ -38,5 +37,16 @@
     </a>
   </div>
 
+</div> <!-- end of row -->
+<hr>
+<div class="row">
+  <!-- profil -->
+  <div class="col-sm-3 col-xs-3 text-center">
+    <a href="<?php base_url() ?>admin/laporanpembelian">
+      <img src="<?php base_url() ?>asset/image/laporan.png" alt="user" class="img-responsive" style="margin: 0 auto;">
+      <br>
+      <strong>Laporan</strong>
+    </a>
+  </div>
 </div> <!-- end of row -->
 <br><br>
