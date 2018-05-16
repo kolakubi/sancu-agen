@@ -231,7 +231,7 @@
           }
         }
 
-        // pembelian langsung 1000
+        // pembelian langsung seribu
         if(($dataPembelianDetail['sancu']+$dataPembelianDetail['boncu']) >= 1000){
           $bonus += 50000;
         }
