@@ -5,7 +5,7 @@
 
       <div class="container-fluid">
         <p class="navbar-text" style="color: white;">Copyright Sancu Creative Indonesia @2018</p>
-        <p class="navbar-text text-right" style="color: white;">ver 1.1</p>
+        <p class="navbar-text text-right" style="color: white;">ver 1.2</p>
       </div>
 
     </nav>

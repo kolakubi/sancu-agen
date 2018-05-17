@@ -4,7 +4,7 @@
 
         <div class="container-fluid">
           <p class="navbar-text">Copyright Sancu Creative Indonesia @<?php echo date('Y') ?></p>
-          <p class="navbar-text">ver 1.1</p>
+          <p class="navbar-text">ver 1.2</p>
         </div>
 
       </nav>

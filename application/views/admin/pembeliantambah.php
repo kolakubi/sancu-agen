@@ -16,18 +16,6 @@
         <span class="text-danger"><?php echo form_error('kodeagen') ?></span>
       </div>
 
-      <!-- <div class="form-group">
-        <label>Nama Agen: </label>
-        <select type="text" name="kodeagen" class="form-control">
-          <?php foreach ($agen as $detailagen) : ?>
-          <option value="<?php echo $detailagen['kode_agen'] ?>">
-            <?php echo $detailagen['nama'] ?>
-          </option>
-          <?php endforeach ?>
-        </select>
-        <span class="text-danger"><?php echo form_error('kodeagen') ?></span>
-      </div> -->
-      <!-- ============================================ -->
       <!-- date -->
       <div class="form-group">
         <label>Tanggal Pembelian: </label>
@@ -87,6 +75,18 @@
         </div>
       </div>
       <!-- ======================================== -->
+      <!-- bonus -->
+      <div class="form-group">
+        <label>Bonus:</label>
+        <input type="number" name="bonus" value="0" class="form-control">
+        <span class="text-danger"><?php echo form_error('bonus') ?></span>
+      </div>
+      <!-- perincian -->
+      <div class="form-group">
+        <label>Perincian Tagihan:</label>
+        <textarea name="perincian" rows="8" cols="80" class="form-control"></textarea>
+        <span class="text-danger"><?php echo form_error('perincian') ?></span>
+      </div>
       <!-- jumlah item -->
       <div class="form-group">
         <label>Jumlah Item: </label>

@@ -278,6 +278,11 @@
             'rules' => 'required'
           ),
           array(
+            'field' => 'bonus',
+            'label' => 'Bonus',
+            'rules' => 'required'
+          ),
+          array(
             'field' => 'sancuharga',
             'label' => 'Harga Sancu',
             'rules' => 'required'
@@ -345,6 +350,11 @@
         $pembelianjumlah = $this->input->post('pembelianjumlah');
         $pembeliandibayar = $this->input->post('pembeliandibayar');
         $pembeliansisatagihan = $this->input->post('pembeliansisatagihan');
+        $perincian = $this->input->post('perincian');
+        if($perincian == null){
+          $perincian = 'tidak ada';
+        }
+        $bonus = $this->input->post('bonus');
 
         // data buat diinput ke pembelian
         $dataPembelian = array(
@@ -353,6 +363,7 @@
           'tanggal_pembelian' => $tanggal,
           'total_item' => $pembelianjumlahitem,
           'total_pembelian' => $pembelianjumlah,
+          'perincian' => $perincian
         );
 
         // data buat diinput ke pembelian detail
@@ -365,7 +376,7 @@
           'pretty' => $pretty,
           'total_harga_pretty' => $prettyharga,
           'xtreme' => $xtreme,
-          'total_harga_xtreme' => $xtremeharga,
+          'total_harga_xtreme' => $xtremeharga
         );
 
         // data buat diinput ke pembayaran
@@ -384,8 +395,16 @@
           'keterangan' => 'pembelian'
         );
 
+        $dataBonus = array(
+          'kode_agen' => $kodeagen,
+          'jumlah_bonus' => $bonus,
+          'ribuan' => 0,
+          'puluhan_ribu' => 0,
+          'total_item' => $sancu+$boncu
+        );
+
         // insert data ke database
-        $result = $this->admin_model->insertPembelian($dataPembelian, $dataPembelianDetail, $dataPembayaran, $dataSaldo);
+        $result = $this->admin_model->insertPembelian($dataPembelian, $dataPembelianDetail, $dataPembayaran, $dataSaldo, $dataBonus);
         if($result){
           // jika sukses redirect ke halaman pembelian
           redirect('admin/pembelian');
@@ -653,6 +672,77 @@
       $this->load->view('admin/bonusdetail', $data);
       $this->load->view('admin/footer');
     }
+
+    ///////////////////////////////////////////////
+    ///////////////////////////////////////////////
+    ///////////////// S A L D O ///////////////////
+
+
+    public function saldo(){
+      $this->form_validation->set_rules(
+        array(
+          array(
+            'field' => 'tanggaldari',
+            'label' => 'Tanggal Dari',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'tanggalsampai',
+            'label' => 'Tanggal Sampai',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'kodeagen',
+            'label' => 'Kode Agen',
+            'rules' => 'required'
+          )
+        )
+      );
+
+      $this->form_validation->set_message('required', 'mohon lengkapi %s');
+
+      if(!$this->form_validation->run()){
+        $data['datasaldo'] = array(
+          array(
+            'kode_saldo' => 0,
+            'kode_agen' => 0,
+            'tgl_perubahan' => '',
+            'debet' => 0,
+            'kredit' => 0,
+            'nominal' => 0,
+          ),
+        );
+
+        $this->load->view('admin/header');
+        $this->load->view('admin/saldo', $data);
+        $this->load->view('admin/footer');
+      }
+      else{
+        $tanggaldari = $this->input->post('tanggaldari');
+        $tanggalsampai = $this->input->post('tanggalsampai');
+        $kodeagen = $this->input->post('kodeagen');
+        $date = $tanggaldari;
+        $kemarin = date('Y-m-d',strtotime($date . "-1 days"));
+        $datasaldo = array(
+          'dari' => $tanggaldari,
+          'sampai' => $tanggalsampai,
+          'kodeagen' => $kodeagen
+        );
+
+        $result = $this->admin_model->getSaldo($datasaldo, $kemarin);
+        $data['datasaldo'] = $result;
+
+        $this->load->view('admin/header');
+        $this->load->view('admin/saldo', $data);
+        $this->load->view('admin/footer');
+
+      }
+
+
+
+
+    }
+
 
     ///////////////////////////////////////////////
     ///////////////////////////////////////////////

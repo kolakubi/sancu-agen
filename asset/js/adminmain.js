@@ -205,7 +205,6 @@
           for(let i = 0; i<data.length; i++){
             ul.append("<a href='#' class='list-group-item list-group-item-action pilih-agen' data-kode-agen="+data[i]['kode_agen']+">"+data[i]['nama']+"</a>");
           }
-          console.log(data);
 
           // regis event klik ke list yg baru dibuat
           let listAgen = $('.pilih-agen');
@@ -220,7 +219,7 @@
             ul.children().remove();
           }) // end of listAgen click
           ///////////////////////////////////////////
-          
+
         },
         error: function(err1, err2, err3){
           console.log(err1);

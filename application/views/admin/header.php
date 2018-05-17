@@ -36,7 +36,8 @@
             <li><a href="<?php echo base_url() ?>admin/agen">Agen</a></li>
             <li><a href="<?php echo base_url() ?>admin/pembelian">Pembelian</a></li>
             <li><a href="<?php echo base_url() ?>admin/pembayaran">Pembayaran</a></li>
-            <li><a href="<?php echo base_url() ?>admin/bonus">Bonus</a></li>
+            <li><a href="<?php echo base_url() ?>admin/saldo">Bonus</a></li>
+            <li><a href="<?php echo base_url() ?>admin/bonus">Saldo</a></li>
             <!-- dropdown -->
             <li class="dropdown">
               <a class="btn dropdown-toggle" data-toggle="dropdown">Laporan

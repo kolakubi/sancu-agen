@@ -40,7 +40,16 @@
 </div> <!-- end of row -->
 <hr>
 <div class="row">
-  <!-- profil -->
+  <!-- saldo -->
+  <div class="col-sm-3 col-xs-3 text-center">
+    <a href="<?php base_url() ?>admin/saldo">
+      <img src="<?php base_url() ?>asset/image/saldo.png" alt="user" class="img-responsive" style="margin: 0 auto;">
+      <br>
+      <strong>Saldo</strong>
+    </a>
+  </div>
+
+  <!-- laporan -->
   <div class="col-sm-3 col-xs-3 text-center">
     <a href="<?php base_url() ?>admin/laporanpembelian">
       <img src="<?php base_url() ?>asset/image/laporan.png" alt="user" class="img-responsive" style="margin: 0 auto;">
