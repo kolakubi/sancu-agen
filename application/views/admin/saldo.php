@@ -47,8 +47,8 @@
     <table class="table table-condensed table-hover table-bordered table-striped">
       <thead>
         <tr class="info">
-          <th style="text-align: center">Tgl</th>
-          <th style="text-align: center">Ket</th>
+          <th style="text-align: center">Tanggal</th>
+          <th style="text-align: center">Keterangan</th>
           <th style="text-align: center">Debet(Rp)</th>
           <th style="text-align: center">Kredit(Rp)</th>
           <th style="text-align: center">Saldo(Rp)</th>

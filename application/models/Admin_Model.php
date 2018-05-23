@@ -9,6 +9,15 @@
 
     /////////////////////////////////////////////////
     /////////////////////////////////////////////////
+    /////////////////// A D M I N ///////////////////
+    public function getDataAdmin($nik){
+      $result = $this->db->get_where('admin', array('nik' => $nik))->row_array();
+
+      return $result;
+    }
+
+    /////////////////////////////////////////////////
+    /////////////////////////////////////////////////
     //////////////// A G E N ////////////////////////
 
     public function getDataAgen($kodeagen=null){
@@ -147,7 +156,7 @@
           'kode_pembelian' => $dataPembelianDetail['kode_pembelian'],
           'kode_item' =>  $item,
           'jumlah_item' => $dataPembelianDetail[$item],
-          'total_harga_item' => $dataPembelianDetail['total_harga_'.$item]
+          'total_harga_item' => $dataPembelianDetail['total_harga_'.$item],
         );
         $that->db->insert('pembelian_detail', $dataBaru);
       }
@@ -226,7 +235,8 @@
           'jumlah_item' => ($dataPembelianDetail['sancu']+$dataPembelianDetail['boncu']),
           'history_item' => $totalItem,
           'tanggal_pembelian' => $dataPembelian['tanggal_pembelian'],
-          'bonus' => $bonus
+          'bonus' => $bonus,
+          'nik' => $_SESSION['username']
         ));
 
         // jika ada bonus
@@ -252,7 +262,8 @@
             'tagihan_sebelumnya' => $sisaTagihanSekarang,
             'nominal_pembayaran' => $bonus,
             'sisa_tagihan' => $sisaTagihanKurangBonus,
-            'keterangan' => 'bonus pembelian '.$dataPembelian['tanggal_pembelian']
+            'keterangan' => 'bonus pembelian '.$dataPembelian['tanggal_pembelian'],
+            'nik' => $_SESSION['username']
           );
 
           $this->db->insert('pembayaran_detail', $dataBonusPembayaranDetail);
@@ -302,7 +313,8 @@
           'jumlah_item' => ($dataPembelianDetail['sancu']+$dataPembelianDetail['boncu']),
           'history_item' => ($dataPembelianDetail['sancu']+$dataPembelianDetail['boncu']),
           'tanggal_pembelian' => $dataPembelian['tanggal_pembelian'],
-          'bonus' => $bonus
+          'bonus' => $bonus,
+          'nik' => $_SESSION['username']
         ));
 
         // jika ada bonus
@@ -329,7 +341,8 @@
             'tagihan_sebelumnya' => $sisaTagihanSekarang,
             'nominal_pembayaran' => $bonus,
             'sisa_tagihan' => $sisaTagihanKurangBonus,
-            'keterangan' => 'bonus pembelian '.$dataPembelian['tanggal_pembelian']
+            'keterangan' => 'bonus pembelian '.$dataPembelian['tanggal_pembelian'],
+            'nik' => $_SESSION['username']
           );
 
           $this->db->insert('pembayaran_detail', $dataBonusPembayaranDetail);

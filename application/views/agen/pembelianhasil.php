@@ -104,6 +104,10 @@
             <td>Jumlah harga</td>
             <td colspan="2" class="text-center"><?php echo 'Rp '.number_format($totalPembelian, 0, ',', '.') ?></td>
           </tr>
+          <tr class="info">
+            <td>Perincian</td>
+            <td colspan="2"><?php echo $pembelian['perincian'] ?></td>
+          </tr>
         <?php endif ?>
         <?php $tanggal = $pembelian['tanggal_pembelian'] ?>
         <?php endforeach ?>

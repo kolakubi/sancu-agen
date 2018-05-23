@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-4">
     <h1 class="text-center">Bayar</h1>
-    <?php echo form_open('admin/pembayarandetailtambah/'.$dataPembayaran['kode_pembayaran']) ?>
+    <?php echo form_open('admin/pembayarandetailtambah/'.$dataPembayaran['kode_pembayaran'].'', array('id' => 'formdisable')) ?>
       <!-- kode pembelian -->
       <div class="form-group">
         <label>Kode Pembayaran: </label>

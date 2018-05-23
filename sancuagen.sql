@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2018 at 05:15 AM
+-- Generation Time: May 18, 2018 at 08:22 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -37,6 +37,14 @@ CREATE TABLE `admin` (
   `kelamin` varchar(20) NOT NULL,
   `email` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`nik`, `nama`, `alamat`, `kota`, `telepon`, `kelamin`, `email`) VALUES
+('admin001', 'Nurul ', 'jalan asmin 1 gang sabar RT 03/ RW 26 susukan ciracas jakarta timur', 'Jakarta Timur', '085715050949', 'perempuan', 'nurulsancu@yahoo.com'),
+('admin002', 'Nisa', 'Jalan Ceger', 'Jakarta Timur', '08561000000', 'Perempuan', 'nisa@sancu.com');
 
 -- --------------------------------------------------------
 
@@ -81,13 +89,6 @@ CREATE TABLE `bonus` (
   `total_item` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `bonus`
---
-
-INSERT INTO `bonus` (`kode_bonus`, `kode_agen`, `jumlah_bonus`, `ribuan`, `puluhan_ribu`, `total_item`) VALUES
-(5, 'agen001', 650000, 2001, 1, 2650);
-
 -- --------------------------------------------------------
 
 --
@@ -101,18 +102,9 @@ CREATE TABLE `bonus_detail` (
   `jumlah_item` int(11) NOT NULL,
   `tanggal_pembelian` date NOT NULL,
   `kode_bonus_detail` int(11) NOT NULL,
-  `history_item` int(11) NOT NULL
+  `history_item` int(11) NOT NULL,
+  `nik` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `bonus_detail`
---
-
-INSERT INTO `bonus_detail` (`kode_bonus`, `status`, `bonus`, `jumlah_item`, `tanggal_pembelian`, `kode_bonus_detail`, `history_item`) VALUES
-(5, '', 0, 500, '2018-05-01', 51, 500),
-(5, '', 0, 350, '2018-05-03', 52, 850),
-(5, '', 350000, 1000, '2018-05-05', 53, 1850),
-(5, '', 300000, 800, '2018-05-08', 54, 2650);
 
 -- --------------------------------------------------------
 
@@ -132,7 +124,9 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`username`, `password`, `level`) VALUES
 ('admin001', 'password', 1),
-('agen001', 'password', 2);
+('admin002', 'password', 1),
+('agen001', 'password', 2),
+('agen004', 'password', 2);
 
 -- --------------------------------------------------------
 
@@ -148,16 +142,6 @@ CREATE TABLE `pembayaran` (
   `sisa_tagihan` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `pembayaran`
---
-
-INSERT INTO `pembayaran` (`kode_pembayaran`, `kode_pembelian`, `tanggal_pembelian`, `jumlah_pembelian`, `sisa_tagihan`) VALUES
-(74, 102, '2018-05-01', 900000, 0),
-(75, 103, '2018-05-03', 450000, 0),
-(76, 104, '2018-05-05', 1200000, 350000),
-(77, 105, '2018-05-08', 1200000, 900000);
-
 -- --------------------------------------------------------
 
 --
@@ -171,21 +155,9 @@ CREATE TABLE `pembayaran_detail` (
   `nominal_pembayaran` int(11) NOT NULL,
   `sisa_tagihan` int(11) NOT NULL,
   `kode_pembayaran_detail` int(11) NOT NULL,
-  `keterangan` text NOT NULL
+  `keterangan` text NOT NULL,
+  `nik` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pembayaran_detail`
---
-
-INSERT INTO `pembayaran_detail` (`kode_pembayaran`, `tanggal_pembayaran`, `tagihan_sebelumnya`, `nominal_pembayaran`, `sisa_tagihan`, `kode_pembayaran_detail`, `keterangan`) VALUES
-(74, '2018-05-01', 900000, 500000, 400000, 61, 'Bayar Pembelian tgl 1 Mei BCA'),
-(74, '2018-05-02', 400000, 300000, 100000, 62, 'Bayar Pembelian tgl 1 Mei Mandiri'),
-(74, '2018-05-04', 100000, 100000, 0, 63, 'Bayar Pembelian tgl 1 Mei BCA'),
-(76, '2018-05-05', 1200000, 350000, 850000, 64, 'bonus pembelian 2018-05-05'),
-(75, '2018-05-06', 450000, 450000, 0, 65, 'Bayar Pembelian tgl 4 Mei Mandiri'),
-(76, '2018-05-07', 850000, 500000, 350000, 66, 'Bayar Pembelian tgl 7 Mei BCA'),
-(77, '2018-05-08', 1200000, 300000, 900000, 67, 'bonus pembelian 2018-05-08');
 
 -- --------------------------------------------------------
 
@@ -198,18 +170,10 @@ CREATE TABLE `pembelian` (
   `kode_agen` varchar(10) NOT NULL,
   `tanggal_pembelian` date NOT NULL,
   `total_item` int(11) NOT NULL,
-  `total_pembelian` int(11) NOT NULL
+  `total_pembelian` int(11) NOT NULL,
+  `perincian` text NOT NULL,
+  `nik` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pembelian`
---
-
-INSERT INTO `pembelian` (`kode_pembelian`, `kode_agen`, `tanggal_pembelian`, `total_item`, `total_pembelian`) VALUES
-(102, 'agen001', '2018-05-01', 900, 900000),
-(103, 'agen001', '2018-05-03', 450, 450000),
-(104, 'agen001', '2018-05-05', 1200, 1200000),
-(105, 'agen001', '2018-05-08', 1200, 1200000);
 
 -- --------------------------------------------------------
 
@@ -224,28 +188,6 @@ CREATE TABLE `pembelian_detail` (
   `jumlah_item` int(11) NOT NULL,
   `total_harga_item` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pembelian_detail`
---
-
-INSERT INTO `pembelian_detail` (`kode_pembelian_detail`, `kode_pembelian`, `kode_item`, `jumlah_item`, `total_harga_item`) VALUES
-(155, 102, 'sancu', 200, 200000),
-(156, 102, 'boncu', 300, 300000),
-(157, 102, 'pretty', 200, 200000),
-(158, 102, 'xtreme', 200, 200000),
-(159, 103, 'sancu', 300, 300000),
-(160, 103, 'boncu', 50, 50000),
-(161, 103, 'pretty', 50, 50000),
-(162, 103, 'xtreme', 50, 50000),
-(163, 104, 'sancu', 500, 500000),
-(164, 104, 'boncu', 500, 500000),
-(165, 104, 'pretty', 100, 100000),
-(166, 104, 'xtreme', 100, 100000),
-(167, 105, 'sancu', 500, 500000),
-(168, 105, 'boncu', 300, 300000),
-(169, 105, 'pretty', 200, 200000),
-(170, 105, 'xtreme', 200, 200000);
 
 -- --------------------------------------------------------
 
@@ -285,23 +227,6 @@ CREATE TABLE `saldo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `saldo`
---
-
-INSERT INTO `saldo` (`kode_saldo`, `kode_agen`, `tgl_perubahan`, `debet`, `kredit`, `nominal`, `keterangan`) VALUES
-(107, 'agen001', '2018-05-01', 900000, 0, 900000, 'pembelian'),
-(108, 'agen001', '2018-05-01', 0, 500000, 400000, 'Bayar Pembelian tgl 1 Mei BCA'),
-(109, 'agen001', '2018-05-02', 0, 300000, 100000, 'Bayar Pembelian tgl 1 Mei Mandiri'),
-(110, 'agen001', '2018-05-03', 450000, 0, 550000, 'pembelian'),
-(111, 'agen001', '2018-05-04', 0, 100000, 450000, 'Bayar Pembelian tgl 1 Mei BCA'),
-(112, 'agen001', '2018-05-05', 1200000, 0, 1650000, 'pembelian'),
-(113, 'agen001', '2018-05-05', 0, 350000, 1300000, 'bonus pembelian 2018-05-05'),
-(114, 'agen001', '2018-05-06', 0, 450000, 850000, 'Bayar Pembelian tgl 4 Mei Mandiri'),
-(115, 'agen001', '2018-05-07', 0, 500000, 350000, 'Bayar Pembelian tgl 7 Mei BCA'),
-(116, 'agen001', '2018-05-08', 1200000, 0, 1550000, 'pembelian'),
-(117, 'agen001', '2018-05-08', 0, 300000, 1250000, 'bonus pembelian 2018-05-08');
-
---
 -- Indexes for dumped tables
 --
 
@@ -329,7 +254,8 @@ ALTER TABLE `bonus`
 --
 ALTER TABLE `bonus_detail`
   ADD PRIMARY KEY (`kode_bonus_detail`),
-  ADD KEY `kode_bonus` (`kode_bonus`);
+  ADD KEY `kode_bonus` (`kode_bonus`),
+  ADD KEY `nik` (`nik`);
 
 --
 -- Indexes for table `login`
@@ -349,7 +275,8 @@ ALTER TABLE `pembayaran`
 --
 ALTER TABLE `pembayaran_detail`
   ADD PRIMARY KEY (`kode_pembayaran_detail`),
-  ADD KEY `kode_pembayaran` (`kode_pembayaran`);
+  ADD KEY `kode_pembayaran` (`kode_pembayaran`),
+  ADD KEY `nik` (`nik`);
 
 --
 -- Indexes for table `pembelian`
@@ -357,7 +284,8 @@ ALTER TABLE `pembayaran_detail`
 ALTER TABLE `pembelian`
   ADD PRIMARY KEY (`kode_pembelian`),
   ADD KEY `kode_agen` (`kode_agen`),
-  ADD KEY `kode_pembelian` (`kode_pembelian`);
+  ADD KEY `kode_pembelian` (`kode_pembelian`),
+  ADD KEY `nik` (`nik`);
 
 --
 -- Indexes for table `pembelian_detail`
@@ -388,43 +316,43 @@ ALTER TABLE `saldo`
 -- AUTO_INCREMENT for table `bonus`
 --
 ALTER TABLE `bonus`
-  MODIFY `kode_bonus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `kode_bonus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `bonus_detail`
 --
 ALTER TABLE `bonus_detail`
-  MODIFY `kode_bonus_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `kode_bonus_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `pembayaran_detail`
 --
 ALTER TABLE `pembayaran_detail`
-  MODIFY `kode_pembayaran_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `kode_pembayaran_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `pembelian_detail`
 --
 ALTER TABLE `pembelian_detail`
-  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
+  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `saldo`
 --
 ALTER TABLE `saldo`
-  MODIFY `kode_saldo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+  MODIFY `kode_saldo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
@@ -440,7 +368,8 @@ ALTER TABLE `bonus`
 -- Constraints for table `bonus_detail`
 --
 ALTER TABLE `bonus_detail`
-  ADD CONSTRAINT `bonus_detail_ibfk_1` FOREIGN KEY (`kode_bonus`) REFERENCES `bonus` (`kode_bonus`);
+  ADD CONSTRAINT `bonus_detail_ibfk_1` FOREIGN KEY (`kode_bonus`) REFERENCES `bonus` (`kode_bonus`),
+  ADD CONSTRAINT `bonus_detail_ibfk_2` FOREIGN KEY (`nik`) REFERENCES `admin` (`nik`);
 
 --
 -- Constraints for table `pembayaran`
@@ -452,13 +381,15 @@ ALTER TABLE `pembayaran`
 -- Constraints for table `pembayaran_detail`
 --
 ALTER TABLE `pembayaran_detail`
-  ADD CONSTRAINT `pembayaran_detail_ibfk_1` FOREIGN KEY (`kode_pembayaran`) REFERENCES `pembayaran` (`kode_pembayaran`);
+  ADD CONSTRAINT `pembayaran_detail_ibfk_1` FOREIGN KEY (`kode_pembayaran`) REFERENCES `pembayaran` (`kode_pembayaran`),
+  ADD CONSTRAINT `pembayaran_detail_ibfk_2` FOREIGN KEY (`nik`) REFERENCES `admin` (`nik`);
 
 --
 -- Constraints for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  ADD CONSTRAINT `pembelian_ibfk_1` FOREIGN KEY (`kode_agen`) REFERENCES `agen` (`kode_agen`);
+  ADD CONSTRAINT `pembelian_ibfk_1` FOREIGN KEY (`kode_agen`) REFERENCES `agen` (`kode_agen`),
+  ADD CONSTRAINT `pembelian_ibfk_2` FOREIGN KEY (`nik`) REFERENCES `admin` (`nik`);
 
 --
 -- Constraints for table `pembelian_detail`

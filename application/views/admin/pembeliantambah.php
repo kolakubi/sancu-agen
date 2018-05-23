@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-4">
     <!-- form tambah agen -->
-    <?php echo form_open('admin/pembeliantambah') ?>
+    <?php echo form_open('admin/pembeliantambah', array('id' => 'formdisable')) ?>
       <span class="text-danger text-center"><?php echo validation_errors(); ?></span>
       <div class="form-group">
         <label>Nama Agen:</label>

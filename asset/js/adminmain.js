@@ -187,10 +187,12 @@
   function ajaxGetAgen(){
     let agen = $('#ajaxNamaAgen');
     let btnCari = $('#btnajaxNamaAgen');
+    let delay = null;
+    let body = $('body');
+    let ul = $('#ulajaxNamaAgen');
 
-    btnCari.on('click', function(){
+    function ajaxCall(agen, btnCari){
       let val = agen.val();
-      let ul = $('#ulajaxNamaAgen');
       ul.children().remove();
 
       $.ajax({
@@ -218,6 +220,7 @@
 
             ul.children().remove();
           }) // end of listAgen click
+
           ///////////////////////////////////////////
 
         },
@@ -226,10 +229,47 @@
           console.log(err2);
           console.log(err3);
         }
-      });
+      }); // end of ajax
+    }
+
+    // ketik event
+    agen.on('keyup', function(){
+
+      clearTimeout(delay);
+      delay = setTimeout(function(){
+
+        ajaxCall(agen, btnCari);
+
+      }, 500);
+    }) // end of ketik event
+
+    // click event
+    btnCari.on('click', function(){
+      ajaxCall(agen, btnCari);
     }) // end of btnCari click
 
-  }
+    body.on('click', function(e){
+      if(e.target.tagName == 'DIV'){
+        e.stopPropagation();
+        ul.children().remove();
+      }
+    })// end of ilangin list dgn klik body
+
+  } // end of ajaxGetAgen
+
+
+  // fungsi matiin enter
+  function disableEnterDiPembelian(){
+    let formPembelian = $('#formdisable');
+    let input = formPembelian.children('input');
+
+    formPembelian.on('keydown', function(event){
+      let key = event.keyCode || event.which;
+      if(key === 13){
+        event.preventDefault();
+      }
+    })
+  }// end of fungsi matiin enter
 
   ////////////////////////////////////////
   ///////// Fungsi Pembayaran ////////////
@@ -269,6 +309,8 @@
   ilanginNol();
   // ambil ketikan data agen
   ajaxGetAgen();
+  // matiin enter di form pembelian
+  disableEnterDiPembelian();
 
 
   //////////////////////////////////////////////////

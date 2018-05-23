@@ -1,4 +1,4 @@
-<h3 class="text text-center">Selamat Datang Admin</h3>
+<h3 class="text text-center">Selamat Datang <?php echo $admin['nama'] ?></h3>
 <!-- <h5 class="text text-center"><?php echo $nama; ?></h5> -->
 <br><br>
 

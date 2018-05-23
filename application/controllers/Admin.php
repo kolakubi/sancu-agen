@@ -18,8 +18,12 @@
     }
 
     public function index(){
+      $nik = $_SESSION['username'];
+      $dataAdmin = $this->admin_model->getDataAdmin($nik);
+      $data['admin'] = $dataAdmin;
+
       $this->load->view('admin/header');
-      $this->load->view('admin/dashboard');
+      $this->load->view('admin/dashboard', $data);
       $this->load->view('admin/footer');
     }
 
@@ -337,6 +341,7 @@
       }
       else{
         $kodeagen = $this->input->post('kodeagen');
+        $kodeadmin = $_SESSION['username'];
         $tanggal = $this->input->post('tanggal');
         $sancu = $this->input->post('sancu');
         $sancuharga = $this->input->post('sancuharga');
@@ -363,7 +368,8 @@
           'tanggal_pembelian' => $tanggal,
           'total_item' => $pembelianjumlahitem,
           'total_pembelian' => $pembelianjumlah,
-          'perincian' => $perincian
+          'perincian' => $perincian,
+          'nik' => $kodeadmin
         );
 
         // data buat diinput ke pembelian detail
@@ -572,7 +578,9 @@
     public function pembayaranDetail($kodePembayaran){
       // ambil data pembayarandetail dari database
       $result = $this->admin_model->getPembayaranDetail($kodePembayaran);
+      $nik = $_SESSION['username'];
       $data['dataPembayaran'] = $result;
+      $data['dataPembayaran']['nik'] = $nik;
       // load view
       $this->load->view('admin/header');
       $this->load->view('admin/pembayarandetail', $data);
@@ -620,13 +628,16 @@
         $sisatagihan = $this->input->post('sisatagihan');
         $keterangan = $this->input->post('keterangan');
 
+        $kodeagen = $_SESSION['username'];
+
         $dataPembayaran = array(
           'kode_pembayaran' => $kodepembayaran,
           'tanggal_pembayaran' => $tanggalpembayaran,
           'nominal_pembayaran' => $dibayar,
           'tagihan_sebelumnya' => $result['sisa_tagihan'],
           'sisa_tagihan' => $sisatagihan,
-          'keterangan' => $keterangan
+          'keterangan' => $keterangan,
+          'nik' => $kodeagen
         );
 
         // data buat di input ke saldo
