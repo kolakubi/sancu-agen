@@ -81,8 +81,9 @@
         $tanggalDari = $this->input->post('tanggaldari');
         $tanggalSampai = $this->input->post('tanggalsampai');
         $item = $this->input->post('item');
-        //$item = implode(',', $item);
         $defaultItem = array('sancu', 'boncu', 'pretty', 'xtreme');
+        $perincian = $item == $defaultItem ? true : false;
+        //$item = implode(',', $item);
 
         $dataAmbil = array(
           'kodeagen' => $kodeAgen,
@@ -98,6 +99,7 @@
           $data['datapembelian'] = $dataPembelian;
           $data['item'] = $item;
           $data['defaultitem'] = $defaultItem;
+          $data['perincian'] = $perincian;
 
           $this->load->view('agen/header');
           $this->load->view('agen/pembelianhasil', $data);

@@ -61,7 +61,6 @@
     <!-- ===================================== -->
 
 
-
     <!-- jika tanggal sudah berbeda -->
     <!-- buat tabel baru -->
     <?php if($pembelian['tanggal_pembelian'] != $tanggal) : ?>
@@ -94,7 +93,28 @@
         <!-- jika item adalah trakhir dalam array -->
         <!-- artinya sudah baris terakhir -->
         <!-- tampilkan jumlah -->
-        <?php if($pembelian['kode_item'] == end($item)) : ?>
+        <!-- jika tanggal bsk tidak kosong -->
+        <?php if(!empty($datapembelian[$i+1]['tanggal_pembelian'])) : ?>
+          <?php if($pembelian['kode_item'] == end($item) ||
+            $datapembelian[$i]['tanggal_pembelian'] != $datapembelian[$i+1]['tanggal_pembelian'] ) : ?>
+            <tr class="success">
+              <td>Jumlah produk</td>
+              <td colspan="2" class="text-center"><?php echo $totalItem ?></td>
+            </tr>
+            <!-- total semua harga -->
+            <tr class="warning">
+              <td>Jumlah harga</td>
+              <td colspan="2" class="text-center"><?php echo 'Rp '.number_format($totalPembelian, 0, ',', '.') ?></td>
+            </tr>
+            <?php if($perincian) : ?>
+            <tr class="info">
+              <td>Perincian</td>
+              <td colspan="2"><?php echo $pembelian['perincian'] ?></td>
+            </tr>
+            <?php endif ?>
+          <?php endif ?>
+        <!-- klo udh akhir dari array -->
+        <?php elseif(end($datapembelian)) : ?>
           <tr class="success">
             <td>Jumlah produk</td>
             <td colspan="2" class="text-center"><?php echo $totalItem ?></td>
@@ -104,12 +124,16 @@
             <td>Jumlah harga</td>
             <td colspan="2" class="text-center"><?php echo 'Rp '.number_format($totalPembelian, 0, ',', '.') ?></td>
           </tr>
+          <?php if($perincian) : ?>
           <tr class="info">
             <td>Perincian</td>
             <td colspan="2"><?php echo $pembelian['perincian'] ?></td>
           </tr>
         <?php endif ?>
+        <?php endif ?>
+
         <?php $tanggal = $pembelian['tanggal_pembelian'] ?>
+        <?php $i++ ?>
         <?php endforeach ?>
         <hr>
       </tbody>

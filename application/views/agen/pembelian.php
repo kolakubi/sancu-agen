@@ -37,12 +37,11 @@
           </div>
         </div>
         <!-- notif checkbox untuk tampilin jumlah tagihan -->
-        <!-- <h5 class="text-center text-info">*Klik semua item untuk menampilkan <br>jumlah yang dibayar dan <br>kekurangan pembayaran</h5> -->
+        <h5 class="text-center text-info">*Klik semua item untuk menampilkan <br>jumlah yang dibayar dan <br>kekurangan pembayaran</h5>
         <!-- ==================================== -->
       </div>
       <span class="text-danger"><?php echo form_error('item[]') ?></span>
       <!-- end of checkboxes -->
-
 
       <!-- tanggal -->
       <div class="form-group">
