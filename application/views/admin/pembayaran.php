@@ -1,8 +1,41 @@
 <h1 class="text-center">Info Pembayaran</h1>
 
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-xs-12 col-md-4 col-md-offset-4">
 
+    <?php echo form_open() ?>
+      <div class="form-group">
+        <label>Nama Agen:</label>
+        <div class="input-group">
+          <input type="text" value="" class="form-control" name="kodeagen" id="ajaxNamaAgen">
+          <span class="input-group-addon" style="cursor: pointer;" id="btnajaxNamaAgen"><i class="glyphicon glyphicon-search"></i></span>
+        </div>
+        <div class="list-group" id="ulajaxNamaAgen">
+          <!-- <li class="list-group-item"></li> -->
+        </div>
+        <span class="text-danger"><?php echo form_error('kodeagen') ?></span>
+      </div>
+      <div class="form-group">
+        <label>Dari: </label>
+        <input type="date" name="tanggaldari" class="form-control">
+        <span class="text-danger"><?php echo form_error('tanggaldari') ?></span>
+      </div>
+      <div class="form-group">
+        <label>Sampai: </label>
+        <input type="date" name="tanggalsampai" class="form-control">
+        <span class="text-danger"><?php echo form_error('tanggalsampai') ?></span>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-info btn-block">Cari</button>
+      </div>
+    <?php echo form_close() ?>
+
+  </div>
+</div>
+<br><br>
+
+<div class="row">
+  <div class="col-xs-12">
     <table class="table table-condensed table-bordered table-striped table-hover" id="datatablepembayaran">
       <thead class="text-center">
         <tr class="info">

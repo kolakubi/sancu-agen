@@ -248,13 +248,51 @@
     }
 
     public function pembelian(){
-      // ambil semua data pembelian
-      $dataPembelian = $this->admin_model->getDataPembelianJoin();
-      $data['pembelian'] = $dataPembelian;
+      $this->form_validation->set_rules(
+        array(
+          array(
+            'field' => 'kodeagen',
+            'label' => 'Kode Agen',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'tanggaldari',
+            'label' => 'Tanggal Dari',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'tanggalsampai',
+            'label' => 'Tanggal Sampai',
+            'rules' => 'required'
+          )
+        )
+      );
 
-      $this->load->view('admin/header');
-      $this->load->view('admin/pembelian', $data);
-      $this->load->view('admin/footer');
+      if(!$this->form_validation->run()){
+        $data['pembelian'] = array();
+
+        $this->load->view('admin/header');
+        $this->load->view('admin/pembelian', $data);
+        $this->load->view('admin/footer');
+      }
+      else{
+        $kodeagen = $this->input->post('kodeagen');
+        $tanggaldari = $this->input->post('tanggaldari');
+        $tanggalsampai = $this->input->post('tanggalsampai');
+        $dataambil = array(
+          'kode_agen' => $kodeagen,
+          'dari' => $tanggaldari,
+          'sampai' => $tanggalsampai
+        );
+
+        // ambil semua data pembelian
+        $dataPembelian = $this->admin_model->getDataPembelianJoin($dataambil);
+        $data['pembelian'] = $dataPembelian;
+
+        $this->load->view('admin/header');
+        $this->load->view('admin/pembelian', $data);
+        $this->load->view('admin/footer');
+      }
     }
 
     public function pembeliantambah(){
@@ -565,14 +603,55 @@
     /////////// P E M B A Y A R AN ///////////////
 
     public function pembayaran(){
-      // ambil data pembayaran dari database
-      $result = $this->admin_model->getPembayaran();
 
-      $data['dataPembayaran'] = $result;
-      // load view
-      $this->load->view('admin/header');
-      $this->load->view('admin/pembayaran', $data);
-      $this->load->view('admin/footer');
+      $this->form_validation->set_rules(
+        array(
+          array(
+            'field' => 'kodeagen',
+            'label' => 'Agen',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'tanggaldari',
+            'label' => 'Tanggal Dari',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'tanggalsampai',
+            'label' => 'Tanggal Sampai',
+            'rules' => 'required'
+          ),
+        )
+      );
+
+      if(!$this->form_validation->run()){
+
+        $data['dataPembayaran'] = array();
+        // load view
+        $this->load->view('admin/header');
+        $this->load->view('admin/pembayaran', $data);
+        $this->load->view('admin/footer');
+      }else{
+        $kodeagen = $this->input->post('kodeagen');
+        $tanggaldari = $this->input->post('tanggaldari');
+        $tanggalsampai = $this->input->post('tanggalsampai');
+
+        $datapembayaran = array(
+          'kode_agen' => $kodeagen,
+          'tanggaldari' => $tanggaldari,
+          'tanggalsampai' => $tanggalsampai
+        );
+
+        // ambil data pembayaran dari database
+        $result = $this->admin_model->getPembayaran($datapembayaran);
+
+        $data['dataPembayaran'] = $result;
+        // load view
+        $this->load->view('admin/header');
+        $this->load->view('admin/pembayaran', $data);
+        $this->load->view('admin/footer');
+      }
+
     }
 
     public function pembayaranDetail($kodePembayaran){
@@ -580,19 +659,16 @@
       $result = $this->admin_model->getPembayaranDetail($kodePembayaran);
       $nik = $_SESSION['username'];
       $data['dataPembayaran'] = $result;
-      $data['dataPembayaran']['nik'] = $nik;
+      //$data['dataPembayaran']['nik'] = $nik;
       // load view
       $this->load->view('admin/header');
       $this->load->view('admin/pembayarandetail', $data);
       $this->load->view('admin/footer');
-      // echo '<pre>';
-      // print_r($result);
-      // echo '</pre>';
     }
 
     public function pembayaranDetailTambah($kodePembayaran){
       // ambil data pembelian
-      $result = $this->admin_model->getPembayaran($kodePembayaran);
+      $result = $this->admin_model->getPembayaranKode($kodePembayaran);
       $data['dataPembayaran'] = $result;
       // set form rules
       $this->form_validation->set_rules(
@@ -628,7 +704,7 @@
         $sisatagihan = $this->input->post('sisatagihan');
         $keterangan = $this->input->post('keterangan');
 
-        $kodeagen = $_SESSION['username'];
+        $nik = $_SESSION['username'];
 
         $dataPembayaran = array(
           'kode_pembayaran' => $kodepembayaran,
@@ -637,7 +713,7 @@
           'tagihan_sebelumnya' => $result['sisa_tagihan'],
           'sisa_tagihan' => $sisatagihan,
           'keterangan' => $keterangan,
-          'nik' => $kodeagen
+          'nik' => $nik
         );
 
         // data buat di input ke saldo

@@ -1,3 +1,5 @@
+<?php $index=0; ?>
+
 <h1 class="text-center">Detail Pembayaran</h1>
 <div class="row">
   <div class="col-xs-12">
@@ -14,6 +16,8 @@
       </thead>
       <tbody>
         <?php foreach($dataPembayaran as $pembayaran) : ?>
+          <?php $index++; ?>
+          <?php echo $index; ?>
           <tr>
             <td><?php echo $pembayaran['kode_pembayaran'] ?></td>
             <td><?php echo $pembayaran['tanggal_pembayaran'] ?></td>

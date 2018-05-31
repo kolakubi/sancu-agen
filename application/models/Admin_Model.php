@@ -91,15 +91,17 @@
       }
     }
 
-    public function getDataPembelianJoin($kodepembelian=null){
+    public function getDataPembelianJoin($dataAmbil=null){
         // ambil data agen join data agen
-      if($kodepembelian){
+      if(!empty($dataAmbil)){
         // jika ada kode agen, ambil data menurut kode agen
         $this->db->select('*');
         $this->db->from('pembelian');
         $this->db->join('agen', 'pembelian.kode_agen = agen.kode_agen');
-        $this->db->where('kode_pembelian', $kodepembelian);
-        $result = $this->db->get()->row_array();
+        $this->db->where('pembelian.kode_agen', $dataAmbil['kode_agen']);
+        $this->db->where('pembelian.tanggal_pembelian >=', $dataAmbil['dari']);
+        $this->db->where('pembelian.tanggal_pembelian <=', $dataAmbil['sampai']);
+        $result = $this->db->get()->result_array();
         return $result;
       }
       else{
@@ -704,7 +706,20 @@
     ///////////////////////////////////////////////
     //////////// P E M B A Y A R A N //////////////
 
-    public function getPembayaran($kodePembayaran = null){
+    public function getPembayaran($dataAmbil){
+      // ambil data pembayaran
+      $this->db->select('*');
+      $this->db->from('pembayaran');
+      $this->db->join('pembelian', 'pembelian.kode_pembelian = pembayaran.kode_pembelian');
+      $this->db->join('agen', 'agen.kode_agen = pembelian.kode_agen');
+      $this->db->where('agen.kode_agen', $dataAmbil['kode_agen']);
+      $this->db->where('pembelian.tanggal_pembelian >=', $dataAmbil['tanggaldari']);
+      $this->db->where('pembelian.tanggal_pembelian <=', $dataAmbil['tanggalsampai']);
+      $result = $this->db->get()->result_array();
+      return $result;
+    }
+
+    public function getPembayaranKode($kodePembayaran = null){
       // ambil data pembayaran
       $this->db->select('*');
       $this->db->from('pembayaran');
