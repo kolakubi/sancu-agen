@@ -96,6 +96,7 @@
 				$result = $this->login_model->login($username, $password, $ip);
 				// jika ada result
 				if($result){
+
 					$level = $result['level']; // cek level
 					$this->session->set_userdata($result);
 
