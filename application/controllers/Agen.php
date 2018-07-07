@@ -42,6 +42,93 @@
 
     ///////////////////////////////////////////////
     ///////////////////////////////////////////////
+    /////// G A N T I   P A S S W O R D ///////////
+
+    public function gantipassword(){
+      // ambil kodeagen dari session username
+      $kodeagen = $_SESSION['username'];
+
+      $this->form_validation->set_rules(
+        array(
+          array(
+            'field' => 'passwordlama',
+            'label' => 'Password Lama',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'passwordbaru',
+            'label' => 'Password Baru',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'passwordbaru2',
+            'label' => 'Password Baru',
+            'rules' => 'required'
+          ),
+        )
+      );
+
+      $this->form_validation->set_message('required', 'mohon lengkapi %s');
+
+      $status = array(
+        'passwordsalah' => false,
+        'passwordbarutdksama' => false,
+        'suseskubahpassword' => false
+      );
+
+      function resetError(){
+        $status = array(
+          'passwordsalah' => false,
+          'passwordbarutdksama' => false,
+          'suseskubahpassword' => false
+        );
+      }
+
+      if(!$this->form_validation->run()){
+        $data['error'] = $status;
+
+        $this->load->view('agen/header');
+        $this->load->view('agen/gantipassword', $data);
+        $this->load->view('agen/footer');
+      }
+      else{
+        $passwordlama = $this->input->post('passwordlama');
+        $passwordbaru = $this->input->post('passwordbaru');
+        $passwordbaru2 = $this->input->post('passwordbaru2');
+
+        // jika password baru match
+        if($passwordbaru === $passwordbaru2){
+          // validasi password user
+          $result = $this->agen_model->cek_password($passwordlama, $passwordbaru, $kodeagen);
+          //jika true
+          if($result){
+            // ubah password sukses
+            resetError();
+            $status['suseskubahpassword'] = true;
+          }
+          // jika false
+          else{
+            // setting peringatan password salah
+            resetError();
+            $status['passwordsalah'] = true;
+          }
+        }
+        // jika password baru tdk match
+        else{
+          resetError();
+          $status['passwordbarutdksama'] = true;
+        }
+
+        $data['error'] = $status;
+
+        $this->load->view('agen/header');
+        $this->load->view('agen/gantipassword', $data);
+        $this->load->view('agen/footer');
+      }
+    }
+
+    ///////////////////////////////////////////////
+    ///////////////////////////////////////////////
     //////////// P E M B E L I A N ////////////////
 
     public function pembelian(){

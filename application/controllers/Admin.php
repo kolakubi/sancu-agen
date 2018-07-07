@@ -825,9 +825,6 @@
 
       }
 
-
-
-
     }
 
 
@@ -848,7 +845,7 @@
             'field' => 'tanggalsampai',
             'label' => 'Tanggal Sampai',
             'rules' => 'required'
-          ),
+          )
         )
       );
 
@@ -862,9 +859,11 @@
         $this->load->view('admin/footer');
       }
       else{
+        $kodeagen = $this->input->post('kodeagen');
         $tanggaldari = $this->input->post('tanggaldari');
         $tanggalsampai = $this->input->post('tanggalsampai');
         $datalaporan = array(
+          'kodeagen' => $kodeagen,
           'dari' => $tanggaldari,
           'sampai' => $tanggalsampai
         );

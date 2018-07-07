@@ -1,4 +1,6 @@
-      </div> <!-- end of container -->
+      </div> <!-- end of body wrapper -->
+
+      <br><br><br>
 
       <nav class="navbar navbar-default">
 

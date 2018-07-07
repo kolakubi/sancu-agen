@@ -1,7 +1,7 @@
 <div class="row" style="padding: 10px 10px 30px 10px">
-  <p class="text text-center">
+  <!-- <p class="text text-center">
     <img src="<?php echo base_url().$fotoprofil ?>" class="img-circle img-responsive" alt="profil" style="margin: 0 auto;">
-  </p>
+  </p> -->
   <h4 class="text-center"><?php echo $nama ?></h4>
   <h4 class="text-center"><?php echo $kota ?></h4>
   <p class="text-center">

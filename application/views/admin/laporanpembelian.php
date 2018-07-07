@@ -7,6 +7,11 @@
   $itempretty = 0;
   $itemxtreme = 0;
   $grandtotalitem = 0;
+  $totalitemsancu = 0;
+  $totalitemboncu = 0;
+  $totalitempretty = 0;
+  $totalitemxtreme = 0;
+  $totalseluruhitem = 0;
 
   // inisiasi $kodeagen
   if(!empty($datapembelian[0]['kode_agen'])){
@@ -16,14 +21,25 @@
   }
 ?>
 
-
-<h1 class="text-center">Laporan Pembelian</h1>
+<h1 class="text-center text-uppercase">Laporan Pembelian</h1>
 <h4 class="text-center">Cari Berdasarkan Tanggal</h4>
 
 <div class="row">
   <div class="col-xs-12 col-md-4 col-md-offset-4">
-
     <?php echo form_open() ?>
+
+    <div class="form-group">
+        <label>Nama Agen:</label>
+        <div class="input-group">
+          <input type="text" value="" class="form-control" name="kodeagen" id="ajaxNamaAgen">
+          <span class="input-group-addon" style="cursor: pointer;" id="btnajaxNamaAgen"><i class="glyphicon glyphicon-search"></i></span>
+        </div>
+        <div class="list-group" id="ulajaxNamaAgen">
+          <!-- <li class="list-group-item"></li> -->
+        </div>
+        <span class="text-danger"><?php echo form_error('kodeagen') ?></span>
+      </div>
+      
       <div class="form-group">
         <label>Dari: </label>
         <input type="date" name="tanggaldari" class="form-control">
@@ -65,17 +81,22 @@
           <?php
             if($datapembelian[$i]['kode_item'] == 'sancu'){
               $itemsancu += $datapembelian[$i]['jumlah_item'];
+              $totalitemsancu += $datapembelian[$i]['jumlah_item'];;
             }
             if($datapembelian[$i]['kode_item'] == 'boncu'){
               $itemboncu += $datapembelian[$i]['jumlah_item'];
+              $totalitemboncu += $datapembelian[$i]['jumlah_item'];
             }
             if($datapembelian[$i]['kode_item'] == 'pretty'){
               $itempretty += $datapembelian[$i]['jumlah_item'];
+              $totalitempretty += $datapembelian[$i]['jumlah_item'];
             }
             if($datapembelian[$i]['kode_item'] == 'xtreme'){
               $itemxtreme += $datapembelian[$i]['jumlah_item'];
+              $totalitemxtreme = $datapembelian[$i]['jumlah_item'];
             }
             $grandtotalitem = $itemsancu+$itemboncu+$itempretty+$itemxtreme;
+            $totalseluruhitem += $grandtotalitem;
           ?>
 
           <!-- jika kodeagen sudah berbeda -->
@@ -142,6 +163,14 @@
         <td></td>
       </tfoot>
     </table>
+
+    <!-- Info Pembelian -->
+    <h4 class="text-center">Summary</h4>
+    <p class="text-center">Total Item Sancu: <?php echo number_format($totalitemsancu, 0, ',', '.') ?></p>
+    <p class="text-center">Total Item Boncu: <?php echo number_format($totalitemboncu, 0, ',', '.') ?></p>
+    <p class="text-center">Total Item Pretty: <?php echo number_format($totalitempretty, 0, ',', '.') ?></p>
+    <p class="text-center">Total Item Xtreme: <?php echo number_format($totalitemxtreme, 0, ',', '.') ?></p>
+    <p class="text-center text-warning">Total Seluruh Item: <?php echo number_format($totalseluruhitem, 0, ',', '.') ?></p>
 
   </div>
 </div>

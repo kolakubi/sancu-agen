@@ -9,6 +9,8 @@
     <!-- datatables css -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>asset/datatables/datatables.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>asset/datatables/buttons/css/buttons.bootstrap.min.css">
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/png" href="<?php echo base_url() ?>asset/image/favicon-sancu.png"/>
     <title>Dashboard</title>
   </head>
   <body>
@@ -31,30 +33,31 @@
           </a>
         </div> <!-- end of nav-header -->
 
-        <div class="nav navbar-nav">
-          <ul class="nav nav-tabs">
-            <li><a href="<?php echo base_url() ?>admin/agen">Agen</a></li>
-            <li><a href="<?php echo base_url() ?>admin/pembelian">Pembelian</a></li>
-            <li><a href="<?php echo base_url() ?>admin/pembayaran">Pembayaran</a></li>
-            <li><a href="<?php echo base_url() ?>admin/bonus">Bonus</a></li>
-            <li><a href="<?php echo base_url() ?>admin/saldo">Saldo</a></li>
-            <!-- dropdown -->
-            <li class="dropdown">
-              <a class="btn dropdown-toggle" data-toggle="dropdown">Laporan
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="<?php echo base_url() ?>admin/laporanpembelian">Pembelian</a></li>
-              </ul>
-            </li>
-            <!-- end of dropdown -->
-          </ul>
-        </div>
-
-        <!-- button logout -->
-        <ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
-          <li><a href="<?php echo base_url() ?>logout" class="btn btn-default navbar-btn navbar-right">Sign out</a></li>
-        </ul>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <div class="nav navbar-nav">
+            <ul class="nav nav-tabs">
+              <li><a href="<?php echo base_url() ?>admin/agen">Agen</a></li>
+              <li><a href="<?php echo base_url() ?>admin/pembelian">Pembelian</a></li>
+              <li><a href="<?php echo base_url() ?>admin/pembayaran">Pembayaran</a></li>
+              <li><a href="<?php echo base_url() ?>admin/bonus">Bonus</a></li>
+              <li><a href="<?php echo base_url() ?>admin/saldo">Saldo</a></li>
+              <!-- dropdown -->
+              <li class="dropdown">
+                <a class="btn dropdown-toggle" data-toggle="dropdown">Laporan
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="<?php echo base_url() ?>admin/laporanpembelian">Pembelian</a></li>
+                </ul>
+              </li>
+              <!-- end of dropdown -->
+            </ul>
+          </div>
+          <!-- button logout -->
+          <ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
+            <li><a href="<?php echo base_url() ?>logout" class="btn btn-default navbar-btn navbar-right">Sign out</a></li>
+          </ul> <!-- end of button logout -->
+        </div> <!-- end of navbar-collapse -->
 
       </div> <!-- end of container-->
 

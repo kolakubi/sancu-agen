@@ -845,16 +845,34 @@
 
     public function getLaporanPembelian($datalaporan){
 
-      $this->db->select('*');
-      $this->db->from('pembelian');
-      $this->db->join('pembelian_detail', 'pembelian_detail.kode_pembelian = pembelian.kode_pembelian');
-      $this->db->join('agen', 'pembelian.kode_agen = agen.kode_agen');
-      $this->db->where('tanggal_pembelian >=', $datalaporan['dari']);
-      $this->db->where('tanggal_pembelian <=', $datalaporan['sampai']);
-      $this->db->order_by('pembelian.kode_agen');
-      $result = $this->db->get()->result_array();
+      if(!empty($datalaporan['kodeagen'])){
 
-      return $result;
+        $this->db->select('*');
+        $this->db->from('pembelian');
+        $this->db->join('pembelian_detail', 'pembelian_detail.kode_pembelian = pembelian.kode_pembelian');
+        $this->db->join('agen', 'pembelian.kode_agen = agen.kode_agen');
+        $this->db->where('tanggal_pembelian >=', $datalaporan['dari']);
+        $this->db->where('tanggal_pembelian <=', $datalaporan['sampai']);
+        $this->db->where('pembelian.kode_agen', $datalaporan['kodeagen']);
+        $this->db->order_by('pembelian.kode_agen');
+        $result = $this->db->get()->result_array();
+
+        return $result;
+
+      }else{
+        $this->db->select('*');
+        $this->db->from('pembelian');
+        $this->db->join('pembelian_detail', 'pembelian_detail.kode_pembelian = pembelian.kode_pembelian');
+        $this->db->join('agen', 'pembelian.kode_agen = agen.kode_agen');
+        $this->db->where('tanggal_pembelian >=', $datalaporan['dari']);
+        $this->db->where('tanggal_pembelian <=', $datalaporan['sampai']);
+        $this->db->order_by('pembelian.kode_agen');
+        $result = $this->db->get()->result_array();
+
+        return $result;
+      }
+
+      
 
     }
 

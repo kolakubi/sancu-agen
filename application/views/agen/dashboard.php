@@ -1,5 +1,5 @@
-  <h3 class="text text-center">Selamat Datang</h3>
-  <h5 class="text text-center"><?php echo $nama; ?></h5>
+  <h5 class="text text-center">Selamat Datang</h5>
+  <h4 class="text text-center" style="text-transform: uppercase; font-weight: bold"><?php echo $nama; ?></h4>
   <br><br>
 
   <!-- baris 1 -->
@@ -11,7 +11,17 @@
         <br> -->
         <img src="<?php base_url() ?>asset/image/user.png" alt="user" class="img-responsive" style="margin: 0 auto;">
         <br>
-        <strong>Profil</strong>
+        <p>Profil</p>
+      </a>
+    </div>
+    <!-- ganti password -->
+    <div class="col-sm-4 col-xs-4 text-center">
+      <a href="<?php base_url() ?>agen/gantipassword">
+        <!-- <span class="glyphicon glyphicon-user" style="font-size:50px; color: #00abc5;" aria-hidden="true"></span>
+        <br> -->
+        <img src="<?php base_url() ?>asset/image/ganti-password.png" alt="ganti-password" class="img-responsive" style="margin: 0 auto;">
+        <br>
+        <p>Ganti Password</p>
       </a>
     </div>
     <!-- transaksi -->
@@ -21,9 +31,14 @@
         <br> -->
         <img src="<?php base_url() ?>asset/image/pembelian.png" alt="pembelian" class="img-responsive" style="margin: 0 auto;">
         <br>
-        <strong>Pembelian</strong>
+        <p>Pembelian</p>
       </a>
     </div>
+
+  </div>
+  <br>
+  <!-- baris 2 -->
+  <div class="row">
     <!-- saldo -->
     <div class="col-sm-4 col-xs-4 text-center">
       <a href="<?php base_url() ?>agen/saldo">
@@ -31,20 +46,16 @@
         <img src="<?php base_url() ?>asset/image/pembayaran.png" alt="pembayaran" class="img-responsive" style="margin: 0 auto;">
         <br>
         <!-- Saldo -->
-        <strong>History Pembayaran</strong>
+        <p>History Pembayaran</p>
       </a>
     </div>
-  </div>
-  <br>
-  <!-- baris 2 -->
-  <div class="row">
     <!-- bonus -->
     <div class="col-sm-4 col-xs-4 text-center">
       <a href="<?php echo base_url() ?>agen/bonus">
         <!-- <span class="glyphicon glyphicon-heart-empty" style="font-size:50px; color: #00abc5;" aria-hidden="true"></span> -->
         <img src="<?php base_url() ?>asset/image/bonus.png" alt="bonus" class="img-responsive" style="margin: 0 auto;">
         <br>
-        <strong>Bonus</strong>
+        <p>Bonus</p>
       </a>
     </div>
     <!-- history pembayaran -->
@@ -54,11 +65,6 @@
         <br>
         History Pembayaran
       </a> -->
-    </div>
-
-    <!-- kosong -->
-    <div class="col-sm-4 col-xs-4 text-center">
-
     </div>
   </div>
 <br><br>

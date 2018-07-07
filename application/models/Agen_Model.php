@@ -34,6 +34,26 @@
 
     /////////////////////////////////////////
     /////////////////////////////////////////
+    ////// G A N T I   P A S S W O R D //////
+
+    public function cek_password($passwordlama, $passwordbaru, $kodeagen){
+      $result = $this->db->get_where('login', array('username' => $kodeagen))->row_array();
+
+      $hashpassword = $result['password'];
+      if(password_verify($passwordlama, $hashpassword)){
+        $hashpasswordbaru = password_hash($passwordbaru, PASSWORD_DEFAULT);
+
+        $this->db->set(array('password' => $hashpasswordbaru));
+        $this->db->where('username', $kodeagen);
+        $this->db->update('login');
+
+        return true;
+      }
+      return false;
+    }
+
+    /////////////////////////////////////////
+    /////////////////////////////////////////
     ////////// P E M B A Y A R A N /////////
 
     // ambil data pembelian berdasarkan range date
