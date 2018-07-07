@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 07, 2018 at 08:30 AM
+-- Generation Time: Jul 07, 2018 at 09:46 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -176,6 +176,13 @@ CREATE TABLE `bonus` (
   `total_item` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `bonus`
+--
+
+INSERT INTO `bonus` (`kode_bonus`, `kode_agen`, `jumlah_bonus`, `ribuan`, `puluhan_ribu`, `total_item`) VALUES
+(279, 'agen003', 0, 0, 0, 200);
+
 -- --------------------------------------------------------
 
 --
@@ -192,6 +199,14 @@ CREATE TABLE `bonus_detail` (
   `history_item` int(11) NOT NULL,
   `nik` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bonus_detail`
+--
+
+INSERT INTO `bonus_detail` (`kode_bonus`, `status`, `bonus`, `jumlah_item`, `tanggal_pembelian`, `kode_bonus_detail`, `history_item`, `nik`) VALUES
+(279, '', 0, 100, '2018-07-07', 364, 100, 'admin001'),
+(279, '', 0, 100, '2018-07-07', 365, 200, 'admin001');
 
 -- --------------------------------------------------------
 
@@ -407,6 +422,14 @@ CREATE TABLE `pembayaran` (
   `sisa_tagihan` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pembayaran`
+--
+
+INSERT INTO `pembayaran` (`kode_pembayaran`, `kode_pembelian`, `tanggal_pembelian`, `jumlah_pembelian`, `sisa_tagihan`) VALUES
+(4, 800, '2018-07-07', 280000, 280000),
+(5, 801, '2018-07-07', 140000, 140000);
+
 -- --------------------------------------------------------
 
 --
@@ -440,6 +463,14 @@ CREATE TABLE `pembelian` (
   `nik` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pembelian`
+--
+
+INSERT INTO `pembelian` (`kode_pembelian`, `kode_agen`, `tanggal_pembelian`, `total_item`, `total_pembelian`, `perincian`, `nik`) VALUES
+(800, 'agen003', '2018-07-07', 200, 280000, 'tidak ada', 'admin001'),
+(801, 'agen003', '2018-07-07', 100, 140000, 'tidak ada', 'admin001');
+
 -- --------------------------------------------------------
 
 --
@@ -453,6 +484,14 @@ CREATE TABLE `pembelian_detail` (
   `jumlah_item` int(11) NOT NULL,
   `total_harga_item` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pembelian_detail`
+--
+
+INSERT INTO `pembelian_detail` (`kode_pembelian_detail`, `kode_pembelian`, `kode_item`, `jumlah_item`, `total_harga_item`) VALUES
+(481, 800, 'sancu', 200, 280000),
+(482, 801, 'sancu', 100, 140000);
 
 -- --------------------------------------------------------
 
@@ -484,12 +523,21 @@ INSERT INTO `produk` (`kode_item`, `Nama`) VALUES
 CREATE TABLE `saldo` (
   `kode_saldo` int(11) NOT NULL,
   `kode_agen` varchar(10) NOT NULL,
+  `kode_pembelian` int(11) NOT NULL,
+  `kode_pembayaran_detail` int(11) NOT NULL,
   `tgl_perubahan` date NOT NULL,
   `debet` int(11) NOT NULL,
   `kredit` int(11) NOT NULL,
   `nominal` int(11) NOT NULL,
   `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `saldo`
+--
+
+INSERT INTO `saldo` (`kode_saldo`, `kode_agen`, `kode_pembelian`, `kode_pembayaran_detail`, `tgl_perubahan`, `debet`, `kredit`, `nominal`, `keterangan`) VALUES
+(445, 'agen003', 0, 0, '2018-07-07', 140000, 0, 140000, 'pembelian');
 
 --
 -- Indexes for dumped tables
@@ -577,7 +625,9 @@ ALTER TABLE `produk`
 --
 ALTER TABLE `saldo`
   ADD PRIMARY KEY (`kode_saldo`),
-  ADD KEY `kode_agen` (`kode_agen`);
+  ADD KEY `kode_agen` (`kode_agen`),
+  ADD KEY `pembelien_child` (`kode_pembelian`),
+  ADD KEY `pembayaran_detail_child` (`kode_pembayaran_detail`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -587,13 +637,13 @@ ALTER TABLE `saldo`
 -- AUTO_INCREMENT for table `bonus`
 --
 ALTER TABLE `bonus`
-  MODIFY `kode_bonus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=279;
+  MODIFY `kode_bonus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=280;
 
 --
 -- AUTO_INCREMENT for table `bonus_detail`
 --
 ALTER TABLE `bonus_detail`
-  MODIFY `kode_bonus_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=364;
+  MODIFY `kode_bonus_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=366;
 
 --
 -- AUTO_INCREMENT for table `log`
@@ -605,31 +655,31 @@ ALTER TABLE `log`
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `pembayaran_detail`
 --
 ALTER TABLE `pembayaran_detail`
-  MODIFY `kode_pembayaran_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `kode_pembayaran_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=799;
+  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=802;
 
 --
 -- AUTO_INCREMENT for table `pembelian_detail`
 --
 ALTER TABLE `pembelian_detail`
-  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=480;
+  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=483;
 
 --
 -- AUTO_INCREMENT for table `saldo`
 --
 ALTER TABLE `saldo`
-  MODIFY `kode_saldo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=442;
+  MODIFY `kode_saldo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=446;
 
 --
 -- Constraints for dumped tables
@@ -674,12 +724,6 @@ ALTER TABLE `pembelian`
 ALTER TABLE `pembelian_detail`
   ADD CONSTRAINT `pembelian_detail_ibfk_1` FOREIGN KEY (`kode_pembelian`) REFERENCES `pembelian` (`kode_pembelian`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `pembelian_detail_ibfk_2` FOREIGN KEY (`kode_item`) REFERENCES `produk` (`kode_item`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `saldo`
---
-ALTER TABLE `saldo`
-  ADD CONSTRAINT `saldo_ibfk_1` FOREIGN KEY (`kode_agen`) REFERENCES `agen` (`kode_agen`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
