@@ -193,6 +193,9 @@
         $saldoAkhir = 0;
       }
       $dataSaldo['nominal'] = $saldoAkhir + $dataSaldo['debet'];
+      // id pembelian terakhir
+      $datasaldo['kode_pembelian'] = $id_pembelian_baru_diinput;
+      $datasaldo['kode_pembayaran_detail'] = 0;
       // insert saldo
       $this->db->insert('saldo', $dataSaldo);
       //////////////////////////////////////////////////////
@@ -694,6 +697,10 @@
     }
 
     public function deletePembelian($kodepembelian){
+      // hapus saldo
+      $this->db->where('kode_pembelian', $kodepembelian);
+      $this->db->delete('saldo');
+
       // hapus data agen dari kodeagen
       $this->db->where('kode_pembelian', $kodepembelian);
       if($this->db->delete('pembelian')){
@@ -753,6 +760,8 @@
 
       // I N S E R T   P E M B E L I A N   D E T A I L
       $this->db->insert('pembayaran_detail', $dataPembayaran);
+      // ambil id pembayaran detail yg bru diinput
+      $kode_pembayaran_detail_diinput = $this->db->insert_id();
       // update table pembayaran (sisa_tagihan)
       $tagihanBaru = array('sisa_tagihan' => $dataPembayaran['sisa_tagihan']);
       $this->db->set($tagihanBaru);
@@ -769,6 +778,10 @@
       $saldoAkhir = $saldoAkhir[0]['nominal'];
 
       $dataSaldo['nominal'] = $saldoAkhir - $dataSaldo['kredit'];
+      // id pembayaran detail
+      $datasaldo['kode_pembayaran_detail'] = $kode_pembayaran_detail_diinput;
+      $datasaldo['kode_pembelian'] = 0;
+
       // insert saldo
       $this->db->insert('saldo', $dataSaldo);
       ///////////////////////////////////////////////
