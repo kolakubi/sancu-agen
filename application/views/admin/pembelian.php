@@ -67,14 +67,16 @@
               lihat
               <span class="glyphicon glyphicon-eye-open"></span>
             </a>
-            <a href="<?php echo base_url() ?>admin/pembelianubah/<?php echo $pembelianDetail['kode_pembelian'] ?>" class="btn btn-success">
+            <!-- <a href="<?php echo base_url() ?>admin/pembelianubah/<?php echo $pembelianDetail['kode_pembelian'] ?>" class="btn btn-success">
               ubah
               <span class="glyphicon glyphicon-edit"></span>
-            </a>
-            <a href="<?php echo base_url() ?>admin/pembelianhapus/<?php echo $pembelianDetail['kode_pembelian'] ?>" class="btn btn-danger btnhapus">
-              hapus
-              <span class="glyphicon glyphicon-trash"></span>
-            </a>
+            </a> -->
+            <?php if(!$pembelianDetail['status_no_edit']) : ?>
+              <a href="<?php echo base_url() ?>admin/pembelianhapus/<?php echo $pembelianDetail['kode_pembelian'] ?>" class="btn btn-danger btnhapus">
+                hapus
+                <span class="glyphicon glyphicon-trash"></span>
+              </a>
+            <?php endif ?>
           </div>
         </td>
       </tr>

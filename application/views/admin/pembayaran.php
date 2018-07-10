@@ -69,10 +69,6 @@
                     <span class="glyphicon glyphicon-edit"></span>
                   </a>
                 <?php endif ?>
-                <a href="#" class="btn btn-danger btnhapus">
-                  Hapus
-                  <span class="glyphicon glyphicon-trash"></span>
-                </a>
               </div>
             </td>
           </tr>

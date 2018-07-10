@@ -591,16 +591,18 @@
     }
 
     public function pembelianhapus($kodepembelian){
+
       // hapus data dari database
       $result = $this->admin_model->deletePembelian($kodepembelian);
       if($result){
         redirect('admin/pembelian');
       }
+
     }
 
     ///////////////////////////////////////////////
     ///////////////////////////////////////////////
-    /////////// P E M B A Y A R AN ///////////////
+    /////////// P E M B A Y A R A N ///////////////
 
     public function pembayaran(){
 
@@ -698,7 +700,6 @@
       }
       else{
         // ambil value dari form
-        $kodepembayaran = $result['kode_pembayaran'];
         $tanggalpembayaran = $this->input->post('tanggalpembayaran');
         $dibayar = $this->input->post('dibayar');
         $sisatagihan = $this->input->post('sisatagihan');
@@ -707,7 +708,7 @@
         $nik = $_SESSION['username'];
 
         $dataPembayaran = array(
-          'kode_pembayaran' => $kodepembayaran,
+          'kode_pembayaran' => $kodePembayaran,
           'tanggal_pembayaran' => $tanggalpembayaran,
           'nominal_pembayaran' => $dibayar,
           'tagihan_sebelumnya' => $result['sisa_tagihan'],
@@ -731,6 +732,16 @@
           redirect('admin/pembayaran');
         }
       }
+    }
+
+    public function pembayarandetailhapus($kodepembayarandetail){
+      
+      // hapus data dari database
+      $result = $this->admin_model->deletePembayaranDetail($kodepembayarandetail);
+      if($result){
+        redirect('admin/pembelian');
+      }
+
     }
 
     ///////////////////////////////////////////////

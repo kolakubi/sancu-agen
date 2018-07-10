@@ -10,21 +10,24 @@
           <th>Tgl Pembayaran</th>
           <th>Tagihan Sebelumnya</th>
           <th>Nominal</th>
-          <th>Sisa Tagihan</th>
+          <!-- <th>Sisa Tagihan</th> -->
           <th>keterangan</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <?php foreach($dataPembayaran as $pembayaran) : ?>
-          <?php $index++; ?>
-          <?php echo $index; ?>
           <tr>
-            <td><?php echo $pembayaran['kode_pembayaran'] ?></td>
+            <td><?php echo $pembayaran['kode_pembayaran_detail'] ?></td>
             <td><?php echo $pembayaran['tanggal_pembayaran'] ?></td>
             <td><?php echo 'Rp'.number_format($pembayaran['tagihan_sebelumnya'], 0, ',', '.')?></td>
             <td><?php echo 'Rp'.number_format($pembayaran['nominal_pembayaran'], 0, ',', '.')?></td>
-            <td><?php echo 'Rp'.number_format($pembayaran['sisa_tagihan'], 0, ',', '.')?></td>
+            <!-- <td><?php echo 'Rp'.number_format($pembayaran['sisa_tagihan'], 0, ',', '.')?></td> -->
             <td><?php echo $pembayaran['keterangan'] ?></td>
+            <td>
+            <a href="<?php echo base_url() ?>admin/pembayarandetailhapus/<?php echo $pembayaran['kode_pembayaran_detail'] ?>" class="btn btn-danger btnhapus">Hapus<span class="glyphicon glyphicon-trash"></span>
+            </a>
+          </td>
           </tr>
         <?php endforeach ?>
       </tbody>
@@ -33,8 +36,9 @@
           <td>tanggal</td>
           <td></td>
           <td></td>
-          <td></td>
+          <!-- <td></td> -->
           <td>keterangan</td>
+          <td></td>
       </tfoot>
     </table>
     <p class="text-center">

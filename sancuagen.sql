@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 07, 2018 at 09:46 AM
+-- Generation Time: Jul 10, 2018 at 11:00 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -181,7 +181,7 @@ CREATE TABLE `bonus` (
 --
 
 INSERT INTO `bonus` (`kode_bonus`, `kode_agen`, `jumlah_bonus`, `ribuan`, `puluhan_ribu`, `total_item`) VALUES
-(279, 'agen003', 0, 0, 0, 200);
+(284, 'agen003', 0, 0, 0, 900);
 
 -- --------------------------------------------------------
 
@@ -197,16 +197,43 @@ CREATE TABLE `bonus_detail` (
   `tanggal_pembelian` date NOT NULL,
   `kode_bonus_detail` int(11) NOT NULL,
   `history_item` int(11) NOT NULL,
-  `nik` varchar(20) NOT NULL
+  `nik` varchar(20) NOT NULL,
+  `kode_pembelian` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `bonus_detail`
 --
 
-INSERT INTO `bonus_detail` (`kode_bonus`, `status`, `bonus`, `jumlah_item`, `tanggal_pembelian`, `kode_bonus_detail`, `history_item`, `nik`) VALUES
-(279, '', 0, 100, '2018-07-07', 364, 100, 'admin001'),
-(279, '', 0, 100, '2018-07-07', 365, 200, 'admin001');
+INSERT INTO `bonus_detail` (`kode_bonus`, `status`, `bonus`, `jumlah_item`, `tanggal_pembelian`, `kode_bonus_detail`, `history_item`, `nik`, `kode_pembelian`) VALUES
+(284, '', 0, 300, '2018-07-10', 382, 300, 'admin001', 819),
+(284, '', 0, 600, '2018-07-10', 383, 900, 'admin001', 820);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `history_delete`
+--
+
+CREATE TABLE `history_delete` (
+  `kode_delete` int(11) NOT NULL,
+  `kode_admin` varchar(10) NOT NULL,
+  `keterangan` varchar(255) NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `history_delete`
+--
+
+INSERT INTO `history_delete` (`kode_delete`, `kode_admin`, `keterangan`, `date`) VALUES
+(1, '0', '0', '2018-07-10 14:12:01'),
+(2, 'admin001', 'hapus data', '2018-07-10 14:13:26'),
+(3, 'admin001', 'hapus data pembelian 818', '2018-07-10 14:14:39'),
+(4, 'admin001', 'hapus data pembelian 19', '2018-07-10 15:54:52'),
+(5, 'admin001', 'hapus data pembelian 19', '2018-07-10 15:55:50'),
+(6, 'admin001', 'hapus data pembelian 22', '2018-07-10 15:57:13'),
+(7, 'admin001', 'hapus data pembelian 22', '2018-07-10 15:57:45');
 
 -- --------------------------------------------------------
 
@@ -295,7 +322,8 @@ INSERT INTO `log` (`kode_login`, `username`, `time`, `ip`, `status`) VALUES
 (69, 'firman', '2018-07-07 10:21:06', '::1', 'sukses'),
 (70, 'admin003', '2018-07-07 10:26:11', '::1', 'sukses'),
 (71, 'agen001', '2018-07-07 11:06:39', '::1', 'gagal'),
-(72, 'admin001', '2018-07-07 11:06:46', '::1', 'sukses');
+(72, 'admin001', '2018-07-07 11:06:46', '::1', 'sukses'),
+(73, 'admin001', '2018-07-10 09:54:31', '::1', 'sukses');
 
 -- --------------------------------------------------------
 
@@ -427,8 +455,8 @@ CREATE TABLE `pembayaran` (
 --
 
 INSERT INTO `pembayaran` (`kode_pembayaran`, `kode_pembelian`, `tanggal_pembelian`, `jumlah_pembelian`, `sisa_tagihan`) VALUES
-(4, 800, '2018-07-07', 280000, 280000),
-(5, 801, '2018-07-07', 140000, 140000);
+(23, 819, '2018-07-10', 600000, 500000),
+(24, 820, '2018-07-10', 900000, 370000);
 
 -- --------------------------------------------------------
 
@@ -447,6 +475,26 @@ CREATE TABLE `pembayaran_detail` (
   `nik` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pembayaran_detail`
+--
+
+INSERT INTO `pembayaran_detail` (`kode_pembayaran`, `tanggal_pembayaran`, `tagihan_sebelumnya`, `nominal_pembayaran`, `sisa_tagihan`, `kode_pembayaran_detail`, `keterangan`, `nik`) VALUES
+(23, '2018-07-10', 600000, 100000, 500000, 9, 'BCA', 'admin001'),
+(24, '2018-07-10', 900000, 200000, 700000, 10, 'Mandiri', 'admin001'),
+(24, '2018-07-10', 700000, 100000, 600000, 11, 'MAndiri', 'admin001'),
+(24, '2018-07-10', 600000, 50000, 550000, 12, 'BRI', 'admin001'),
+(24, '2018-07-10', 550000, 50000, 500000, 13, 'Mandiri', 'admin001'),
+(24, '2018-07-10', 500000, 50000, 450000, 14, 'asd', 'admin001'),
+(24, '2018-07-10', 450000, 10000, 440000, 15, 'dsa', 'admin001'),
+(24, '2018-07-10', 440000, 10000, 430000, 16, 'asd', 'admin001'),
+(24, '2018-07-10', 430000, 10000, 420000, 17, 'asd', 'admin001'),
+(24, '2018-07-10', 420000, 10000, 410000, 18, '64', 'admin001'),
+(24, '2018-07-10', 410000, 10000, 400000, 19, 'asd', 'admin001'),
+(24, '2018-07-10', 400000, 10000, 390000, 20, '654', 'admin001'),
+(24, '2018-07-10', 390000, 10000, 380000, 21, 'asd', 'admin001'),
+(24, '2018-07-10', 380000, 10000, 370000, 22, 'asdasdasd', 'admin001');
+
 -- --------------------------------------------------------
 
 --
@@ -460,16 +508,17 @@ CREATE TABLE `pembelian` (
   `total_item` int(11) NOT NULL,
   `total_pembelian` int(11) NOT NULL,
   `perincian` text NOT NULL,
-  `nik` varchar(20) NOT NULL
+  `nik` varchar(20) NOT NULL,
+  `status_no_edit` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pembelian`
 --
 
-INSERT INTO `pembelian` (`kode_pembelian`, `kode_agen`, `tanggal_pembelian`, `total_item`, `total_pembelian`, `perincian`, `nik`) VALUES
-(800, 'agen003', '2018-07-07', 200, 280000, 'tidak ada', 'admin001'),
-(801, 'agen003', '2018-07-07', 100, 140000, 'tidak ada', 'admin001');
+INSERT INTO `pembelian` (`kode_pembelian`, `kode_agen`, `tanggal_pembelian`, `total_item`, `total_pembelian`, `perincian`, `nik`, `status_no_edit`) VALUES
+(819, 'agen003', '2018-07-10', 600, 600000, 'tidak ada', 'admin001', 1),
+(820, 'agen003', '2018-07-10', 900, 900000, 'tidak ada', 'admin001', 1);
 
 -- --------------------------------------------------------
 
@@ -490,8 +539,12 @@ CREATE TABLE `pembelian_detail` (
 --
 
 INSERT INTO `pembelian_detail` (`kode_pembelian_detail`, `kode_pembelian`, `kode_item`, `jumlah_item`, `total_harga_item`) VALUES
-(481, 800, 'sancu', 200, 280000),
-(482, 801, 'sancu', 100, 140000);
+(518, 819, 'sancu', 100, 100000),
+(519, 819, 'boncu', 200, 200000),
+(520, 819, 'xtreme', 300, 300000),
+(521, 820, 'sancu', 500, 500000),
+(522, 820, 'boncu', 100, 100000),
+(523, 820, 'pretty', 300, 300000);
 
 -- --------------------------------------------------------
 
@@ -537,7 +590,20 @@ CREATE TABLE `saldo` (
 --
 
 INSERT INTO `saldo` (`kode_saldo`, `kode_agen`, `kode_pembelian`, `kode_pembayaran_detail`, `tgl_perubahan`, `debet`, `kredit`, `nominal`, `keterangan`) VALUES
-(445, 'agen003', 0, 0, '2018-07-07', 140000, 0, 140000, 'pembelian');
+(471, 'agen003', 819, 0, '2018-07-10', 600000, 0, 600000, 'pembelian'),
+(472, 'agen003', 0, 9, '2018-07-10', 0, 100000, 500000, 'BCA'),
+(473, 'agen003', 820, 0, '2018-07-10', 900000, 0, 1400000, 'pembelian'),
+(474, 'agen003', 0, 10, '2018-07-10', 0, 200000, 1200000, 'Mandiri'),
+(475, 'agen003', 0, 11, '2018-07-10', 0, 100000, 1100000, 'MAndiri'),
+(476, 'agen003', 0, 12, '2018-07-10', 0, 50000, 1050000, 'BRI'),
+(477, 'agen003', 0, 13, '2018-07-10', 0, 50000, 1000000, 'Mandiri'),
+(478, 'agen003', 0, 14, '2018-07-10', 0, 50000, 950000, 'asd'),
+(479, 'agen003', 0, 15, '2018-07-10', 0, 10000, 940000, 'dsa'),
+(480, 'agen003', 0, 16, '2018-07-10', 0, 10000, 930000, 'asd'),
+(481, 'agen003', 0, 17, '2018-07-10', 0, 10000, 920000, 'asd'),
+(482, 'agen003', 0, 18, '2018-07-10', 0, 10000, 910000, '64'),
+(484, 'agen003', 0, 20, '2018-07-10', 0, 10000, 890000, '654'),
+(485, 'agen003', 0, 21, '2018-07-10', 0, 10000, 880000, 'asd');
 
 --
 -- Indexes for dumped tables
@@ -569,6 +635,12 @@ ALTER TABLE `bonus_detail`
   ADD PRIMARY KEY (`kode_bonus_detail`),
   ADD KEY `kode_bonus` (`kode_bonus`),
   ADD KEY `nik` (`nik`);
+
+--
+-- Indexes for table `history_delete`
+--
+ALTER TABLE `history_delete`
+  ADD PRIMARY KEY (`kode_delete`);
 
 --
 -- Indexes for table `log`
@@ -637,49 +709,55 @@ ALTER TABLE `saldo`
 -- AUTO_INCREMENT for table `bonus`
 --
 ALTER TABLE `bonus`
-  MODIFY `kode_bonus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=280;
+  MODIFY `kode_bonus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=285;
 
 --
 -- AUTO_INCREMENT for table `bonus_detail`
 --
 ALTER TABLE `bonus_detail`
-  MODIFY `kode_bonus_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=366;
+  MODIFY `kode_bonus_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=384;
+
+--
+-- AUTO_INCREMENT for table `history_delete`
+--
+ALTER TABLE `history_delete`
+  MODIFY `kode_delete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `kode_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `kode_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `pembayaran_detail`
 --
 ALTER TABLE `pembayaran_detail`
-  MODIFY `kode_pembayaran_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `kode_pembayaran_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=802;
+  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=821;
 
 --
 -- AUTO_INCREMENT for table `pembelian_detail`
 --
 ALTER TABLE `pembelian_detail`
-  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=483;
+  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=524;
 
 --
 -- AUTO_INCREMENT for table `saldo`
 --
 ALTER TABLE `saldo`
-  MODIFY `kode_saldo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=446;
+  MODIFY `kode_saldo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=487;
 
 --
 -- Constraints for dumped tables
