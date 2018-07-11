@@ -416,62 +416,76 @@
     } // => end of function tambah pembelian
 
     public function updatePembelian($dataPembelian, $dataPembelianDetail, $dataPembayaran, $kodepembelian){
-      //update detail pembelian
-      //=============================================
-      //sancu
-      $dataSancu = array(
-        'kode_pembelian' => $kodepembelian,
-        'kode_item' => 'sancu',
-        'jumlah_item' => $dataPembelianDetail['sancu'],
-        'total_harga_item' => $dataPembelianDetail['total_harga_sancu']
-        );
-      $this->db->set($dataSancu);
-      $this->db->where('kode_item', 'sancu');
-      $this->db->update('pembelian_detail');
-      //Boncu
-      $dataBoncu = array(
-        'kode_pembelian' => $kodepembelian,
-        'kode_item' =>  'boncu',
-        'jumlah_item' => $dataPembelianDetail['boncu'],
-        'total_harga_item' => $dataPembelianDetail['total_harga_boncu']
-        );
-      $this->db->set($dataBoncu);
-      $this->db->where('kode_item', 'boncu');
-      $this->db->update('pembelian_detail');
-      //Pretty
-      $dataPretty = array(
-        'kode_pembelian' => $kodepembelian,
-        'kode_item' =>  'pretty',
-        'jumlah_item' => $dataPembelianDetail['pretty'],
-        'total_harga_item' => $dataPembelianDetail['total_harga_pretty']
-        );
-      $this->db->set($dataPretty);
-      $this->db->where('kode_item', 'pretty');
-      $this->db->update('pembelian_detail');
-      //Xtreme
-      $dataXtreme = array(
-        'kode_pembelian' => $kodepembelian,
-        'kode_item' =>  'xtreme',
-        'jumlah_item' => $dataPembelianDetail['xtreme'],
-        'total_harga_item' => $dataPembelianDetail['total_harga_xtreme']
-        );
-      $this->db->set($dataXtreme);
-      $this->db->where('kode_item', 'xtreme');
-      $this->db->update('pembelian_detail');
-      //==============================================
-      //Update Pembayaran
-      $this->db->set($dataPembayaran);
-      $this->db->where('kode_pembelian', $kodepembelian);
-      $this->db->update('pembayaran');
-      //update pembelian
-      $this->db->set($dataPembelian);
-      $this->db->where('kode_pembelian', $kodepembelian);
-      $this->db->update('pembelian');
+      // //update detail pembelian
+      // //=============================================
+      // //sancu
+      // $dataSancu = array(
+      //   'kode_pembelian' => $kodepembelian,
+      //   'kode_item' => 'sancu',
+      //   'jumlah_item' => $dataPembelianDetail['sancu'],
+      //   'total_harga_item' => $dataPembelianDetail['total_harga_sancu']
+      //   );
+      // $this->db->set($dataSancu);
+      // $this->db->where('kode_item', 'sancu');
+      // $this->db->update('pembelian_detail');
+      // //Boncu
+      // $dataBoncu = array(
+      //   'kode_pembelian' => $kodepembelian,
+      //   'kode_item' =>  'boncu',
+      //   'jumlah_item' => $dataPembelianDetail['boncu'],
+      //   'total_harga_item' => $dataPembelianDetail['total_harga_boncu']
+      //   );
+      // $this->db->set($dataBoncu);
+      // $this->db->where('kode_item', 'boncu');
+      // $this->db->update('pembelian_detail');
+      // //Pretty
+      // $dataPretty = array(
+      //   'kode_pembelian' => $kodepembelian,
+      //   'kode_item' =>  'pretty',
+      //   'jumlah_item' => $dataPembelianDetail['pretty'],
+      //   'total_harga_item' => $dataPembelianDetail['total_harga_pretty']
+      //   );
+      // $this->db->set($dataPretty);
+      // $this->db->where('kode_item', 'pretty');
+      // $this->db->update('pembelian_detail');
+      // //Xtreme
+      // $dataXtreme = array(
+      //   'kode_pembelian' => $kodepembelian,
+      //   'kode_item' =>  'xtreme',
+      //   'jumlah_item' => $dataPembelianDetail['xtreme'],
+      //   'total_harga_item' => $dataPembelianDetail['total_harga_xtreme']
+      //   );
+      // $this->db->set($dataXtreme);
+      // $this->db->where('kode_item', 'xtreme');
+      // $this->db->update('pembelian_detail');
+      // //==============================================
+      // //Update Pembayaran
+      // $this->db->set($dataPembayaran);
+      // $this->db->where('kode_pembelian', $kodepembelian);
+      // $this->db->update('pembayaran');
+      // //update pembelian
+      // $this->db->set($dataPembelian);
+      // $this->db->where('kode_pembelian', $kodepembelian);
+      // $this->db->update('pembelian');
 
-      return true;
+      // return true;
     }
 
     public function deletePembelian($kodepembelian){
+
+      // exe I N S E R T   HISTORY_PEMBELIAN
+      // ambil semua data terkait pemebayaran
+      $this->db->select('*');
+      $this->db->from('pembelian');
+      $this->db->where('kode_pembelian', $kodepembelian);
+      $datapembelian = $this->db->get()->row_array();
+      $keterangan = 'hapus data pembelian '.$datapembelian["kode_pembelian"].' | '.$datapembelian["kode_agen"].' |  nominal pembayaran '.$datapembelian["total_pembelian"];
+
+      $this->db->insert('history_delete', array(
+        'kode_admin' => $_SESSION['username'],
+        'keterangan' => $keterangan
+      ));
+
       // exe H A P U S   S A L D O
       $this->db->where('kode_pembelian', $kodepembelian);
       $this->db->delete('saldo');
@@ -519,13 +533,6 @@
       // exe H A P U S  P E M B E L I A N
       $this->db->where('kode_pembelian', $kodepembelian);
       $this->db->delete('pembelian');
-
-      // exe I N S E R T   HISTORY_DELETE
-      $this->db->insert('history_delete', array(
-        'kode_admin' => $_SESSION['username'],
-        'keterangan' => 'hapus data pembelian '.$kodepembelian
-      ));
-
 
       return true;
 
@@ -664,6 +671,21 @@
 
     public function deletePembayaranDetail($kodepembayarandetail){
 
+      // exe I N S E R T   HISTORY_DELETE
+      // ambil semua data terkait pemebayaran
+      $this->db->select('*');
+      $this->db->from('pembayaran_detail');
+      $this->db->join('pembayaran', 'pembayaran.kode_pembayaran = pembayaran_detail.kode_pembayaran');
+      $this->db->join('pembelian', 'pembelian.kode_pembelian = pembayaran.kode_pembelian');
+      $this->db->where('pembayaran_detail.kode_pembayaran_detail', $kodepembayarandetail);
+      $datalengkappembayaran = $this->db->get()->row_array();
+      $keterangan = 'hapus data pembayaran '.$datalengkappembayaran["kode_pembayaran"].' | '.$datalengkappembayaran["kode_agen"].' |  nominal pembayaran '.$datalengkappembayaran["nominal_pembayaran"];
+
+      $this->db->insert('history_delete', array(
+        'kode_admin' => $_SESSION['username'],
+        'keterangan' => $keterangan
+      ));
+
       // Ambil data PEMBAYARAN INDUK
       $this->db->select('*');
       $this->db->from('pembayaran');
@@ -692,16 +714,6 @@
       // exe H A P U S   S A L D O
       $this->db->where('kode_pembayaran_detail', $kodepembayarandetail);
       $this->db->delete('saldo');
-
-      // exe I N S E R T   HISTORY_DELETE
-      // ambil semua data terkait pemebayaran
-      $this->db->select('*');
-      $this->db->
-
-      $this->db->insert('history_delete', array(
-        'kode_admin' => $_SESSION['username'],
-        'keterangan' => 'hapus data pembayaran '.$kodepembayarandetail
-      ));
 
       return true;
 
