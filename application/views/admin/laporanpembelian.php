@@ -47,7 +47,7 @@
       </div>
       <div class="form-group">
         <label>Sampai: </label>
-        <input type="date" name="tanggalsampai" class="form-control">
+        <input type="date" name="tanggalsampai" class="form-control" id="datepembelian">
         <span class="text-danger"><?php echo form_error('tanggalsampai') ?></span>
       </div>
       <div class="form-group">
@@ -96,7 +96,6 @@
               $totalitemxtreme = $datapembelian[$i]['jumlah_item'];
             }
             $grandtotalitem = $itemsancu+$itemboncu+$itempretty+$itemxtreme;
-            $totalseluruhitem += $grandtotalitem;
           ?>
 
           <!-- jika kodeagen sudah berbeda -->
@@ -170,7 +169,7 @@
     <p class="text-center">Total Item Boncu: <?php echo number_format($totalitemboncu, 0, ',', '.') ?></p>
     <p class="text-center">Total Item Pretty: <?php echo number_format($totalitempretty, 0, ',', '.') ?></p>
     <p class="text-center">Total Item Xtreme: <?php echo number_format($totalitemxtreme, 0, ',', '.') ?></p>
-    <p class="text-center text-warning">Total Seluruh Item: <?php echo number_format($totalseluruhitem, 0, ',', '.') ?></p>
+    <p class="text-center text-warning">Total Seluruh Item: <?php echo number_format($totalitemsancu+$totalitemboncu+$totalitempretty+$totalitemxtreme, 0, ',', '.') ?></p>
 
   </div>
 </div>

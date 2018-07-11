@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-4">
-    <h1 class="text-center">Bayar</h1>
+    <h1 class="text-center text-uppercase">Bayar</h1>
     <?php echo form_open('admin/pembayarandetailtambah/'.$dataPembayaran['kode_pembayaran'].'', array('id' => 'formdisable')) ?>
       <!-- kode pembelian -->
       <div class="form-group">
@@ -25,7 +25,7 @@
       <!-- Tanggal Pembayaran -->
       <div class="form-group">
         <label>Tanggal Pembayaran: </label>
-        <input type="date" name="tanggalpembayaran" value="" class="form-control">
+        <input type="date" name="tanggalpembayaran" value="" class="form-control" id="datepembelian">
         <span class="text-danger"><?php echo form_error('tanggalpembayaran') ?></span>
       </div>
       <!-- Dibayar -->

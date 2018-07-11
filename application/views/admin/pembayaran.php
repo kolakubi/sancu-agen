@@ -1,4 +1,4 @@
-<h1 class="text-center">Info Pembayaran</h1>
+<h1 class="text-center text-uppercase">Info Pembayaran</h1>
 
 <div class="row">
   <div class="col-xs-12 col-md-4 col-md-offset-4">
@@ -22,7 +22,7 @@
       </div>
       <div class="form-group">
         <label>Sampai: </label>
-        <input type="date" name="tanggalsampai" class="form-control">
+        <input type="date" name="tanggalsampai" class="form-control" id="datepembelian">
         <span class="text-danger"><?php echo form_error('tanggalsampai') ?></span>
       </div>
       <div class="form-group">

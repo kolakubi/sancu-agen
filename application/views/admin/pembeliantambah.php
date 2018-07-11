@@ -1,4 +1,4 @@
-<h1 class="text-center">Pembelian Tambah</h1>
+<h1 class="text-center text-uppercase">Pembelian Tambah</h1>
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-4">
     <!-- form tambah agen -->

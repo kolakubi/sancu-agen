@@ -71,7 +71,11 @@
     let hari = tanggal.getDate();
     hari = hari <= 9 ? '0'+hari : hari;
     let time = tahun+'-'+bulan+'-'+hari;
-    document.getElementById("datepembelian").defaultValue = time;
+
+    let dateInput = document.getElementById("datepembelian");
+    if(dateInput){
+      dateInput.defaultValue = time;
+    }
   }
 
   // fungsi hitung jumlah Item
@@ -311,6 +315,8 @@
   ajaxGetAgen();
   // matiin enter di form pembelian
   disableEnterDiPembelian();
+  // fungsi otomatis date hari ini
+  dateOtomatisHariIni();
 
 
   //////////////////////////////////////////////////
@@ -321,7 +327,7 @@
   let kodeHalaman = window.location.pathname.split("/").pop();
   if(window.location.pathname == "/sancu-agen/admin/pembeliantambah"){
     // fungsi otomatis date hari ini
-    dateOtomatisHariIni();
+    //dateOtomatisHariIni();
     // fungsi hitung jumlah Item
     hitungJumlahItem();
     // fungsi hitung jumlah pembelian
