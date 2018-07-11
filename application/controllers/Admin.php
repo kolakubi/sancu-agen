@@ -731,6 +731,9 @@
         if($result){
           redirect('admin/pembayaran');
         }
+        // echo '<pre>';
+        // print_r($result);
+        // echo '</pre>';
       }
     }
 

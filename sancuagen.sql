@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 10, 2018 at 11:00 AM
+-- Generation Time: Jul 11, 2018 at 05:29 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -176,13 +176,6 @@ CREATE TABLE `bonus` (
   `total_item` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `bonus`
---
-
-INSERT INTO `bonus` (`kode_bonus`, `kode_agen`, `jumlah_bonus`, `ribuan`, `puluhan_ribu`, `total_item`) VALUES
-(284, 'agen003', 0, 0, 0, 900);
-
 -- --------------------------------------------------------
 
 --
@@ -201,14 +194,6 @@ CREATE TABLE `bonus_detail` (
   `kode_pembelian` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `bonus_detail`
---
-
-INSERT INTO `bonus_detail` (`kode_bonus`, `status`, `bonus`, `jumlah_item`, `tanggal_pembelian`, `kode_bonus_detail`, `history_item`, `nik`, `kode_pembelian`) VALUES
-(284, '', 0, 300, '2018-07-10', 382, 300, 'admin001', 819),
-(284, '', 0, 600, '2018-07-10', 383, 900, 'admin001', 820);
-
 -- --------------------------------------------------------
 
 --
@@ -221,19 +206,6 @@ CREATE TABLE `history_delete` (
   `keterangan` varchar(255) NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `history_delete`
---
-
-INSERT INTO `history_delete` (`kode_delete`, `kode_admin`, `keterangan`, `date`) VALUES
-(1, '0', '0', '2018-07-10 14:12:01'),
-(2, 'admin001', 'hapus data', '2018-07-10 14:13:26'),
-(3, 'admin001', 'hapus data pembelian 818', '2018-07-10 14:14:39'),
-(4, 'admin001', 'hapus data pembelian 19', '2018-07-10 15:54:52'),
-(5, 'admin001', 'hapus data pembelian 19', '2018-07-10 15:55:50'),
-(6, 'admin001', 'hapus data pembelian 22', '2018-07-10 15:57:13'),
-(7, 'admin001', 'hapus data pembelian 22', '2018-07-10 15:57:45');
 
 -- --------------------------------------------------------
 
@@ -248,82 +220,6 @@ CREATE TABLE `log` (
   `ip` varchar(20) NOT NULL,
   `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `log`
---
-
-INSERT INTO `log` (`kode_login`, `username`, `time`, `ip`, `status`) VALUES
-(4, 'agen001', '2018-05-24 13:13:29', '::1', 'sukses'),
-(5, 'agen080', '2018-05-24 13:24:08', '::1', 'gagal'),
-(6, 'agen080', '2018-05-24 13:24:35', '::1', 'sukses'),
-(7, 'agen001', '2018-05-24 13:45:11', '::1', 'gagal'),
-(8, 'agen001', '2018-05-24 13:45:44', '::1', 'sukses'),
-(9, 'admin001', '2018-05-24 13:46:04', '::1', 'sukses'),
-(10, 'agen001', '2018-05-24 13:48:47', '::1', 'sukses'),
-(11, 'agen001', '2018-05-24 14:56:55', '::1', 'gagal'),
-(12, 'agen001', '2018-05-24 14:57:17', '::1', 'sukses'),
-(13, 'agen001', '2018-05-26 10:21:27', '::1', 'gagal'),
-(14, 'agen001', '2018-05-26 10:22:30', '::1', 'sukses'),
-(15, 'admin001', '2018-05-26 10:23:29', '::1', 'gagal'),
-(16, 'admin001', '2018-05-26 10:23:36', '::1', 'sukses'),
-(17, 'admin001', '2018-05-26 11:14:24', '::1', 'sukses'),
-(18, 'agen001', '2018-05-26 11:14:39', '::1', 'gagal'),
-(19, 'agen001', '2018-05-26 11:14:48', '::1', 'sukses'),
-(20, 'agen001', '2018-05-28 11:44:22', '::1', 'sukses'),
-(21, 'admin001', '2018-05-28 11:50:37', '::1', 'sukses'),
-(22, 'agen001', '2018-05-28 11:51:32', '::1', 'sukses'),
-(23, 'admin001', '2018-05-28 14:12:21', '::1', 'sukses'),
-(24, 'admin001', '2018-05-30 09:57:38', '::1', 'sukses'),
-(25, 'agen001', '2018-05-30 13:58:31', '::1', 'gagal'),
-(26, 'admin001', '2018-05-30 13:58:44', '::1', 'sukses'),
-(27, 'admin001', '2018-05-30 14:45:06', '::1', 'sukses'),
-(28, 'agen001', '2018-05-30 15:02:25', '::1', 'gagal'),
-(29, 'admin003', '2018-05-30 15:02:46', '::1', 'gagal'),
-(30, 'agen003', '2018-05-30 15:03:02', '::1', 'sukses'),
-(31, 'admin001', '2018-05-31 10:19:46', '::1', 'sukses'),
-(32, 'agen001', '2018-06-01 10:55:01', '::1', 'gagal'),
-(33, 'agen001', '2018-06-01 11:02:05', '::1', 'gagal'),
-(34, 'agen001', '2018-06-01 11:02:17', '::1', 'gagal'),
-(35, 'agen001', '2018-06-01 11:03:10', '::1', 'gagal'),
-(36, 'admin001', '2018-06-01 11:03:19', '::1', 'gagal'),
-(37, 'agen001', '2018-06-01 11:03:31', '::1', 'gagal'),
-(38, 'agen001', '2018-06-01 11:09:04', '::1', 'gagal'),
-(39, 'agen001', '2018-06-01 11:09:27', '::1', 'gagal'),
-(40, 'admin001', '2018-06-01 13:18:26', '::1', 'sukses'),
-(41, 'agen001', '2018-06-01 13:18:34', '::1', 'gagal'),
-(42, 'agen001', '2018-06-01 13:18:40', '::1', 'sukses'),
-(43, 'agen003', '2018-06-01 13:20:26', '::1', 'sukses'),
-(44, 'agen001', '2018-06-04 08:32:01', '::1', 'sukses'),
-(45, 'agen001', '2018-06-04 10:57:22', '::1', 'gagal'),
-(46, 'agen001', '2018-06-04 10:57:32', '::1', 'gagal'),
-(47, 'agen001', '2018-06-04 10:57:40', '::1', 'gagal'),
-(48, 'agen001', '2018-06-04 11:12:55', '::1', 'gagal'),
-(49, 'agen001', '2018-06-04 11:13:06', '::1', 'gagal'),
-(50, 'agen001', '2018-06-04 11:13:27', '::1', 'gagal'),
-(51, 'agen001', '2018-06-04 11:13:42', '::1', 'gagal'),
-(52, 'agen002', '2018-06-04 11:13:57', '::1', 'sukses'),
-(53, 'agen001', '2018-06-04 11:14:47', '::1', 'gagal'),
-(54, 'agen001', '2018-06-04 11:14:52', '::1', 'gagal'),
-(55, 'admin001', '2018-06-04 11:17:16', '::1', 'sukses'),
-(56, 'agen001', '2018-06-04 11:17:30', '::1', 'sukses'),
-(57, 'agen001', '2018-06-04 11:17:49', '::1', 'sukses'),
-(58, 'agen001', '2018-06-04 11:18:30', '::1', 'sukses'),
-(59, 'agen001', '2018-06-04 13:46:58', '::1', 'gagal'),
-(60, 'admin001', '2018-06-04 13:47:06', '::1', 'sukses'),
-(61, 'agen001', '2018-06-04 13:48:51', '::1', 'sukses'),
-(62, 'agen001', '2018-06-04 13:53:20', '::1', 'sukses'),
-(63, 'agen001', '2018-06-05 14:28:38', '::1', 'sukses'),
-(64, 'admin002', '2018-06-05 14:33:12', '::1', 'sukses'),
-(65, 'admin001', '2018-07-04 13:39:48', '::1', 'sukses'),
-(66, 'admin001', '2018-07-04 14:39:47', '::1', 'sukses'),
-(67, 'admin001', '2018-07-07 09:16:42', '::1', 'sukses'),
-(68, 'admin001', '2018-07-07 10:07:29', '::1', 'sukses'),
-(69, 'firman', '2018-07-07 10:21:06', '::1', 'sukses'),
-(70, 'admin003', '2018-07-07 10:26:11', '::1', 'sukses'),
-(71, 'agen001', '2018-07-07 11:06:39', '::1', 'gagal'),
-(72, 'admin001', '2018-07-07 11:06:46', '::1', 'sukses'),
-(73, 'admin001', '2018-07-10 09:54:31', '::1', 'sukses');
 
 -- --------------------------------------------------------
 
@@ -450,14 +346,6 @@ CREATE TABLE `pembayaran` (
   `sisa_tagihan` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `pembayaran`
---
-
-INSERT INTO `pembayaran` (`kode_pembayaran`, `kode_pembelian`, `tanggal_pembelian`, `jumlah_pembelian`, `sisa_tagihan`) VALUES
-(23, 819, '2018-07-10', 600000, 500000),
-(24, 820, '2018-07-10', 900000, 370000);
-
 -- --------------------------------------------------------
 
 --
@@ -472,28 +360,9 @@ CREATE TABLE `pembayaran_detail` (
   `sisa_tagihan` int(11) NOT NULL,
   `kode_pembayaran_detail` int(11) NOT NULL,
   `keterangan` text NOT NULL,
-  `nik` varchar(20) NOT NULL
+  `nik` varchar(20) NOT NULL,
+  `status_no_edit` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pembayaran_detail`
---
-
-INSERT INTO `pembayaran_detail` (`kode_pembayaran`, `tanggal_pembayaran`, `tagihan_sebelumnya`, `nominal_pembayaran`, `sisa_tagihan`, `kode_pembayaran_detail`, `keterangan`, `nik`) VALUES
-(23, '2018-07-10', 600000, 100000, 500000, 9, 'BCA', 'admin001'),
-(24, '2018-07-10', 900000, 200000, 700000, 10, 'Mandiri', 'admin001'),
-(24, '2018-07-10', 700000, 100000, 600000, 11, 'MAndiri', 'admin001'),
-(24, '2018-07-10', 600000, 50000, 550000, 12, 'BRI', 'admin001'),
-(24, '2018-07-10', 550000, 50000, 500000, 13, 'Mandiri', 'admin001'),
-(24, '2018-07-10', 500000, 50000, 450000, 14, 'asd', 'admin001'),
-(24, '2018-07-10', 450000, 10000, 440000, 15, 'dsa', 'admin001'),
-(24, '2018-07-10', 440000, 10000, 430000, 16, 'asd', 'admin001'),
-(24, '2018-07-10', 430000, 10000, 420000, 17, 'asd', 'admin001'),
-(24, '2018-07-10', 420000, 10000, 410000, 18, '64', 'admin001'),
-(24, '2018-07-10', 410000, 10000, 400000, 19, 'asd', 'admin001'),
-(24, '2018-07-10', 400000, 10000, 390000, 20, '654', 'admin001'),
-(24, '2018-07-10', 390000, 10000, 380000, 21, 'asd', 'admin001'),
-(24, '2018-07-10', 380000, 10000, 370000, 22, 'asdasdasd', 'admin001');
 
 -- --------------------------------------------------------
 
@@ -517,8 +386,10 @@ CREATE TABLE `pembelian` (
 --
 
 INSERT INTO `pembelian` (`kode_pembelian`, `kode_agen`, `tanggal_pembelian`, `total_item`, `total_pembelian`, `perincian`, `nik`, `status_no_edit`) VALUES
-(819, 'agen003', '2018-07-10', 600, 600000, 'tidak ada', 'admin001', 1),
-(820, 'agen003', '2018-07-10', 900, 900000, 'tidak ada', 'admin001', 1);
+(824, 'agen003', '2018-07-11', 300, 300000, 'Jaring Rp 100.000', 'admin001', 1),
+(826, 'agen003', '2018-07-11', 500, 500000, 'tidak ada', 'admin001', 1),
+(828, 'agen001', '2018-07-11', 600, 600000, 'Jaring Rp50.000', 'admin001', 0),
+(829, 'agen003', '2018-07-11', 300, 2100000, 'tidak ada', 'admin001', 0);
 
 -- --------------------------------------------------------
 
@@ -533,18 +404,6 @@ CREATE TABLE `pembelian_detail` (
   `jumlah_item` int(11) NOT NULL,
   `total_harga_item` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pembelian_detail`
---
-
-INSERT INTO `pembelian_detail` (`kode_pembelian_detail`, `kode_pembelian`, `kode_item`, `jumlah_item`, `total_harga_item`) VALUES
-(518, 819, 'sancu', 100, 100000),
-(519, 819, 'boncu', 200, 200000),
-(520, 819, 'xtreme', 300, 300000),
-(521, 820, 'sancu', 500, 500000),
-(522, 820, 'boncu', 100, 100000),
-(523, 820, 'pretty', 300, 300000);
 
 -- --------------------------------------------------------
 
@@ -584,26 +443,6 @@ CREATE TABLE `saldo` (
   `nominal` int(11) NOT NULL,
   `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `saldo`
---
-
-INSERT INTO `saldo` (`kode_saldo`, `kode_agen`, `kode_pembelian`, `kode_pembayaran_detail`, `tgl_perubahan`, `debet`, `kredit`, `nominal`, `keterangan`) VALUES
-(471, 'agen003', 819, 0, '2018-07-10', 600000, 0, 600000, 'pembelian'),
-(472, 'agen003', 0, 9, '2018-07-10', 0, 100000, 500000, 'BCA'),
-(473, 'agen003', 820, 0, '2018-07-10', 900000, 0, 1400000, 'pembelian'),
-(474, 'agen003', 0, 10, '2018-07-10', 0, 200000, 1200000, 'Mandiri'),
-(475, 'agen003', 0, 11, '2018-07-10', 0, 100000, 1100000, 'MAndiri'),
-(476, 'agen003', 0, 12, '2018-07-10', 0, 50000, 1050000, 'BRI'),
-(477, 'agen003', 0, 13, '2018-07-10', 0, 50000, 1000000, 'Mandiri'),
-(478, 'agen003', 0, 14, '2018-07-10', 0, 50000, 950000, 'asd'),
-(479, 'agen003', 0, 15, '2018-07-10', 0, 10000, 940000, 'dsa'),
-(480, 'agen003', 0, 16, '2018-07-10', 0, 10000, 930000, 'asd'),
-(481, 'agen003', 0, 17, '2018-07-10', 0, 10000, 920000, 'asd'),
-(482, 'agen003', 0, 18, '2018-07-10', 0, 10000, 910000, '64'),
-(484, 'agen003', 0, 20, '2018-07-10', 0, 10000, 890000, '654'),
-(485, 'agen003', 0, 21, '2018-07-10', 0, 10000, 880000, 'asd');
 
 --
 -- Indexes for dumped tables
@@ -709,55 +548,55 @@ ALTER TABLE `saldo`
 -- AUTO_INCREMENT for table `bonus`
 --
 ALTER TABLE `bonus`
-  MODIFY `kode_bonus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=285;
+  MODIFY `kode_bonus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=289;
 
 --
 -- AUTO_INCREMENT for table `bonus_detail`
 --
 ALTER TABLE `bonus_detail`
-  MODIFY `kode_bonus_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=384;
+  MODIFY `kode_bonus_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=393;
 
 --
 -- AUTO_INCREMENT for table `history_delete`
 --
 ALTER TABLE `history_delete`
-  MODIFY `kode_delete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `kode_delete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `kode_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `kode_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `pembayaran_detail`
 --
 ALTER TABLE `pembayaran_detail`
-  MODIFY `kode_pembayaran_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `kode_pembayaran_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=821;
+  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=830;
 
 --
 -- AUTO_INCREMENT for table `pembelian_detail`
 --
 ALTER TABLE `pembelian_detail`
-  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=524;
+  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=543;
 
 --
 -- AUTO_INCREMENT for table `saldo`
 --
 ALTER TABLE `saldo`
-  MODIFY `kode_saldo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=487;
+  MODIFY `kode_saldo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=511;
 
 --
 -- Constraints for dumped tables

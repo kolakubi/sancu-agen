@@ -25,9 +25,11 @@
             <!-- <td><?php echo 'Rp'.number_format($pembayaran['sisa_tagihan'], 0, ',', '.')?></td> -->
             <td><?php echo $pembayaran['keterangan'] ?></td>
             <td>
-            <a href="<?php echo base_url() ?>admin/pembayarandetailhapus/<?php echo $pembayaran['kode_pembayaran_detail'] ?>" class="btn btn-danger btnhapus">Hapus<span class="glyphicon glyphicon-trash"></span>
-            </a>
-          </td>
+              <?php if(!$pembayaran['status_no_edit']) : ?>
+                <a href="<?php echo base_url() ?>admin/pembayarandetailhapus/<?php echo $pembayaran['kode_pembayaran_detail'] ?>" class="btn btn-danger btnhapus">Hapus<span class="glyphicon glyphicon-trash"></span>
+                </a>
+              <?php endif ?>
+            </td>
           </tr>
         <?php endforeach ?>
       </tbody>

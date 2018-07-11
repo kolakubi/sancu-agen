@@ -292,7 +292,8 @@
             'nominal_pembayaran' => $bonus,
             'sisa_tagihan' => $sisaTagihanKurangBonus,
             'keterangan' => 'bonus pembelian '.$dataPembelian['tanggal_pembelian'],
-            'nik' => $_SESSION['username']
+            'nik' => $_SESSION['username'],
+            'status_no_edit' => 1
           );
 
           $this->db->insert('pembayaran_detail', $dataBonusPembayaranDetail);
@@ -376,7 +377,8 @@
             'nominal_pembayaran' => $bonus,
             'sisa_tagihan' => $sisaTagihanKurangBonus,
             'keterangan' => 'bonus pembelian '.$dataPembelian['tanggal_pembelian'],
-            'nik' => $_SESSION['username']
+            'nik' => $_SESSION['username'],
+            'status_no_edit' => 1
           );
 
           $this->db->insert('pembayaran_detail', $dataBonusPembayaranDetail);
@@ -567,10 +569,9 @@
     public function getPembayaranDetail($kodePembayaran){
       // ambil data pembayaran detail sesuai kode pembayaran
       $this->db->select('*');
-      $this->db->from('pembayaran_detail');
-      $this->db->join('pembayaran', 'pembayaran.kode_pembayaran = pembayaran_detail.kode_pembayaran');
-      $this->db->join('pembelian', 'pembelian.kode_pembelian = pembayaran.kode_pembelian');
-      $this->db->where('pembayaran.kode_pembayaran', $kodePembayaran);
+      $this->db->from('pembayaran');
+      $this->db->join('pembayaran_detail', 'pembayaran_detail.kode_pembayaran = pembayaran.kode_pembayaran');
+      $this->db->where('pembayaran_detail.kode_pembayaran', $kodePembayaran);
       $result = $this->db->get()->result_array();
 
       return $result;
@@ -578,7 +579,59 @@
 
     public function insertPembayaranDetail($dataPembayaran, $dataSaldo){
 
-      // I N S E R T   P E M B E L I A N   D E T A I L
+      // U P D A T E   P E M B E L I A N
+      // update data pembelian sebelumnya
+
+      // ambil semua data pembelian berdasarkan kode_pembayaran
+      $this->db->select('*');
+      $this->db->from('pembelian');
+      $this->db->join('pembayaran', 'pembayaran.kode_pembelian = pembelian.kode_pembelian');
+      $this->db->where('pembayaran.kode_pembayaran', $dataPembayaran['kode_pembayaran']);
+      $this->db->order_by('pembayaran.kode_pembayaran', 'DESC');
+      $this->db->limit(2);
+      $pembelianterakhir = $this->db->get()->result_array();
+      $pembelianterakhir = $pembelianterakhir[0];
+
+      //return $pembelianterakhir;
+      
+      // cek pembelian sebelumnya
+      if(!empty($pembelianterakhir)){
+        $kodePembelianTerakhir = $pembelianterakhir['kode_pembelian'];
+
+        // ex UPDATE STATUS EDIT PEMBELIAN TERAKHIR
+        $this->db->set('status_no_edit', 1);
+        $this->db->where('kode_pembelian', $kodePembelianTerakhir);
+        $this->db->update('pembelian');
+
+      } // => end of cek pembelian sebelumnya
+
+
+      // U P D A T E   STATUS EDIT DETAIL PEMBAYARAN
+      // update status edit detail pembayaran sebelumnya
+      $this->db->select('*');
+      $this->db->from('pembayaran');
+      $this->db->join('pembayaran_detail', 'pembayaran_detail.kode_pembayaran = pembayaran.kode_pembayaran');
+      $this->db->where('pembayaran.kode_pembayaran', $dataPembayaran['kode_pembayaran']);
+      $this->db->order_by('pembayaran_detail.kode_pembayaran_detail', 'DESC');
+      $this->db->limit(2);
+      $pembayarandetalterakhir = $this->db->get()->result_array();
+      $pembayarandetalterakhir = $pembayarandetalterakhir[0];
+
+      // return $pembayarandetalterakhir;
+
+      $kodepembayarandetailterakhir = $pembayarandetalterakhir['kode_pembayaran_detail'];
+
+      // cek pembayaran sebelumnya
+      if(!empty($pembayarandetalterakhir)){
+
+        // ex UPDATE STATUS EDIT pembayaran TERAKHIR
+        $this->db->set('status_no_edit', 1);
+        $this->db->where('kode_pembayaran_detail', $kodepembayarandetailterakhir);
+        $this->db->update('pembayaran_detail');
+
+      } // => end of cek pembayaran sebelumnya
+      
+      // I N S E R T   P E M B A Y A R A N   D E T A I L
       $this->db->insert('pembayaran_detail', $dataPembayaran);
       // ambil id pembayaran detail yg bru diinput
       $kode_pembayaran_detail_diinput = $this->db->insert_id();
@@ -596,8 +649,8 @@
       $this->db->limit(2);
       $saldoAkhir = $this->db->get('saldo')->result_array();
       $saldoAkhir = $saldoAkhir[0]['nominal'];
-
       $dataSaldo['nominal'] = $saldoAkhir - $dataSaldo['kredit'];
+
       // id pembayaran detail
       $datasaldo['kode_pembayaran_detail'] = $kode_pembayaran_detail_diinput;
       $datasaldo['kode_pembelian'] = 0;
@@ -605,29 +658,6 @@
       // insert saldo
       $dataSaldo['kode_pembayaran_detail'] = $kode_pembayaran_detail_diinput;
       $this->db->insert('saldo', $dataSaldo);
-
-      // U P D A T E   P E M B E L I A N
-      // update status edit pembelian sebelumnya
-      
-      $kodepembayaran = $this->db->get_where('pembayaran', array('kode_pembayaran' => $dataPembayaran['kode_pembayaran']))->row_array();
-      $kodepembelian = $kodepembayaran['kode_pembelian'];
-
-      // ambil semua data pembelian berdasarkan kode_pembelian
-      $pembelianTerakhir = $this->db->get_where('pembelian', array('kode_pembelian' => $kodepembelian))->row_array();
-      $kodePembelianTerakhir = $pembelianTerakhir['kode_pembelian'];
-      
-
-      // cek pembelian sebelumnya
-      if(!empty($pembelianTerakhir)){
-
-        // ex UPDATE STATUS EDIT PEMBELIAN TERAKHIR
-        $this->db->set('status_no_edit', 1);
-        $this->db->where('kode_pembelian', $kodePembelianTerakhir);
-        $this->db->update('pembelian');
-
-      } // => end of cek pembelian sebelumnya
-
-      ///////////////////////////////////////////////
 
       return true;
     }
@@ -638,35 +668,40 @@
       $this->db->select('*');
       $this->db->from('pembayaran');
       $this->db->join('pembayaran_detail', 'pembayaran_detail.kode_pembayaran = pembayaran.kode_pembayaran');
-      $this->db->where('pembayaran_detail.kode_pembayaran', $kodepembayarandetail);
+      $this->db->where('pembayaran_detail.kode_pembayaran_detail', $kodepembayarandetail);
       $dataPembayaran = $this->db->get()->row_array();
+
+      // ambil kode pembelian
+      $kodepembelian = $dataPembayaran['kode_pembelian'];
 
       // ambil value bonus
       $sisatagihanlama = $dataPembayaran['sisa_tagihan'];
 
       // Ambil nominal pembayaran_detail yang ingin dihapus
-      $nominalpembayaran = $this->db->get_where('pembayaran_detail', array('kode_pembayaran_detail', $kodepembayarandetail))->row_array();
-      $nominalpembayaran = $nominalpembayaran['nominal_pembayaran'];
+      $nominalpembayaran = $dataPembayaran['nominal_pembayaran'];
 
       // exe U P D A T E   P E M B A Y A R A N
       $this->db->set('sisa_tagihan', $sisatagihanlama+$nominalpembayaran);
       $this->db->where('kode_pembayaran', $dataPembayaran['kode_pembayaran']);
       $this->db->update('pembayaran');
 
-      // exe H A P U S  BONUS_DETAIL
-      $this->db->where('kode_pembelian', $kodepembelian);
-      $this->db->delete('bonus_detail');
+      // exe H A P U S  PEMBAYARAN_DETAIL
+      $this->db->where('kode_pembayaran_detail', $kodepembayarandetail);
+      $this->db->delete('pembayaran_detail');
       
       // exe H A P U S   S A L D O
       $this->db->where('kode_pembayaran_detail', $kodepembayarandetail);
       $this->db->delete('saldo');
 
       // exe I N S E R T   HISTORY_DELETE
+      // ambil semua data terkait pemebayaran
+      $this->db->select('*');
+      $this->db->
+
       $this->db->insert('history_delete', array(
         'kode_admin' => $_SESSION['username'],
-        'keterangan' => 'hapus data pembelian '.$kodepembayarandetail
+        'keterangan' => 'hapus data pembayaran '.$kodepembayarandetail
       ));
-
 
       return true;
 
