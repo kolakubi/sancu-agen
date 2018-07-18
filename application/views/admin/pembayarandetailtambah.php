@@ -18,7 +18,7 @@
       <!-- Tagihan Sebelumnya -->
       <div class="form-group">
         <label>Tagihan Sebelumnya: </label>
-        <input type="number" name="tagihansebelumnya" value="<?php echo $dataPembayaran['sisa_tagihan'] ?>" class="form-control" readonly="true" id="bayartagihansebelumnya">
+        <input type="text" name="tagihansebelumnya" value="<?php echo number_format(($dataPembayaran['sisa_tagihan']), 0, ',', '.')?>" class="form-control" readonly="true" id="bayartagihansebelumnya">
         <span class="text-danger"><?php echo form_error('tagihansebelumnya') ?></span>
       </div>
       <!-- Detail Pembayaran -->
@@ -31,7 +31,7 @@
       <!-- Dibayar -->
       <div class="form-group">
         <label>Dibayar: </label>
-        <input type="number" name="dibayar" value="" class="form-control" id="bayardibayar">
+        <input type="text" name="dibayar" value="" class="form-control autonum" id="bayardibayar" data-a-dec="," data-a-sep=".">
         <span class="text-danger"><?php echo form_error('dibayar') ?></span>
       </div>
       <!-- Sisa Tagihan -->

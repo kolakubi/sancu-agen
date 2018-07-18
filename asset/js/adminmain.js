@@ -86,7 +86,7 @@
     let xtreme = document.getElementById('pembelianxtreme');
     let totalItem = 0;
     function getAllValue(){
-      totalItem = parseInt(sancu.value) + parseInt(boncu.value) + parseInt(pretty.value) + parseInt(xtreme.value);
+      totalItem = parseInt(sancu.value.replace(/\D+/g, '')) + parseInt(boncu.value.replace(/\D+/g, '')) + parseInt(pretty.value.replace(/\D+/g, '')) + parseInt(xtreme.value.replace(/\D+/g, ''));
     }
     let jumlahItem = document.getElementById('pembelianjumlahitem');
     sancu.addEventListener('change', function(){
@@ -116,10 +116,10 @@
 
     let jumlah = 0;
     function totalPembelian(){
-      jumlah = parseInt(pembelianHargaSancu.val()) +
-      parseInt(pembelianHargaBoncu.val()) +
-      parseInt(pembelianHargaPretty.val()) +
-      parseInt(pembelianHargaXtreme.val());
+      jumlah = parseInt(pembelianHargaSancu.val().replace(/\D+/g, '')) +
+      parseInt(pembelianHargaBoncu.val().replace(/\D+/g, '')) +
+      parseInt(pembelianHargaPretty.val().replace(/\D+/g, '')) +
+      parseInt(pembelianHargaXtreme.val().replace(/\D+/g, ''));
     }
 
     pembelianHargaSancu.on('change', () => {
@@ -275,6 +275,22 @@
     })
   }// end of fungsi matiin enter
 
+  // fungsi auto numeric
+  function autoDecimal(){
+    $('.autonum').autoNumeric('init', {vMin: '0', vMax: '999999999' });
+  }
+
+  function extractDecimal($elem){
+    btnExtract.on('click', function(){
+      let autoNumeric = $elem;
+      let val = autoNumeric.val();
+      let hanyaAngka = val.replace(/\D+/g, '');
+      
+      return hanyaAngka;
+    })
+  }
+ 
+
   ////////////////////////////////////////
   ///////// Fungsi Pembayaran ////////////
 
@@ -285,7 +301,7 @@
 
     let selisih = 0;
     function sisaTagihanFunc(){
-      selisih = parseInt(tagihanSebelumnya.val()) - parseInt(dibayar.val());
+      selisih = parseInt(tagihanSebelumnya.val().replace(/\D+/g, '')) - parseInt(dibayar.val().replace(/\D+/g, ''));
     }
 
     dibayar.on('change', function(){
@@ -317,6 +333,8 @@
   disableEnterDiPembelian();
   // fungsi otomatis date hari ini
   dateOtomatisHariIni();
+  // fungsi auto Numeric
+  autoDecimal();
 
 
   //////////////////////////////////////////////////

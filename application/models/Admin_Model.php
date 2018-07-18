@@ -753,10 +753,13 @@
       //$this->db->order_by('tgl_perubahan', 'ASC');
       $result = $this->db->get()->result_array();
 
+      //return $result;
+
       // ambil data saldo 1 hari sebelumnya
       $this->db->select('*');
       $this->db->from('saldo');
       $this->db->where('tgl_perubahan', $kemarin);
+      $this->db->where('kode_agen', $dataAmbil['kodeagen']);
       $kemarinArr = $this->db->get()->result_array();
       $satuharilalu = array();
       if(!empty($kemarinArr)){

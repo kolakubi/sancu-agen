@@ -33,7 +33,7 @@
           <span class="text-danger"><?php echo form_error('sancu') ?></span>
           <!-- harga -->
           <label>Harga: </label>
-          <input type="number" name="sancuharga" value="0" class="form-control" id="pembelianhargasancu">
+          <input type="text" name="sancuharga" value="0" class="form-control autonum" id="pembelianhargasancu" data-a-dec="," data-a-sep=".">
           <span class="text-danger"><?php echo form_error('sancuharga') ?></span>
         </div>
         <hr>
@@ -45,7 +45,7 @@
           <span class="text-danger"><?php echo form_error('boncu') ?></span>
           <!-- harga -->
           <label>Harga: </label>
-          <input type="number" name="boncuharga" value="0" class="form-control" id="pembelianhargaboncu">
+          <input type="text" name="boncuharga" value="0" class="form-control autonum" id="pembelianhargaboncu" data-a-dec="," data-a-sep=".">
           <span class="text-danger"><?php echo form_error('boncuharga') ?></span>
         </div>
       </div>
@@ -58,7 +58,7 @@
           <span class="text-danger"><?php echo form_error('pretty') ?></span>
           <!-- harga -->
           <label>Harga: </label>
-          <input type="number" name="prettyharga" value="0" class="form-control" id="pembelianhargapretty">
+          <input type="text" name="prettyharga" value="0" class="form-control autonum" id="pembelianhargapretty" data-a-dec="," data-a-sep=".">
           <span class="text-danger"><?php echo form_error('prettyharga') ?></span>
         </div>
         <hr>
@@ -70,7 +70,7 @@
           <span class="text-danger"><?php echo form_error('xtreme') ?></span>
           <!-- harga -->
           <label>Harga: </label>
-          <input type="number" name="xtremeharga" value="0" class="form-control" id="pembelianhargaxtreme">
+          <input type="text" name="xtremeharga" value="0" class="form-control autonum" id="pembelianhargaxtreme" data-a-dec="," data-a-sep=".">
           <span class="text-danger"><?php echo form_error('xtremeharga') ?></span>
         </div>
       </div>
@@ -78,7 +78,7 @@
       <!-- bonus -->
       <div class="form-group">
         <label>Bonus:</label>
-        <input type="number" name="bonus" value="0" class="form-control">
+        <input type="text" name="bonus" value="0" class="form-control autonum" data-a-dec="," data-a-sep=".">
         <span class="text-danger"><?php echo form_error('bonus') ?></span>
       </div>
       <!-- perincian -->

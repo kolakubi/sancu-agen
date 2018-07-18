@@ -93,7 +93,7 @@
             }
             if($datapembelian[$i]['kode_item'] == 'xtreme'){
               $itemxtreme += $datapembelian[$i]['jumlah_item'];
-              $totalitemxtreme = $datapembelian[$i]['jumlah_item'];
+              $totalitemxtreme += $datapembelian[$i]['jumlah_item'];
             }
             $grandtotalitem = $itemsancu+$itemboncu+$itempretty+$itemxtreme;
           ?>
@@ -104,11 +104,11 @@
               <tr>
                   <td><?php echo $index ?></td>
                   <td><?php echo $datapembelian[$i]['nama'] ?></td>
-                  <td><?php echo $itemsancu ?></td>
-                  <td><?php echo $itemboncu ?></td>
-                  <td><?php echo $itempretty ?></td>
-                  <td><?php echo $itemxtreme ?></td>
-                  <td><?php echo $grandtotalitem ?></td>
+                  <td><?php echo number_format(($itemsancu), 0, ',', '.') ?></td>
+                  <td><?php echo number_format(($itemboncu), 0, ',', '.') ?></td>
+                  <td><?php echo number_format(($itempretty), 0, ',', '.') ?></td>
+                  <td><?php echo number_format(($itemxtreme), 0, ',', '.') ?></td>
+                  <td><?php echo number_format(($grandtotalitem), 0, ',', '.') ?></td>
               </tr>
               <?php
                 $index++;

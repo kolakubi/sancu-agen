@@ -12,6 +12,7 @@
       </nav>
 
   <script type="text/javascript" src="<?php echo base_url() ?>asset/js/jquery.js"></script>
+  <script type="text/javascript" src="<?php echo base_url() ?>asset/js/autonumeric.js"></script>
   <script type="text/javascript" src="<?php echo base_url() ?>asset/bootstrap/js/bootstrap.js"></script>
   <!-- datatables js -->
   <script type="text/javascript" src="<?php echo base_url() ?>asset/datatables/datatables.min.js"></script>

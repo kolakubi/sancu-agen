@@ -383,12 +383,20 @@
         $tanggal = $this->input->post('tanggal');
         $sancu = $this->input->post('sancu');
         $sancuharga = $this->input->post('sancuharga');
+        $sancuharga = preg_replace("/[^0-9]/", "", $sancuharga);
+        ///////////////////////////////////////////////////////
         $boncu = $this->input->post('boncu');
         $boncuharga = $this->input->post('boncuharga');
+        $boncuharga = preg_replace("/[^0-9]/", "", $boncuharga);
+        ///////////////////////////////////////////////////////
         $pretty = $this->input->post('pretty');
         $prettyharga = $this->input->post('prettyharga');
+        $prettyharga = preg_replace("/[^0-9]/", "", $prettyharga);
+        ///////////////////////////////////////////////////////
         $xtreme = $this->input->post('xtreme');
         $xtremeharga = $this->input->post('xtremeharga');
+        $xtremeharga = preg_replace("/[^0-9]/", "", $xtremeharga);
+        ///////////////////////////////////////////////////////
         $pembelianjumlahitem = $this->input->post('pembelianjumlahitem');
         $pembelianjumlah = $this->input->post('pembelianjumlah');
         $pembeliandibayar = $this->input->post('pembeliandibayar');
@@ -398,6 +406,7 @@
           $perincian = 'tidak ada';
         }
         $bonus = $this->input->post('bonus');
+        $bonus = preg_replace("/[^0-9]/", "", $bonus);
 
         // data buat diinput ke pembelian
         $dataPembelian = array(
@@ -702,7 +711,11 @@
         // ambil value dari form
         $tanggalpembayaran = $this->input->post('tanggalpembayaran');
         $dibayar = $this->input->post('dibayar');
+        $dibayar = preg_replace("/[^0-9]/", "", $dibayar);
+        /////////////////////////////////////////////////////
         $sisatagihan = $this->input->post('sisatagihan');
+        $sisatagihan = preg_replace("/[^0-9]/", "", $sisatagihan);
+        /////////////////////////////////////////////////////
         $keterangan = $this->input->post('keterangan');
 
         $nik = $_SESSION['username'];
@@ -831,6 +844,11 @@
         );
 
         $result = $this->admin_model->getSaldo($datasaldo, $kemarin);
+
+        // echo '<pre>';
+        // print_r($result);
+        // echo '</pre>';
+
         $data['datasaldo'] = $result;
 
         $this->load->view('admin/header');
