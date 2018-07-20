@@ -270,6 +270,7 @@
 
       if(!$this->form_validation->run()){
         $data['pembelian'] = array();
+        $data['tanggal'] = array();
 
         $this->load->view('admin/header');
         $this->load->view('admin/pembelian', $data);
@@ -288,6 +289,10 @@
         // ambil semua data pembelian
         $dataPembelian = $this->admin_model->getDataPembelianJoin($dataambil);
         $data['pembelian'] = $dataPembelian;
+        $data['tanggal'] = array(
+          'dari' => $tanggaldari,
+          'sampai' => $tanggalsampai
+        );
 
         $this->load->view('admin/header');
         $this->load->view('admin/pembelian', $data);
@@ -638,6 +643,7 @@
       if(!$this->form_validation->run()){
 
         $data['dataPembayaran'] = array();
+        $data['tanggal'] = array();
         // load view
         $this->load->view('admin/header');
         $this->load->view('admin/pembayaran', $data);
@@ -657,6 +663,10 @@
         $result = $this->admin_model->getPembayaran($datapembayaran);
 
         $data['dataPembayaran'] = $result;
+        $data['tanggal'] = array(
+          'dari' => $tanggaldari,
+          'sampai' => $tanggalsampai
+        );
         // load view
         $this->load->view('admin/header');
         $this->load->view('admin/pembayaran', $data);
@@ -826,6 +836,7 @@
             'nominal' => 0,
           ),
         );
+        $data['tanggal'] = array();
 
         $this->load->view('admin/header');
         $this->load->view('admin/saldo', $data);
@@ -850,6 +861,10 @@
         // echo '</pre>';
 
         $data['datasaldo'] = $result;
+        $data['tanggal'] = array(
+          'dari' => $tanggaldari,
+          'sampai' => $tanggalsampai
+        );
 
         $this->load->view('admin/header');
         $this->load->view('admin/saldo', $data);
@@ -885,6 +900,7 @@
 
       if(!$this->form_validation->run()){
         $data['datapembelian'] = array();
+        $data['tanggal'] = array();
 
         $this->load->view('admin/header');
         $this->load->view('admin/laporanpembelian', $data);
@@ -907,6 +923,10 @@
         // echo '</pre>';
 
         $data['datapembelian'] = $result;
+        $data['tanggal'] = array(
+          'dari' => $tanggaldari,
+          'sampai' => $tanggalsampai
+        );
 
         $this->load->view('admin/header');
         $this->load->view('admin/laporanpembelian', $data);

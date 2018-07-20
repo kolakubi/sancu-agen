@@ -39,6 +39,13 @@
 
   </div>
 </div>
+<!-- info tanggal pencarian -->
+<?php if(!empty($tanggal)) : ?>
+  <div class="well" style="margin-bottom: -20px;">
+    <p class="text-center"><strong>Menampilkan pencarian tanggal</strong></p>
+    <p style="font-size: 18px; margin-top: -10px;" class="text-center text-success"><strong><?php echo $tanggal['dari']?> <span style="color: #555555">s/d</span> <?php echo $tanggal['sampai']?></strong></p>
+  </div>
+<?php endif ?>
 <br><br>
 
 <div class="row">
