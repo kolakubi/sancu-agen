@@ -724,7 +724,6 @@
         $dibayar = preg_replace("/[^0-9]/", "", $dibayar);
         /////////////////////////////////////////////////////
         $sisatagihan = $this->input->post('sisatagihan');
-        $sisatagihan = preg_replace("/[^0-9]/", "", $sisatagihan);
         /////////////////////////////////////////////////////
         $keterangan = $this->input->post('keterangan');
 
@@ -856,9 +855,9 @@
 
         $result = $this->admin_model->getSaldo($datasaldo, $kemarin);
 
-        // echo '<pre>';
-        // print_r($result);
-        // echo '</pre>';
+        echo '<pre>';
+        print_r($result);
+        echo '</pre>';
 
         $data['datasaldo'] = $result;
         $data['tanggal'] = array(

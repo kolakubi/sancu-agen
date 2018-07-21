@@ -495,7 +495,9 @@
 
       // ambil value bonus
       $bonus = $dataBonusDetail['bonus'];
+      $jumlahItem = $datapembelian['jumlah_item'];
       $bonuslama = 0;
+      $jumlahItemLama = 0;
 
       // jika tertera bonus
       if($bonus > 0){
@@ -511,13 +513,15 @@
         // ambil KODE_BONUS
         $kodebonus = $dataBonus['kode_bonus'];
         $bonuslama = $dataBonus['jumlah_bonus'];
+        $jumlahItemLama = $dataBonus['jumlah_item'];
 
         // jika bonus tidak nol
         if($bonuslama > 0){
 
           // exe U P D A T E   B O N U S
           $this->db->set(array(
-            'jumlah_bonus' => $bonuslama - $bonus
+            'jumlah_bonus' => $bonuslama - $bonus,
+            'total_item' => $jumlahItemLama - $jumlahItem
           ));
           $this->db->where('kode_bonus', $kodebonus);
           $this->db->update('bonus');

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 20, 2018 at 02:48 PM
+-- Generation Time: Jul 21, 2018 at 03:15 PM
 -- Server version: 5.6.39
 -- PHP Version: 5.6.30
 
@@ -106,7 +106,7 @@ INSERT INTO `agen` (`kode_agen`, `tgl_gabung`, `nama`, `alamat`, `kota`, `telepo
 ('agen033', 'Apr 2010', ' Iskandar ', ' Jl Veteran no 94 rt 2/ 10 pelutan pemalang ', 'Pemalang', ' 085727230310 / 085727128886 / 088215102808 / 082169320000 ', ' kantuik1980@yahoo.co.id ', 'laki-laki', ''),
 ('agen034', 'Des 2017', 'Isnawan', 'Dusun 3 rt.12 rw.06 sumber baru seputih banyak lampung tengah.', 'Lampung', '081368785868', 'Suburmakmur795@gmail.com', 'laki-laki', ''),
 ('agen035', 'Apr 2011', ' Iwan Fakhrudin ', ' Perum . Abdi Negara jalan Kresna 3 No. 2 Bojanegara Rt. 06 Rw. 04 Padamara Purbalingga Jawa- Tengah ', 'Purbalingga', ' 081390043310 ', ' my_fakhruddin@yahoo.com ', 'laki-laki', ''),
-('agen036', 'Mar 2012', ' Junaedi ', ' Jl. Jawa No. 39 Kel. Gubeng Kec. Gubeng - Surabaya ', 'Surabaya', ' 081231155719  ', ' mochamadadnan82@gmail.com ', 'laki-laki', ''),
+('agen036', 'Mar 2012', ' Junaedi / Adnan', ' Jl. Jawa No. 39 Kel. Gubeng Kec. Gubeng - Surabaya ', 'Surabaya', ' 081231155719  ', ' mochamadadnan82@gmail.com ', 'laki-laki', ''),
 ('agen037', 'Jan 2014', ' Luki ', ' jl masjid no 2 pekan selesai, kecamatan selesai kabupaten langkat,, sumatera utara ', 'Langkat', ' \'089692454456 ', ' tiaraputri250@yahoo.com ', 'laki-laki', ''),
 ('agen038', 'Jan 2013', 'Lutfi Hakiki', 'Jl. Komplek Chandra Utama, No. 26, Kel. Guntung Manggis, Kota Banjarbaru, Kalimantan Selatan (Alamat Toko)', 'Tapin', '085251095452', 'luthfi_hakiki@ymail.com', 'laki-laki', ''),
 ('agen039', 'Jan 2010', ' M suwandi ', ' Taman banjar agung indah blok C5 no 4 ( samping play group azkia ) pakupatan kec cipocok jaya rt 001/ 009 serang 42122 ', 'Serang', ' 081388063155 / 081219161416 / 087788220324 ', ' siaa1124@yahoo.com / suwandi@adis.co.id / nisrina_kaysa@yahoo.com ', 'laki-laki', ''),
@@ -185,12 +185,12 @@ INSERT INTO `bonus` (`kode_bonus`, `kode_agen`, `jumlah_bonus`, `ribuan`, `puluh
 (294, 'agen064', 650000, 0, 0, 1815),
 (295, 'agen012', 0, 0, 0, 210),
 (296, 'agen072', 350000, 0, 0, 1330),
-(297, 'agen057', 700000, 0, 0, 140),
+(297, 'agen057', 700000, 0, 0, 280),
 (298, 'agen029', 300000, 0, 0, 145),
 (300, 'agen022', 300000, 0, 0, 465),
 (301, 'agen047', 0, 0, 0, 1340),
 (302, 'agen062', 0, 0, 0, 590),
-(305, 'agen009', 0, 0, 0, 760),
+(305, 'agen009', 600000, 0, 0, 1200),
 (306, 'agen088', 1400000, 0, 0, 2580),
 (307, 'agen069', 0, 0, 0, 405),
 (308, 'agen024', 650000, 0, 0, 1495),
@@ -201,17 +201,18 @@ INSERT INTO `bonus` (`kode_bonus`, `kode_agen`, `jumlah_bonus`, `ribuan`, `puluh
 (313, 'agen046', 300000, 0, 0, 325),
 (314, 'agen079', 300000, 0, 0, 670),
 (315, 'agen075', 300000, 0, 0, 370),
-(316, 'agen036', 0, 0, 0, 325),
-(317, 'agen015', 0, 0, 0, 130),
+(317, 'agen015', 0, 0, 0, 155),
 (318, 'agen026', 0, 0, 0, 145),
 (319, 'agen010', 650000, 0, 0, 105),
 (320, 'agen028', 0, 0, 0, 150),
 (321, 'agen070', 0, 0, 0, 275),
-(322, 'agen032', 0, 0, 0, 180),
+(322, 'agen032', 300000, 0, 0, 1555),
 (323, 'agen033', 300000, 0, 0, 900),
 (325, 'agen023', 300000, 0, 0, 760),
 (326, 'agen007', 300000, 0, 0, 455),
-(327, 'agen011', 0, 0, 0, 715);
+(327, 'agen011', 0, 0, 0, 715),
+(328, 'agen004', 300000, 0, 0, 815),
+(329, 'agen076', 0, 0, 0, 140);
 
 -- --------------------------------------------------------
 
@@ -259,13 +260,11 @@ INSERT INTO `bonus_detail` (`kode_bonus`, `status`, `bonus`, `jumlah_item`, `tan
 (314, '', 300000, 670, '2018-07-14', 421, 670, 'admin003', 858),
 (315, '', 300000, 370, '2018-07-14', 422, 370, 'admin003', 859),
 (305, '', 0, 510, '2018-07-14', 423, 560, 'admin003', 860),
-(316, '', 0, 120, '2018-07-14', 424, 120, 'admin003', 861),
 (317, '', 0, 0, '2018-07-13', 425, 0, 'admin003', 862),
 (317, '', 0, 45, '2018-07-14', 426, 45, 'admin003', 863),
 (317, '', 0, 50, '2018-07-13', 427, 95, 'admin003', 864),
 (317, '', 0, 35, '2018-07-14', 428, 130, 'admin003', 865),
 (305, '', 0, 200, '2018-07-16', 429, 760, 'admin003', 866),
-(316, '', 0, 205, '2018-07-16', 430, 325, 'admin003', 867),
 (317, '', 0, 0, '2018-07-16', 431, 130, 'admin003', 868),
 (317, '', 0, 0, '2018-07-16', 432, 130, 'admin003', 869),
 (297, '', 0, 0, '2018-07-16', 433, 140, 'admin003', 870),
@@ -282,7 +281,14 @@ INSERT INTO `bonus_detail` (`kode_bonus`, `status`, `bonus`, `jumlah_item`, `tan
 (307, '', 0, 240, '2018-07-18', 445, 405, 'admin003', 882),
 (326, '', 300000, 455, '2018-07-18', 446, 455, 'admin003', 883),
 (327, '', 0, 715, '2018-07-18', 447, 715, 'admin003', 884),
-(294, '', 300000, 695, '2018-07-18', 448, 1815, 'admin003', 885);
+(294, '', 300000, 695, '2018-07-18', 448, 1815, 'admin003', 885),
+(328, '', 300000, 815, '2018-07-19', 449, 815, 'admin003', 886),
+(322, '', 300000, 1375, '2018-07-19', 451, 1555, 'admin003', 888),
+(317, '', 0, 20, '2018-07-19', 452, 150, 'admin003', 889),
+(317, '', 0, 5, '2018-07-19', 453, 155, 'admin003', 890),
+(329, '', 0, 140, '2018-07-20', 454, 140, 'admin003', 891),
+(297, '', 0, 140, '2018-07-20', 455, 280, 'admin003', 892),
+(305, '', 300000, 440, '2018-07-20', 458, 1200, 'admin003', 895);
 
 -- --------------------------------------------------------
 
@@ -302,7 +308,9 @@ CREATE TABLE `history_delete` (
 --
 
 INSERT INTO `history_delete` (`kode_delete`, `kode_admin`, `keterangan`, `date`) VALUES
-(1, 'admin001', 'hapus data pembelian 880 | agen018 |  nominal pembayaran 21618500', '2018-07-19 15:30:24');
+(1, 'admin001', 'hapus data pembelian 880 | agen018 |  nominal pembayaran 21618500', '2018-07-19 15:30:24'),
+(2, 'admin003', 'hapus data pembelian 893 | agen009 |  nominal pembayaran 13968620', '2018-07-21 13:53:19'),
+(3, 'admin003', 'hapus data pembayaran 64 | agen009 |  nominal pembayaran 13705910', '2018-07-21 14:58:25');
 
 -- --------------------------------------------------------
 
@@ -394,7 +402,11 @@ INSERT INTO `log` (`kode_login`, `username`, `time`, `ip`, `status`) VALUES
 (149, 'firman', '2018-07-20 08:38:58', '114.4.79.46', 'sukses'),
 (150, 'admin003', '2018-07-20 13:28:08', '139.192.133.49', 'sukses'),
 (151, 'admin003', '2018-07-20 14:30:40', '139.192.133.49', 'sukses'),
-(152, 'admin001', '2018-07-20 14:48:31', '139.192.133.49', 'sukses');
+(152, 'admin001', '2018-07-20 14:48:31', '139.192.133.49', 'sukses'),
+(153, 'admin003', '2018-07-21 13:17:38', '139.193.26.253', 'sukses'),
+(154, 'admin001', '2018-07-21 13:34:53', '139.193.26.253', 'sukses'),
+(155, 'admin001', '2018-07-21 14:25:25', '139.193.26.253', 'gagal'),
+(156, 'admin001', '2018-07-21 14:25:31', '139.193.26.253', 'sukses');
 
 -- --------------------------------------------------------
 
@@ -548,14 +560,12 @@ INSERT INTO `pembayaran` (`kode_pembayaran`, `kode_pembelian`, `tanggal_pembelia
 (61, 857, '2018-07-14', 15494150, 5494150),
 (62, 858, '2018-07-14', 11344500, 0),
 (63, 859, '2018-07-14', 6235700, 0),
-(64, 860, '2018-07-14', 8852610, 3196500),
-(65, 861, '2018-07-14', 25484550, 25484550),
+(64, 860, '2018-07-14', 8852610, -3196500),
 (66, 862, '2018-07-13', 1037500, 0),
 (67, 863, '2018-07-14', 713250, 0),
 (68, 864, '2018-07-13', 702500, 0),
 (69, 865, '2018-07-14', 68229770, 67666270),
 (70, 866, '2018-07-16', 3279660, 3279660),
-(71, 867, '2018-07-16', 4716500, 4716500),
 (72, 868, '2018-07-16', 325000, 0),
 (73, 869, '2018-07-16', 225000, 0),
 (74, 870, '2018-07-16', 2192500, 152250),
@@ -566,13 +576,20 @@ INSERT INTO `pembayaran` (`kode_pembayaran`, `kode_pembelian`, `tanggal_pembelia
 (79, 875, '2018-07-17', 11939450, 4316700),
 (80, 876, '2018-07-17', 3180870, 1002870),
 (81, 877, '2018-07-17', 4197450, 172800),
-(82, 878, '2018-07-17', 7768000, 3768000),
+(82, 878, '2018-07-17', 7768000, 1232000),
 (83, 879, '2018-07-18', 19297310, 13997310),
 (85, 881, '2018-07-18', 12017750, 11717750),
 (86, 882, '2018-07-18', 6806750, 6806750),
 (87, 883, '2018-07-18', 8812750, 413000),
 (88, 884, '2018-07-18', 13449250, 615950),
-(89, 885, '2018-07-18', 11403590, 10103590);
+(89, 885, '2018-07-18', 11403590, 10103590),
+(90, 886, '2018-07-19', 17170125, 16870125),
+(92, 888, '2018-07-19', 23779800, 23479800),
+(93, 889, '2018-07-19', 282500, 0),
+(94, 890, '2018-07-19', 87750, 0),
+(95, 891, '2018-07-20', 4021000, 102375),
+(96, 892, '2018-07-20', 2414875, 53175),
+(99, 895, '2018-07-20', 14268620, 13968620);
 
 -- --------------------------------------------------------
 
@@ -648,7 +665,7 @@ INSERT INTO `pembayaran_detail` (`kode_pembayaran`, `tanggal_pembayaran`, `tagih
 (57, '2018-07-17', 12913200, 12658200, 255000, 98, 'bca 17 juli 12658200', 'admin003', 0),
 (56, '2018-07-15', 2310250, 985000, 1325250, 99, 'bca 15 juli 985,000', 'admin003', 1),
 (56, '2018-07-15', 1325250, 1260000, 65250, 100, 'bca 15 juli 1,260,000', 'admin003', 0),
-(64, '2018-07-17', 234360, 3430860, 3196500, 101, '', 'admin003', 0),
+(64, '2018-07-17', 234360, 3430860, -3196500, 101, '', 'admin003', 1),
 (74, '2018-07-14', 2192500, 2040250, 152250, 102, 'mandiri 14 juli 2,040,250', 'admin003', 0),
 (75, '2018-07-14', 2217500, 2217500, 0, 103, 'mandiri 14 juli 2,217,500', 'admin003', 0),
 (76, '2018-07-16', 6552040, 5000000, 1552040, 104, 'bca 16 juli 5jt', 'admin003', 1),
@@ -660,7 +677,7 @@ INSERT INTO `pembayaran_detail` (`kode_pembayaran`, `tanggal_pembayaran`, `tagih
 (80, '2018-07-17', 3180870, 1078000, 2102870, 110, 'bca 17 juli 1078000', 'admin003', 1),
 (80, '2018-07-18', 2102870, 1100000, 1002870, 111, 'bca 18 juli 1,1jt', 'admin003', 0),
 (81, '2018-07-17', 4197450, 4024650, 172800, 112, 'mandiri 17 juli 4,024,650', 'admin003', 0),
-(82, '2018-07-16', 7768000, 4000000, 3768000, 113, 'mandiri 16 juli 4jt', 'admin003', 0),
+(82, '2018-07-16', 7768000, 4000000, 3768000, 113, 'mandiri 16 juli 4jt', 'admin003', 1),
 (72, '2018-07-18', 325000, 325000, 0, 114, 'mandiri 18 juli 325,000', 'admin003', 0),
 (73, '2018-07-18', 225000, 225000, 0, 115, 'bca 18 juli 225rb', 'admin003', 0),
 (83, '2018-07-18', 19297310, 300000, 18997310, 116, 'bonus pembelian 2018-07-18', 'admin003', 1),
@@ -673,7 +690,15 @@ INSERT INTO `pembayaran_detail` (`kode_pembayaran`, `tanggal_pembayaran`, `tagih
 (89, '2018-07-18', 11403590, 300000, 11103590, 124, 'bonus pembelian 2018-07-18', 'admin003', 1),
 (60, '2018-07-19', 9121700, 1450000, 7671700, 125, 'mandiri 19 juli 1,450,000', 'admin003', 0),
 (76, '2018-07-19', 1552040, 1552040, 0, 126, 'BCA 19 juli 1552040', 'admin003', 0),
-(89, '2018-07-19', 11103590, 1000000, 10103590, 127, 'bca 19 juli 1jt', 'admin003', 0);
+(89, '2018-07-19', 11103590, 1000000, 10103590, 127, 'bca 19 juli 1jt', 'admin003', 0),
+(90, '2018-07-19', 17170125, 300000, 16870125, 128, 'bonus pembelian 2018-07-19', 'admin003', 1),
+(92, '2018-07-19', 23779800, 300000, 23479800, 136, 'bonus pembelian 2018-07-19', 'admin003', 1),
+(82, '2018-07-17', 3768000, 5000000, 1232000, 137, 'bca 17 juli 5jt', 'admin003', 0),
+(93, '2018-07-20', 282500, 282500, 0, 138, 'bca 20 juli 282500', 'admin003', 0),
+(94, '2018-07-20', 87750, 87750, 0, 139, 'bca 20 juli 87750', 'admin003', 0),
+(95, '2018-07-20', 4021000, 3918625, 102375, 140, 'bca 20 juli 3918625', 'admin003', 0),
+(96, '2018-07-19', 2414875, 2361700, 53175, 141, 'mandiri 19 juli 2,361,700', 'admin003', 0),
+(99, '2018-07-20', 14268620, 300000, 13968620, 145, 'bonus pembelian 2018-07-20', 'admin003', 1);
 
 -- --------------------------------------------------------
 
@@ -720,13 +745,11 @@ INSERT INTO `pembelian` (`kode_pembelian`, `kode_agen`, `tanggal_pembelian`, `to
 (858, 'agen079', '2018-07-14', 670, 11344500, 'tidak ada', 'admin003', 1),
 (859, 'agen075', '2018-07-14', 370, 6235700, 'tidak ada', 'admin003', 1),
 (860, 'agen009', '2018-07-14', 510, 8852610, 'tidak ada', 'admin003', 1),
-(861, 'agen036', '2018-07-14', 120, 25484550, 'tidak ada', 'admin003', 1),
 (862, 'agen015', '2018-07-13', 30, 1037500, 'tidak ada', 'admin003', 1),
 (863, 'agen015', '2018-07-14', 45, 713250, 'tidak ada', 'admin003', 1),
 (864, 'agen015', '2018-07-13', 50, 702500, 'tidak ada', 'admin003', 1),
 (865, 'agen015', '2018-07-14', 35, 68229770, 'tidak ada', 'admin003', 1),
 (866, 'agen009', '2018-07-16', 200, 3279660, 'tidak ada', 'admin003', 0),
-(867, 'agen036', '2018-07-16', 250, 4716500, 'tidak ada', 'admin003', 0),
 (868, 'agen015', '2018-07-16', 10, 325000, 'tidak ada', 'admin003', 1),
 (869, 'agen015', '2018-07-16', 5, 225000, 'tidak ada', 'admin003', 1),
 (870, 'agen057', '2018-07-16', 60, 2192500, 'tidak ada', 'admin003', 1),
@@ -743,7 +766,14 @@ INSERT INTO `pembelian` (`kode_pembelian`, `kode_agen`, `tanggal_pembelian`, `to
 (882, 'agen069', '2018-07-18', 320, 6806750, 'tidak ada', 'admin003', 0),
 (883, 'agen007', '2018-07-18', 475, 8812750, 'tidak ada', 'admin003', 1),
 (884, 'agen011', '2018-07-18', 715, 13449250, 'tidak ada', 'admin003', 1),
-(885, 'agen064', '2018-07-18', 695, 11403590, 'tidak ada', 'admin003', 1);
+(885, 'agen064', '2018-07-18', 695, 11403590, 'tidak ada', 'admin003', 1),
+(886, 'agen004', '2018-07-19', 975, 17170125, 'tidak ada', 'admin003', 0),
+(888, 'agen032', '2018-07-19', 1375, 23779800, 'tidak ada', 'admin003', 0),
+(889, 'agen015', '2018-07-19', 20, 282500, 'tidak ada', 'admin003', 1),
+(890, 'agen015', '2018-07-19', 5, 87750, 'tidak ada', 'admin003', 1),
+(891, 'agen076', '2018-07-20', 195, 4021000, 'tidak ada', 'admin003', 1),
+(892, 'agen057', '2018-07-20', 140, 2414875, 'tidak ada', 'admin003', 1),
+(895, 'agen009', '2018-07-20', 770, 14268620, 'tidak ada', 'admin003', 0);
 
 -- --------------------------------------------------------
 
@@ -806,17 +836,12 @@ INSERT INTO `pembelian_detail` (`kode_pembelian_detail`, `kode_pembelian`, `kode
 (601, 858, 'sancu', 670, 11344500),
 (602, 859, 'sancu', 370, 6235700),
 (603, 860, 'sancu', 510, 8852610),
-(604, 861, 'sancu', 120, 25484550),
 (605, 862, 'xtreme', 30, 1037500),
 (606, 863, 'sancu', 45, 713250),
 (607, 864, 'boncu', 50, 702500),
 (608, 865, 'sancu', 35, 68229770),
 (609, 866, 'sancu', 145, 2534660),
 (610, 866, 'boncu', 55, 745000),
-(611, 867, 'sancu', 160, 2611500),
-(612, 867, 'boncu', 45, 662500),
-(613, 867, 'pretty', 10, 180000),
-(614, 867, 'xtreme', 35, 1262500),
 (615, 868, 'xtreme', 10, 325000),
 (616, 869, 'xtreme', 5, 225000),
 (617, 870, 'pretty', 15, 262500),
@@ -844,7 +869,22 @@ INSERT INTO `pembelian_detail` (`kode_pembelian_detail`, `kode_pembelian`, `kode
 (641, 883, 'sancu', 455, 7975250),
 (642, 883, 'xtreme', 20, 837500),
 (643, 884, 'sancu', 715, 13449250),
-(644, 885, 'sancu', 695, 11403590);
+(644, 885, 'sancu', 695, 11403590),
+(645, 886, 'sancu', 435, 7585125),
+(646, 886, 'boncu', 380, 5257500),
+(647, 886, 'pretty', 90, 1615000),
+(648, 886, 'xtreme', 70, 2712500),
+(653, 888, 'sancu', 1375, 23779800),
+(654, 889, 'boncu', 20, 282500),
+(655, 890, 'sancu', 5, 87750),
+(656, 891, 'sancu', 110, 1828500),
+(657, 891, 'boncu', 30, 405000),
+(658, 891, 'xtreme', 55, 1787500),
+(659, 892, 'sancu', 140, 2414875),
+(668, 895, 'sancu', 255, 4658620),
+(669, 895, 'boncu', 185, 2585000),
+(670, 895, 'pretty', 265, 4787500),
+(671, 895, 'xtreme', 65, 2237500);
 
 -- --------------------------------------------------------
 
@@ -955,7 +995,6 @@ INSERT INTO `saldo` (`kode_saldo`, `kode_agen`, `kode_pembelian`, `kode_pembayar
 (594, 'agen009', 0, 91, '2018-07-13', 0, 56700, 0, 'mandiri 13 juli 56700'),
 (595, 'agen009', 860, 0, '2018-07-14', 8852610, 0, 8852610, 'pembelian'),
 (596, 'agen009', 0, 92, '2018-07-14', 0, 8618250, 234360, 'mandiri 14 juli 8,618,250.'),
-(597, 'agen036', 861, 0, '2018-07-14', 25484550, 0, 25484550, 'pembelian'),
 (598, 'agen015', 862, 0, '2018-07-13', 1037500, 0, 1037500, 'pembelian'),
 (599, 'agen015', 863, 0, '2018-07-14', 713250, 0, 1750750, 'pembelian'),
 (600, 'agen015', 864, 0, '2018-07-13', 702500, 0, 2453250, 'pembelian'),
@@ -970,7 +1009,6 @@ INSERT INTO `saldo` (`kode_saldo`, `kode_agen`, `kode_pembelian`, `kode_pembayar
 (609, 'agen030', 0, 100, '2018-07-15', 0, 1260000, 65250, 'bca 15 juli 1,260,000'),
 (610, 'agen009', 866, 0, '2018-07-16', 3279660, 0, 3514020, 'pembelian'),
 (611, 'agen009', 0, 101, '2018-07-17', 0, 3430860, 83160, ''),
-(612, 'agen036', 867, 0, '2018-07-16', 4716500, 0, 30201050, 'pembelian'),
 (613, 'agen015', 868, 0, '2018-07-16', 325000, 0, 67991270, 'pembelian'),
 (614, 'agen015', 869, 0, '2018-07-16', 225000, 0, 68216270, 'pembelian'),
 (615, 'agen057', 870, 0, '2018-07-16', 2192500, 0, 2215450, 'pembelian'),
@@ -1012,7 +1050,23 @@ INSERT INTO `saldo` (`kode_saldo`, `kode_agen`, `kode_pembelian`, `kode_pembayar
 (653, 'agen064', 885, 0, '2018-07-18', 0, 300000, 33629542, 'bonus pembelian 2018-07-18'),
 (654, 'agen046', 0, 125, '2018-07-19', 0, 1450000, 7671700, 'mandiri 19 juli 1,450,000'),
 (655, 'agen064', 0, 126, '2018-07-19', 0, 1552040, 32077502, 'BCA 19 juli 1552040'),
-(656, 'agen064', 0, 127, '2018-07-19', 0, 1000000, 31077502, 'bca 19 juli 1jt');
+(656, 'agen064', 0, 127, '2018-07-19', 0, 1000000, 31077502, 'bca 19 juli 1jt'),
+(657, 'agen004', 0, 0, '2018-07-20', 12774000, 0, 12774000, 'saldo awal 20 Juli 2018'),
+(658, 'agen004', 886, 0, '2018-07-19', 17170125, 0, 29944125, 'pembelian'),
+(659, 'agen004', 0, 886, '2018-07-19', 0, 300000, 29644125, 'bonus pembelian 2018-07-19'),
+(668, 'agen032', 888, 0, '2018-07-19', 23779800, 0, 27547800, 'pembelian'),
+(669, 'agen032', 888, 0, '2018-07-19', 0, 300000, 27247800, 'bonus pembelian 2018-07-19'),
+(670, 'agen032', 0, 137, '2018-07-17', 0, 5000000, 22247800, 'bca 17 juli 5jt'),
+(671, 'agen015', 889, 0, '2018-07-19', 282500, 0, 67948770, 'pembelian'),
+(672, 'agen015', 0, 138, '2018-07-20', 0, 282500, 67666270, 'bca 20 juli 282500'),
+(673, 'agen015', 890, 0, '2018-07-19', 87750, 0, 67754020, 'pembelian'),
+(674, 'agen015', 0, 139, '2018-07-20', 0, 87750, 67666270, 'bca 20 juli 87750'),
+(675, 'agen076', 891, 0, '2018-07-20', 4021000, 0, 4021000, 'pembelian'),
+(676, 'agen076', 0, 140, '2018-07-20', 0, 3918625, 102375, 'bca 20 juli 3918625'),
+(677, 'agen057', 892, 0, '2018-07-20', 2414875, 0, 2590075, 'pembelian'),
+(678, 'agen057', 0, 141, '2018-07-19', 0, 2361700, 228375, 'mandiri 19 juli 2,361,700'),
+(684, 'agen009', 895, 0, '2018-07-20', 14268620, 0, 14351780, 'pembelian'),
+(685, 'agen009', 895, 0, '2018-07-20', 0, 300000, 14051780, 'bonus pembelian 2018-07-20');
 
 --
 -- Indexes for dumped tables
@@ -1118,55 +1172,55 @@ ALTER TABLE `saldo`
 -- AUTO_INCREMENT for table `bonus`
 --
 ALTER TABLE `bonus`
-  MODIFY `kode_bonus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=328;
+  MODIFY `kode_bonus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=330;
 
 --
 -- AUTO_INCREMENT for table `bonus_detail`
 --
 ALTER TABLE `bonus_detail`
-  MODIFY `kode_bonus_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=449;
+  MODIFY `kode_bonus_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=459;
 
 --
 -- AUTO_INCREMENT for table `history_delete`
 --
 ALTER TABLE `history_delete`
-  MODIFY `kode_delete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `kode_delete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `kode_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `kode_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT for table `pembayaran_detail`
 --
 ALTER TABLE `pembayaran_detail`
-  MODIFY `kode_pembayaran_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+  MODIFY `kode_pembayaran_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
 
 --
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=886;
+  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=896;
 
 --
 -- AUTO_INCREMENT for table `pembelian_detail`
 --
 ALTER TABLE `pembelian_detail`
-  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=645;
+  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=672;
 
 --
 -- AUTO_INCREMENT for table `saldo`
 --
 ALTER TABLE `saldo`
-  MODIFY `kode_saldo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=657;
+  MODIFY `kode_saldo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=686;
 
 --
 -- Constraints for dumped tables
