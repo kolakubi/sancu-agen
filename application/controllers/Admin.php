@@ -855,9 +855,9 @@
 
         $result = $this->admin_model->getSaldo($datasaldo, $kemarin);
 
-        echo '<pre>';
-        print_r($result);
-        echo '</pre>';
+        // echo '<pre>';
+        // print_r($result);
+        // echo '</pre>';
 
         $data['datasaldo'] = $result;
         $data['tanggal'] = array(

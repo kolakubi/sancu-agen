@@ -495,7 +495,7 @@
 
       // ambil value bonus
       $bonus = $dataBonusDetail['bonus'];
-      $jumlahItem = $datapembelian['jumlah_item'];
+      $jumlahItem = $dataBonusDetail['jumlah_item'];
       $bonuslama = 0;
       $jumlahItemLama = 0;
 
@@ -510,10 +510,12 @@
         $this->db->where('bonus_detail.kode_pembelian', $kodepembelian);
         $dataBonus = $this->db->get()->row_array();
 
+        //return $dataBonus;
+
         // ambil KODE_BONUS
         $kodebonus = $dataBonus['kode_bonus'];
         $bonuslama = $dataBonus['jumlah_bonus'];
-        $jumlahItemLama = $dataBonus['jumlah_item'];
+        $jumlahItemLama = $dataBonus['total_item'];
 
         // jika bonus tidak nol
         if($bonuslama > 0){
