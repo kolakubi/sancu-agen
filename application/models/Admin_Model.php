@@ -788,7 +788,35 @@
       }
 
       return $result;
-    }
+    } // end of function getSaldo
+
+    public function saldoAwal($dataSaldoAwal){
+
+      $status = 0;
+
+      // cek apakah agen sudah memiliki saldo
+      $this->db->select('*');
+      $this->db->from('saldo');
+      $this->db->where('kode_agen', $dataSaldoAwal['kode_agen']);
+      $hasil = $this->db->get()->row_array();
+
+      // jika ada
+      if(count($hasil) > 0){
+        $status = 0;
+        return $status;
+      }
+      // jika tidak ada
+      else{
+
+        // insert data ke saldo
+        $this->db->insert('saldo', $dataSaldoAwal);
+        $status = 1;
+        return $status;
+
+      } // => end of cek data saldo agen
+
+    } // => end of function saldoAwal
+
     ///////////////////////////////////////////////
 
     ///////////////////////////////////////////////

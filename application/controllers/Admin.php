@@ -869,9 +869,89 @@
         $this->load->view('admin/saldo', $data);
         $this->load->view('admin/footer');
 
-      }
+      } // => end of form_validation
 
-    }
+    } // => end of function saldo
+
+    function saldoAwal(){
+
+      // set form rules
+      $this->form_validation->set_rules(
+        array(
+          array(
+            'field' => 'saldo',
+            'label' => 'Saldo',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'sebelah',
+            'label' => 'Sebelah',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'kodeagen',
+            'label' => 'Kode Agen',
+            'rules' => 'required'
+          )
+        )
+      );
+
+      // set pesan error
+      $this->form_validation->set_message('required', 'mohon lengkapi %s');
+
+      // jika form tidak valid
+      if(!$this->form_validation->run()){
+
+        // status error false
+        $data['statusDataSaldo'] = 0;
+
+        $this->load->view('admin/header');
+        $this->load->view('admin/saldoawal', $data);
+        $this->load->view('admin/footer');
+      }
+      else{
+
+        // ambil value dari form
+        $kodeagen = $this->input->post('kodeagen');
+        $sebelah = $this->input->post('sebelah');
+        $saldo = $this->input->post('saldo');
+        $saldo = preg_replace("/[^0-9]/", "", $saldo);
+
+        $dataSaldoAwal = array(
+
+          'kode_agen' => $kodeagen,
+          'kode_pembelian' => 0,
+          'kode_pembayaran_detail' => 0,
+          'tgl_perubahan' => date('Y-m-d'),
+          'debet' => $sebelah == 'debet' ? $saldo : 0,
+          'kredit' => $sebelah == 'kredit' ? $saldo : 0,
+          'nominal' => $sebelah == 'debet' ? $saldo : ($saldo*(-1)),
+          'keterangan' => 'saldo awal '.date('Y-m-d')
+
+        );
+
+        // hapus index sebelah
+        unset($dataSaldoAwal['sebelah']);
+
+        // echo '<pre>';
+        // print_r($dataSaldoAwal);
+        // echo '</pre>';
+
+        $hasil = $this->admin_model->saldoAwal($dataSaldoAwal);
+        if($hasil){
+          redirect('admin/saldo');
+        }{
+          // status error true
+          $data['statusDataSaldo'] = 1;
+
+          $this->load->view('admin/header');
+          $this->load->view('admin/saldoawal', $data);
+          $this->load->view('admin/footer');
+        }
+
+      } // end of form validation
+
+    } // => end of function saldoAwal
 
 
     ///////////////////////////////////////////////

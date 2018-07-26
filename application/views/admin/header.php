@@ -40,8 +40,18 @@
               <li><a href="<?php echo base_url() ?>admin/pembelian">Pembelian</a></li>
               <li><a href="<?php echo base_url() ?>admin/pembayaran">Pembayaran</a></li>
               <li><a href="<?php echo base_url() ?>admin/bonus">Bonus</a></li>
-              <li><a href="<?php echo base_url() ?>admin/saldo">Saldo</a></li>
-              <!-- dropdown -->
+             <!-- dropdown Saldo -->
+             <li class="dropdown">
+                <a class="btn dropdown-toggle" data-toggle="dropdown">Saldo
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="<?php echo base_url() ?>admin/saldoawal">Saldo Awal</a></li>
+                  <li><a href="<?php echo base_url() ?>admin/saldo">Saldo</a></li>
+                </ul>
+              </li>
+              <!-- end of dropdown -->
+              <!-- dropdown laporan -->
               <li class="dropdown">
                 <a class="btn dropdown-toggle" data-toggle="dropdown">Laporan
                   <span class="caret"></span>
