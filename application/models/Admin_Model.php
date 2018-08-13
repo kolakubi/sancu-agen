@@ -790,7 +790,7 @@
       return $result;
     } // end of function getSaldo
 
-    public function saldoAwal($dataSaldoAwal){
+    public function saldoAwal($dataSaldoAwal, $dataPembelian, $dataPembelianDetail, $dataPembayaran){
 
       $status = 0;
 
@@ -801,7 +801,7 @@
       $hasil = $this->db->get()->row_array();
 
       // jika ada
-      if(count($hasil) > 0){
+      if(!empty($hasil)){
         $status = 0;
         return $status;
       }
@@ -810,14 +810,54 @@
 
         // insert data ke saldo
         $this->db->insert('saldo', $dataSaldoAwal);
+        // insert ke table pembelian
+        $this->db->insert('pembelian', $dataPembelian);
+        // ambil id pembelian yg baru saja diinput
+        $kodePembelianBaruDiinput = $this->db->insert_id();
+        // insert data pembayaran dengan foreign key id pembelian
+        $dataPembayaran['kode_pembelian'] = $kodePembelianBaruDiinput;
+        $this->db->insert('pembayaran', $dataPembayaran);
+        // ambil id Pembayaran baru diinput
+        $kodePembayaranBaruDiinput = $this->db->insert_id();
+
+        // I N S E R T   P E M B E L I A N   D E T A I L
+        // fungsi insert berdasarkan nama item
+        // inisiai $this
+        $that = $this;
+        $dataPembelianDetail['kode_pembelian'] = $kodePembelianBaruDiinput;
+        function insert_item_detail_pembelian($item, $dataPembelianDetail, $that){
+          $dataBaru = array(
+            'kode_pembelian' => $dataPembelianDetail['kode_pembelian'],
+            'kode_item' =>  $item,
+            'jumlah_item' => $dataPembelianDetail[$item],
+            'total_harga_item' => $dataPembelianDetail['total_harga_'.$item],
+          );
+          $that->db->insert('pembelian_detail', $dataBaru);
+        }
+        // pembelian sancu
+        if($dataPembelianDetail['sancu'] != 0){
+          insert_item_detail_pembelian('sancu', $dataPembelianDetail, $that);
+        }
+        // pembelian boncu
+        if($dataPembelianDetail['boncu'] != 0){
+          insert_item_detail_pembelian('boncu', $dataPembelianDetail, $that);
+        }
+        // pembelian pretty
+        if($dataPembelianDetail['pretty'] != 0){
+          insert_item_detail_pembelian('pretty', $dataPembelianDetail, $that);
+        }
+        // pembelian xtreme
+        if($dataPembelianDetail['xtreme'] != 0){
+          insert_item_detail_pembelian('xtreme', $dataPembelianDetail, $that);
+        }
+        ///////////////////////////////////////////////////////
+
         $status = 1;
         return $status;
 
       } // => end of cek data saldo agen
 
     } // => end of function saldoAwal
-
-    ///////////////////////////////////////////////
 
     ///////////////////////////////////////////////
     ///////////////////////////////////////////////

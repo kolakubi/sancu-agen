@@ -892,7 +892,27 @@
             'field' => 'kodeagen',
             'label' => 'Kode Agen',
             'rules' => 'required'
-          )
+          ),
+          array(
+            'field' => 'sancu',
+            'label' => 'Sancu',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'boncu',
+            'label' => 'Boncu',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'pretty',
+            'label' => 'Pretty',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'xtreme',
+            'label' => 'Xtreme',
+            'rules' => 'required'
+          ),
         )
       );
 
@@ -916,28 +936,61 @@
         $sebelah = $this->input->post('sebelah');
         $saldo = $this->input->post('saldo');
         $saldo = preg_replace("/[^0-9]/", "", $saldo);
+        $sancu = $this->input->post('sancu');
+        $boncu = $this->input->post('boncu');
+        $pretty = $this->input->post('pretty');
+        $xtreme = $this->input->post('xtreme');
+        $tanggal = date('Y-m-d');
+        $nik = $_SESSION['username'];
 
         $dataSaldoAwal = array(
-
           'kode_agen' => $kodeagen,
           'kode_pembelian' => 0,
           'kode_pembayaran_detail' => 0,
-          'tgl_perubahan' => date('Y-m-d'),
+          'tgl_perubahan' => $tanggal,
           'debet' => $sebelah == 'debet' ? $saldo : 0,
           'kredit' => $sebelah == 'kredit' ? $saldo : 0,
           'nominal' => $sebelah == 'debet' ? $saldo : ($saldo*(-1)),
-          'keterangan' => 'saldo awal '.date('Y-m-d')
+          'keterangan' => 'saldo awal '.$tanggal,
+        );
 
+        $dataPembelian = array(
+          'kode_agen' => $kodeagen,
+          'tanggal_pembelian' => $tanggal,
+          'total_item' => $sancu+$boncu+$pretty+$xtreme,
+          'total_pembelian' => $saldo,
+          'perincian' => 'saldo awal '.$tanggal,
+          'status_no_edit' => 1,
+          'nik' => $nik
+        );
+
+        $dataPembelianDetail = array(
+          'tanggal_pembelian' => $tanggal,
+          'sancu' => $sancu,
+          'total_harga_sancu' => 0,
+          'boncu' => $boncu,
+          'total_harga_boncu' => 0,
+          'pretty' => $pretty,
+          'total_harga_pretty' => 0,
+          'xtreme' => $xtreme,
+          'total_harga_xtreme' => 0
+        );
+
+        $dataPembayaran = array(
+          'tanggal_pembelian' => date('Y-m-d'),
+          'jumlah_pembelian' => $saldo,
+          'sisa_tagihan' => $saldo
         );
 
         // hapus index sebelah
+        // krn tidak diperlukan di database
         unset($dataSaldoAwal['sebelah']);
 
         // echo '<pre>';
         // print_r($dataSaldoAwal);
         // echo '</pre>';
 
-        $hasil = $this->admin_model->saldoAwal($dataSaldoAwal);
+        $hasil = $this->admin_model->saldoAwal($dataSaldoAwal, $dataPembelian, $dataPembelianDetail, $dataPembayaran);
         if($hasil){
           redirect('admin/saldo');
         }{

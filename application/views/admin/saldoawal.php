@@ -1,4 +1,4 @@
-<h1 class="text-center">Tambah Saldo Awal</h1>
+<h1 class="text-center text-uppercase">Tambah Saldo Awal</h1>
 <br><br>
 
 <div class="row">
@@ -11,7 +11,8 @@
                 <span style="color: white;">Agen Sudah Memiliki Saldo</span>
             </div>
         <?php endif ?>
-      
+
+      <!-- nama agen -->
       <div class="form-group">
         <label>Nama Agen:</label>
         <div class="input-group">
@@ -46,6 +47,62 @@
             <span style="color: white;"><?php echo form_error('sebelah') ?></span>
         </div>
       </div>
+
+      <hr>
+
+      <!-- item -->
+      <div class="row">
+        <h4 class="text-center text-uppercase">item yang sudah dibeli</h4>
+
+        <!-- sancu -->
+        <div class="col-xs-6">
+          <div class="form-group">
+            <label>Sancu:</label>
+            <input type="text" class="form-control" name="sancu">
+            <div style="background-color: #f44242; text-align: center;">
+              <span style="color: white;"><?php echo form_error('sancu') ?></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- boncu -->
+        <div class="col-xs-6">
+          <div class="form-group">
+            <label>Boncu:</label>
+            <input type="text" class="form-control" name="boncu">
+            <div style="background-color: #f44242; text-align: center;">
+              <span style="color: white;"><?php echo form_error('boncu') ?></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <!-- Pretty -->
+        <div class="col-xs-6">
+          <div class="form-group">
+            <label>Pretty:</label>
+            <input type="text" class="form-control" name="pretty">
+            <div style="background-color: #f44242; text-align: center;">
+              <span style="color: white;"><?php echo form_error('pretty') ?></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Xtreme -->
+        <div class="col-xs-6">
+          <div class="form-group">
+            <label>Xtreme:</label>
+            <input type="text" class="form-control" name="xtreme">
+            <div style="background-color: #f44242; text-align: center;">
+              <span style="color: white;"><?php echo form_error('xtreme') ?></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================ end of item -->
 
       <!-- button -->
       <div class="form-group">
