@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2018 at 04:03 AM
+-- Generation Time: Sep 10, 2018 at 11:15 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -181,7 +181,8 @@ CREATE TABLE `bonus` (
 --
 
 INSERT INTO `bonus` (`kode_bonus`, `kode_agen`, `jumlah_bonus`, `ribuan`, `puluhan_ribu`, `total_item`) VALUES
-(332, 'agen001', 300000, 0, 0, 500);
+(335, 'agen001', 300000, 0, 0, 1000),
+(336, 'agen002', 0, 0, 0, 600);
 
 -- --------------------------------------------------------
 
@@ -206,7 +207,11 @@ CREATE TABLE `bonus_detail` (
 --
 
 INSERT INTO `bonus_detail` (`kode_bonus`, `status`, `bonus`, `jumlah_item`, `tanggal_pembelian`, `kode_bonus_detail`, `history_item`, `nik`, `kode_pembelian`) VALUES
-(332, '', 300000, 500, '2018-07-26', 468, 500, 'admin001', 905);
+(335, '', 0, 700, '2018-08-11', 477, 700, 'admin001', 923),
+(335, '', 300000, 0, '2018-08-12', 478, 700, 'admin001', 924),
+(335, '', 0, 300, '2018-09-10', 479, 1000, 'admin001', 925),
+(336, '', 0, 100, '2018-09-10', 480, 100, 'admin001', 926),
+(336, '', 0, 500, '2018-09-11', 481, 600, 'admin001', 927);
 
 -- --------------------------------------------------------
 
@@ -239,7 +244,8 @@ INSERT INTO `history_delete` (`kode_delete`, `kode_admin`, `keterangan`, `date`)
 (11, 'admin001', 'hapus data pembelian 904 | agen001 |  nominal pembayaran 800000', '2018-07-26 09:00:42'),
 (12, 'admin001', 'hapus data pembelian 904 | agen001 |  nominal pembayaran 800000', '2018-07-26 09:02:11'),
 (13, 'admin001', 'hapus data pembelian 904 | agen001 |  nominal pembayaran 800000', '2018-07-26 09:04:16'),
-(14, 'admin001', 'hapus data pembelian 906 | agen001 |  nominal pembayaran 800000', '2018-07-26 09:16:39');
+(14, 'admin001', 'hapus data pembelian 906 | agen001 |  nominal pembayaran 800000', '2018-07-26 09:16:39'),
+(15, 'admin001', 'hapus data pembelian 915 | agen001 |  nominal pembayaran 9000000', '2018-08-03 14:39:36');
 
 -- --------------------------------------------------------
 
@@ -343,7 +349,38 @@ INSERT INTO `log` (`kode_login`, `username`, `time`, `ip`, `status`) VALUES
 (161, 'admin001', '2018-07-26 11:04:04', '::1', 'gagal'),
 (162, 'admin001', '2018-07-26 11:04:11', '::1', 'sukses'),
 (163, 'admin001', '2018-07-26 15:05:17', '::1', 'sukses'),
-(164, 'admin001', '2018-08-02 09:00:52', '::1', 'sukses');
+(164, 'admin001', '2018-08-02 09:00:52', '::1', 'sukses'),
+(165, 'admin001', '2018-08-03 13:56:37', '::1', 'sukses'),
+(166, 'admin001', '2018-08-13 09:02:55', '::1', 'sukses'),
+(167, 'admin001', '2018-08-14 14:48:42', '::1', 'gagal'),
+(168, 'admin001', '2018-08-14 14:48:49', '::1', 'sukses'),
+(169, 'admin001', '2018-08-18 08:53:20', '::1', 'sukses'),
+(170, 'agen001', '2018-08-18 08:55:13', '::1', 'gagal'),
+(171, 'agen001', '2018-08-18 08:57:31', '::1', 'sukses'),
+(172, 'admin001', '2018-08-18 09:18:07', '::1', 'sukses'),
+(173, 'admin001', '2018-08-18 13:25:31', '::1', 'sukses'),
+(174, 'admin', '2018-09-07 13:32:39', '::1', 'gagal'),
+(175, 'admin001', '2018-09-07 13:32:45', '::1', 'sukses'),
+(176, 'admin001', '2018-09-08 10:36:38', '::1', 'sukses'),
+(177, 'admin001', '2018-09-08 13:31:33', '::1', 'sukses'),
+(178, 'admin001', '2018-09-10 08:11:51', '::1', 'sukses'),
+(179, 'agen001', '2018-09-10 10:09:33', '::1', 'sukses'),
+(180, 'agen001', '2018-09-10 10:10:36', '::1', 'sukses'),
+(181, 'admin001', '2018-09-10 10:11:04', '::1', 'gagal'),
+(182, 'admin001', '2018-09-10 10:11:13', '::1', 'sukses'),
+(183, 'agen001', '2018-09-10 10:19:39', '::1', 'sukses'),
+(184, 'admin001', '2018-09-10 10:20:38', '::1', 'sukses'),
+(185, 'agen001', '2018-09-10 10:32:14', '::1', 'gagal'),
+(186, 'agen001', '2018-09-10 10:32:18', '::1', 'sukses'),
+(187, 'admin001', '2018-09-10 10:33:26', '::1', 'sukses'),
+(188, 'agen001', '2018-09-10 11:45:37', '::1', 'sukses'),
+(189, 'admin001', '2018-09-10 15:10:03', '::1', 'sukses'),
+(190, 'agen002', '2018-09-10 15:54:59', '::1', 'sukses'),
+(191, 'admin001', '2018-09-10 16:07:30', '::1', 'gagal'),
+(192, 'admin001', '2018-09-10 16:07:35', '::1', 'sukses'),
+(193, 'agen001', '2018-09-10 16:08:04', '::1', 'gagal'),
+(194, 'agen001', '2018-09-10 16:08:19', '::1', 'gagal'),
+(195, 'agen002', '2018-09-10 16:08:28', '::1', 'sukses');
 
 -- --------------------------------------------------------
 
@@ -475,7 +512,11 @@ CREATE TABLE `pembayaran` (
 --
 
 INSERT INTO `pembayaran` (`kode_pembayaran`, `kode_pembelian`, `tanggal_pembelian`, `jumlah_pembelian`, `sisa_tagihan`) VALUES
-(109, 905, '2018-07-26', 600000, 300000);
+(123, 923, '2018-08-11', 900000, 600000),
+(124, 924, '2018-08-12', 870000, 145000),
+(125, 925, '2018-09-10', 400000, 400000),
+(126, 926, '2018-09-10', 500000, 150000),
+(127, 927, '2018-09-11', 500000, 500000);
 
 -- --------------------------------------------------------
 
@@ -500,7 +541,17 @@ CREATE TABLE `pembayaran_detail` (
 --
 
 INSERT INTO `pembayaran_detail` (`kode_pembayaran`, `tanggal_pembayaran`, `tagihan_sebelumnya`, `nominal_pembayaran`, `sisa_tagihan`, `kode_pembayaran_detail`, `keterangan`, `nik`, `status_no_edit`) VALUES
-(109, '2018-07-26', 600000, 300000, 300000, 156, 'bonus pembelian 2018-07-26', 'admin001', 1);
+(123, '2018-08-11', 900000, 0, 0, 164, 'pembelian awal 2018-08-11', 'admin001', 1),
+(123, '2018-08-13', 900000, 200000, 800000, 165, '', 'admin001', 1),
+(123, '2018-08-13', 800000, 250000, 600000, 166, '', 'admin001', 0),
+(124, '2018-08-12', 600000, 0, 0, 167, 'pembelian awal 2018-08-12', 'admin001', 1),
+(124, '2018-08-12', 600000, 300000, 300000, 168, 'bonus pembelian 2018-08-12', 'admin001', 1),
+(124, '2018-08-13', 300000, 50000, 225000, 169, '', 'admin001', 1),
+(124, '2018-08-14', 225000, 100000, 145000, 170, '', 'admin001', 0),
+(125, '2018-09-10', 400000, 0, 0, 171, 'pembelian awal 2018-09-10', 'admin001', 1),
+(126, '2018-09-10', 400000, 0, 0, 172, 'pembelian awal 2018-09-10', 'admin001', 1),
+(126, '2018-09-10', 400000, 100000, 150000, 173, 'BCA', 'admin001', 0),
+(127, '2018-09-11', 500000, 0, 0, 174, 'pembelian awal 2018-09-11', 'admin001', 1);
 
 -- --------------------------------------------------------
 
@@ -524,7 +575,11 @@ CREATE TABLE `pembelian` (
 --
 
 INSERT INTO `pembelian` (`kode_pembelian`, `kode_agen`, `tanggal_pembelian`, `total_item`, `total_pembelian`, `perincian`, `nik`, `status_no_edit`) VALUES
-(905, 'agen001', '2018-07-26', 600, 600000, 'tidak ada', 'admin001', 1);
+(923, 'agen001', '2018-08-09', 800, 900000, 'tidak ada', 'admin001', 1),
+(924, 'agen001', '2018-08-12', 870, 870000, 'tidak ada', 'admin001', 1),
+(925, 'agen001', '2018-09-10', 400, 400000, 'tidak ada', 'admin001', 0),
+(926, 'agen002', '2018-09-10', 500, 500000, 'tidak ada', 'admin001', 1),
+(927, 'agen002', '2018-09-11', 500, 500000, 'tidak ada', 'admin001', 0);
 
 -- --------------------------------------------------------
 
@@ -545,9 +600,20 @@ CREATE TABLE `pembelian_detail` (
 --
 
 INSERT INTO `pembelian_detail` (`kode_pembelian_detail`, `kode_pembelian`, `kode_item`, `jumlah_item`, `total_harga_item`) VALUES
-(698, 905, 'sancu', 100, 100000),
-(699, 905, 'boncu', 400, 400000),
-(700, 905, 'pretty', 100, 100000);
+(736, 923, 'sancu', 100, 100000),
+(737, 923, 'boncu', 0, 0),
+(738, 923, 'xtreme', 0, 0),
+(739, 924, 'pretty', 700, 700000),
+(740, 925, 'sancu', 100, 100000),
+(741, 925, 'boncu', 200, 200000),
+(742, 925, 'xtreme', 100, 100000),
+(750, 924, 'sancu', 150, 150000),
+(751, 924, 'xtreme', 20, 20000),
+(752, 926, 'sancu', 100, 100000),
+(753, 926, 'pretty', 100, 100000),
+(754, 926, 'xtreme', 100, 100000),
+(755, 926, 'boncu', 200, 200000),
+(756, 927, 'sancu', 500, 500000);
 
 -- --------------------------------------------------------
 
@@ -593,9 +659,17 @@ CREATE TABLE `saldo` (
 --
 
 INSERT INTO `saldo` (`kode_saldo`, `kode_agen`, `kode_pembelian`, `kode_pembayaran_detail`, `tgl_perubahan`, `debet`, `kredit`, `nominal`, `keterangan`) VALUES
-(705, 'agen001', 905, 0, '2018-07-26', 600000, 0, 600000, 'pembelian'),
-(706, 'agen001', 0, 905, '2018-07-26', 0, 300000, 300000, 'bonus pembelian 2018-07-26'),
-(709, 'agen002', 0, 0, '2018-07-26', 50000, 0, 50000, 'saldo awal 2018-07-26');
+(733, 'agen001', 923, 0, '2018-08-09', 900000, 0, 900000, 'pembelian'),
+(734, 'agen001', 0, 165, '2018-08-13', 0, 200000, 800000, ''),
+(735, 'agen001', 0, 166, '2018-08-13', 0, 250000, 600000, ''),
+(736, 'agen001', 924, 0, '2018-08-12', 870000, 0, 1200000, 'pembelian'),
+(737, 'agen001', 924, 0, '2018-08-12', 0, 300000, 900000, 'bonus pembelian 2018-08-12'),
+(738, 'agen001', 0, 169, '2018-08-13', 0, 50000, 825000, ''),
+(739, 'agen001', 0, 170, '2018-08-14', 0, 100000, 745000, ''),
+(740, 'agen001', 925, 0, '2018-09-10', 400000, 0, 1145000, 'pembelian'),
+(741, 'agen002', 926, 0, '2018-09-10', 500000, 0, 400000, 'pembelian'),
+(742, 'agen002', 0, 173, '2018-09-10', 0, 100000, 150000, 'BCA'),
+(743, 'agen002', 927, 0, '2018-09-11', 500000, 0, 650000, 'pembelian');
 
 --
 -- Indexes for dumped tables
@@ -701,55 +775,55 @@ ALTER TABLE `saldo`
 -- AUTO_INCREMENT for table `bonus`
 --
 ALTER TABLE `bonus`
-  MODIFY `kode_bonus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=333;
+  MODIFY `kode_bonus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=337;
 
 --
 -- AUTO_INCREMENT for table `bonus_detail`
 --
 ALTER TABLE `bonus_detail`
-  MODIFY `kode_bonus_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=469;
+  MODIFY `kode_bonus_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=482;
 
 --
 -- AUTO_INCREMENT for table `history_delete`
 --
 ALTER TABLE `history_delete`
-  MODIFY `kode_delete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `kode_delete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `kode_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
+  MODIFY `kode_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT for table `pembayaran_detail`
 --
 ALTER TABLE `pembayaran_detail`
-  MODIFY `kode_pembayaran_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
+  MODIFY `kode_pembayaran_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=175;
 
 --
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=906;
+  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=928;
 
 --
 -- AUTO_INCREMENT for table `pembelian_detail`
 --
 ALTER TABLE `pembelian_detail`
-  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=701;
+  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=757;
 
 --
 -- AUTO_INCREMENT for table `saldo`
 --
 ALTER TABLE `saldo`
-  MODIFY `kode_saldo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=710;
+  MODIFY `kode_saldo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=744;
 
 --
 -- Constraints for dumped tables
