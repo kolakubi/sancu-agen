@@ -27,6 +27,9 @@
       $this->db->where('pembelian.tanggal_pembelian <=', $dataAmbil['tanggalsampai']);
       $this->db->where('kode_agen', $dataAmbil['kodeagen']);
       $this->db->where_in('kode_item', $dataAmbil['item']);
+      $this->db->order_by('tanggal_pembelian', 'ASC');
+      $this->db->order_by('kode_item', 'ASC');
+
       $result = $this->db->get()->result_array();
       return $result;
 

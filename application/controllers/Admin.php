@@ -572,7 +572,6 @@
           'tanggal_pembelian' => $tanggal,
           'total_item' => $pembelianjumlahitem,
           'total_pembelian' => $pembelianjumlah,
-
         );
 
         $dataPembelianDetail = array(
@@ -590,13 +589,18 @@
 
         $dataPembayaran = array(
           //'kode_pembelian' => $kodepembelian,
-          'tanggal_pembelian' => $tanggal,
+          // 'tanggal_pembelian' => $tanggal,
           'jumlah_pembelian' => $pembelianjumlah,
-          'sisa_tagihan' => $pembelianjumlah
+          // 'sisa_tagihan' => $pembelianjumlah
         );
 
         // insert data ke database
         $result = $this->admin_model->updatePembelian($dataPembelian, $dataPembelianDetail, $dataPembayaran, $kodepembelian);
+
+        echo '<pre>';
+        print_r($result);
+        echo '</pre>';
+
         if($result){
           // jika sukses redirect ke halaman pembelian
           redirect('admin/pembelian');
@@ -612,7 +616,7 @@
         redirect('admin/pembelian');
       }
 
-    }
+    } // end of function pembelianHapus
 
     ///////////////////////////////////////////////
     ///////////////////////////////////////////////
@@ -667,6 +671,11 @@
           'dari' => $tanggaldari,
           'sampai' => $tanggalsampai
         );
+
+        // echo '<pre>';
+        // print_r($result);
+        // echo '</pre>';
+
         // load view
         $this->load->view('admin/header');
         $this->load->view('admin/pembayaran', $data);
@@ -681,6 +690,11 @@
       $nik = $_SESSION['username'];
       $data['dataPembayaran'] = $result;
       //$data['dataPembayaran']['nik'] = $nik;
+
+      // echo '<pre>';
+      // print_r($result);
+      // echo '</pre>';
+
       // load view
       $this->load->view('admin/header');
       $this->load->view('admin/pembayarandetail', $data);
@@ -758,6 +772,51 @@
         // echo '</pre>';
       }
     }
+
+    public function pembayaranDetailUbah($kodePembayaranDetail){
+
+      $this->form_validation->set_rules(
+        array(
+          array(
+            'field' => 'nominalpembayaran',
+            'label' => 'Nominal',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'kodepembayarandetail',
+            'label' => 'Kode Pembayaran Detail',
+            'rules' => 'required'
+          )
+        )
+      );
+
+      $this->form_validation->set_message('required', 'mohon lengkapi %s');
+
+      if(!$this->form_validation->run()){
+        // ambil data pembayarandetail dari database
+        $result = $this->admin_model->getPembayaranDetail2($kodePembayaranDetail);
+        $data['dataPembayaranDetail'] = $result;
+      
+        // load view
+        $this->load->view('admin/header');
+        $this->load->view('admin/pembayarandetailubah', $data);
+        $this->load->view('admin/footer');
+      }
+      else{
+        $nominal = $this->input->post('nominalpembayaran');
+
+        $dataPembayaranDetailUbah = array(
+          'kode_pembayaran_detail' => $this->input->post('kodepembayarandetail'),
+          'nominal_pembayaran' => $nominal
+        );
+
+        $hasil = $this->admin_model->pembayaranDetailUbah($dataPembayaranDetailUbah);
+        if($hasil){
+          redirect('admin/pembayaran');
+        }
+      }
+
+    } // end of function pembayaranDetailUbah
 
     public function pembayarandetailhapus($kodepembayarandetail){
       

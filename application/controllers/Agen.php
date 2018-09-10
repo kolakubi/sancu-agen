@@ -181,6 +181,7 @@
 
         // ambil data pembelian
         $dataPembelian = $this->agen_model->getDataPembelianRange($dataAmbil);
+
         // cek apakah data kosong
         if(!empty($dataPembelian)){
           $data['datapembelian'] = $dataPembelian;

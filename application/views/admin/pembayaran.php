@@ -42,6 +42,7 @@
 <?php endif ?>
 <br><br>
 
+<!-- table hasil pencarian -->
 <div class="row">
   <div class="col-xs-12">
     <table class="table table-condensed table-bordered table-striped table-hover" id="datatablepembayaran">
@@ -57,30 +58,93 @@
         </tr>
       </thead>
       <tbody>
-        <?php foreach($dataPembayaran as $pembayaran) : ?>
-          <tr>
-            <td><?php echo $pembayaran['kode_pembayaran'] ?></td>
-            <td><?php echo $pembayaran['kode_pembelian'] ?></td>
-            <td><?php echo $pembayaran['nama'] ?></td>
-            <td><?php echo $pembayaran['tanggal_pembelian'] ?></td>
-            <td><?php echo 'Rp'.number_format($pembayaran['jumlah_pembelian'], 0, ',', '.') ?></td>
-            <td><?php echo 'Rp'.number_format($pembayaran['sisa_tagihan'], 0, ',', '.') ?></td>
-            <td>
-              <div class="btn-group">
-                <a href="<?php echo base_url() ?>admin/pembayarandetail/<?php echo $pembayaran['kode_pembayaran'] ?>" class="btn btn-info">
-                  lihat
-                  <span class="glyphicon glyphicon-eye-open"></span>
-                </a>
-                <?php if($pembayaran['sisa_tagihan'] > 0) : ?>
-                  <a href="<?php echo base_url() ?>admin/pembayarandetailtambah/<?php echo $pembayaran['kode_pembayaran'] ?>" class="btn btn-success">
-                    Bayar
-                    <span class="glyphicon glyphicon-edit"></span>
-                  </a>
-                <?php endif ?>
-              </div>
-            </td>
-          </tr>
-        <?php endforeach ?>
+
+        <?php
+          $jumlahIndex = count($dataPembayaran)-1;
+          $sisaTagihan = 0;
+          $totalCicilan = 0;
+        ?>
+        
+        <!-- loop data pembayaran -->
+        <?php for($i=0; $i<=$jumlahIndex; $i++) : ?>
+          <?php 
+
+            $totalCicilan += $dataPembayaran[$i]['nominal_pembayaran'];
+            $sisaTagihan = $dataPembayaran[$i]['jumlah_pembelian'] - $totalCicilan;
+            // echo '$i = '.$i;
+            // echo '$jumlahIndex ='.$jumlahIndex;
+
+            if(!empty($dataPembayaran[$i+1])){
+              // jika kodePembayaran selanjutnya berbeda
+              if($dataPembayaran[$i+1]['kode_pembelian'] != $dataPembayaran[$i]['kode_pembelian']){
+                ?>
+                  <!-- tampilkan data paling akhir sesuai kodePembayaran -->
+                  <tr>
+                    <td><?php echo $dataPembayaran[$i]['kode_pembayaran'] ?></td>
+                    <td><?php echo $dataPembayaran[$i]['kode_pembelian'] ?></td>
+                    <td><?php echo $dataPembayaran[$i]['nama'] ?></td>
+                    <td><?php echo $dataPembayaran[$i]['tanggal_pembelian'] ?></td>
+                    <td><?php echo 'Rp'.number_format($dataPembayaran[$i]['jumlah_pembelian'], 0, ',', '.') ?></td>
+                    <td><?php echo 'Rp'.number_format($sisaTagihan, 0, ',', '.') ?></td>
+                    <!-- button action -->
+                    <td>
+                      <div class="btn-group">
+                        <a href="<?php echo base_url() ?>admin/pembayarandetail/<?php echo $dataPembayaran[$i]['kode_pembayaran'] ?>" class="btn btn-info">
+                          lihat
+                          <span class="glyphicon glyphicon-eye-open"></span>
+                        </a>
+                        <?php if($sisaTagihan > 0) : ?>
+                          <a href="<?php echo base_url() ?>admin/pembayarandetailtambah/<?php echo $dataPembayaran[$i]['kode_pembayaran'] ?>" class="btn btn-success">
+                            Bayar
+                            <span class="glyphicon glyphicon-edit"></span>
+                          </a>
+                        <?php endif ?>
+                      </div>
+                    </td>
+                  </tr> <!-- end of data paling akhir -->
+
+                <?php
+                // reset sisa tagihan
+                $sisaTagihan = 0;
+                $totalCicilan = 0;
+              } // end of jika kode Pembayaran tidak cocok
+            } // end of jika dataPembayaran tidak kosong
+            else{
+              // tampilkan akhir array
+              if($i == $jumlahIndex){
+                ?>
+                  <tr>
+                    <td><?php echo $dataPembayaran[$i]['kode_pembayaran'] ?></td>
+                    <td><?php echo $dataPembayaran[$i]['kode_pembelian'] ?></td>
+                    <td><?php echo $dataPembayaran[$i]['nama'] ?></td>
+                    <td><?php echo $dataPembayaran[$i]['tanggal_pembelian'] ?></td>
+                    <td><?php echo 'Rp'.number_format($dataPembayaran[$i]['jumlah_pembelian'], 0, ',', '.') ?></td>
+                    <td><?php echo 'Rp'.number_format($sisaTagihan, 0, ',', '.') ?></td>
+                    <!-- button action -->
+                    <td>
+                      <div class="btn-group">
+                        <a href="<?php echo base_url() ?>admin/pembayarandetail/<?php echo $dataPembayaran[$i]['kode_pembayaran'] ?>" class="btn btn-info">
+                          lihat
+                          <span class="glyphicon glyphicon-eye-open"></span>
+                        </a>
+                        <?php if($sisaTagihan > 0) : ?>
+                          <a href="<?php echo base_url() ?>admin/pembayarandetailtambah/<?php echo $dataPembayaran[$i]['kode_pembayaran'] ?>" class="btn btn-success">
+                            Bayar
+                            <span class="glyphicon glyphicon-edit"></span>
+                          </a>
+                        <?php endif ?>
+                      </div>
+                    </td>
+                  </tr>
+                <?php
+              }
+              // reset sisa tagihan
+              $sisaTagihan = 0;
+              $totalCicilan = 0;
+            } // end of tampilkan akhir array
+          ?>
+          
+        <?php endfor ?>
       </tbody>
       <tfoot>
         <td></td>
